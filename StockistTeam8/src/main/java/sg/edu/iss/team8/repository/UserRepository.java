@@ -16,12 +16,12 @@ public interface UserRepository extends JpaRepository<User, String> {
 	@Query("SELECT u FROM User u WHERE u.name=:un AND u.password=:pwd")
 	User findUserByNamePwd(@Param("un") String uname, @Param("pwd") String pwd);*/
 	
-	@Query("SELECT u FROM user u WHERE u.username = :un")
+	/*@Query("SELECT u FROM user u WHERE u.username = :un")
 	User findUserByUsername(@Param("un") String username);
 	
 	@Query("SELECT u FROM User u WHERE u.username=:un AND u.password=:pwd")
 	User findUserByUsernamePwd(@Param("un") String username, @Param("pwd") String password);
 	
 	@Query("SELECT u FROM User u WHERE u.role=:role")
-	ArrayList<User> findUserByRole(@Param("role") String role);
+	ArrayList<User> findUserByRole(@Param("role") String role);*/
 }
