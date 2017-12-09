@@ -1,5 +1,28 @@
 package sg.edu.iss.team8.repository;
 
-public interface TransactionRepository {
+import java.util.ArrayList;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import sg.edu.iss.team8.model.Transaction;
+
+public interface TransactionRepository extends JpaRepository<Transaction, Integer>{
+
+	@Query("SELECT t from transaction t WHERE t.transactionid = :eid")
+	ArrayList<Transaction> findTransactionsByEID(@Param("eid") String eid);
+	
+	@Query("SELECT t from transaction t WHERE (date_field BETWEEN ':eid' AND ':eid2'")
+	ArrayList<Transaction> findTransactionsByDate(@Param("eid") String eid, @Param("eid2") String eid2);
+//	@Query("SELECT t.transactionid FROM transaction t")
+//	ArrayList<String> findTransactionByDateRange();
+//	
+//	@Query("SELECT td.partnumber from transactiondetails td WHERE td.partnumber = :partNumber")
+//	ArrayList<Integer> findTDByPartNumber(@Param("partNumber") Integer partNumber);
+//	
+//	@Query("SELECT td.transactionid from transactiondetails td WHERE td.transactionid = :tid")
+//	ArrayList<Integer> findTDById(@Param("tid") Integer tid);
+
 
 }
