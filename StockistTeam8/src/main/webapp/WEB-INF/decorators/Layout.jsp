@@ -17,12 +17,6 @@
 <link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/3.2.1/assets/font-awesome/css/font-awesome.css">	
 
 <style>
-div.dropdown-menu.show{
-    left:auto !important;
-    right: 5 !important;
-    top: 1 !important;
-    margin-right:-6px !important;
-}
 
 .navbox{
 	width:100%;
