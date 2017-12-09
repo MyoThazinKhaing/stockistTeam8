@@ -21,18 +21,18 @@ import sg.edu.iss.team8.exception.UserNotFound;
 import sg.edu.iss.team8.model.User;
 //import sg.edu.iss.team8.service.EmployeeService;
 import sg.edu.iss.team8.service.UserService;
-//import sg.edu.iss.team8.validator.UserValidator;
+import sg.edu.iss.team8.validator.UserValidator;
 
-@RequestMapping(value="/admin/user")
+@RequestMapping(value = "/admin/user")
 @Controller
 public class AdminUserController {
 
 	@Autowired
 	private UserService uService;
-//	@Autowired
-//	private EmployeeService eService;
-//	@Autowired
-//	private UserValidator uValidator;
+	// @Autowired
+	// private EmployeeService eService;
+	@Autowired
+	private UserValidator uValidator;
 
 	@InitBinder("user")
 	private void initUserBinder(WebDataBinder binder) {
@@ -48,7 +48,7 @@ public class AdminUserController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView newUserPage() {
 		ModelAndView mav = new ModelAndView("user-new", "user", new User());
-		ArrayList<String> eidList = eService.findAllEmployeeIDs();
+		ArrayList<User> eidList = uService.findAllUsers();
 		mav.addObject("eidlist", eidList);
 		return mav;
 	}
@@ -61,7 +61,7 @@ public class AdminUserController {
 			return new ModelAndView("user-new");
 
 		ModelAndView mav = new ModelAndView();
-		String message = "New user " + user.getUserId() + " was successfully created.";
+		String message = "New user was successfully created.";
 
 		uService.createUser(user);
 		mav.setViewName("redirect:/admin/user/list");
@@ -83,8 +83,8 @@ public class AdminUserController {
 		ModelAndView mav = new ModelAndView("user-edit");
 		User user = uService.findUser(id);
 		mav.addObject("user", user);
-		ArrayList<String> eidList = eService.findAllEmployeeIDs();
-		mav.addObject("eidlist", eidList);
+		ArrayList<User> userList = uService.findAllUsers();
+		mav.addObject("userList", userList);
 		return mav;
 	}
 
@@ -111,7 +111,7 @@ public class AdminUserController {
 		ModelAndView mav = new ModelAndView("redirect:/admin/user/list");
 		User user = uService.findUser(id);
 		uService.removeUser(user);
-		String message = "The user " + user.getUserId() + " was successfully deleted.";
+		String message = "The user " + user.getUsername() + " was successfully deleted.";
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
