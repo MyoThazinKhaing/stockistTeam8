@@ -53,7 +53,7 @@ div.dropdown-menu.show{
 							style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
 							<a class="dropdown-item" href="#">Manage account</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Logout</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/home/logout">Logout</a>
 						</div></li>
 				</ul>
 				
