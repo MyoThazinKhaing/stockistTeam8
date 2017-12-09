@@ -72,7 +72,7 @@ public class AdminUserController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView userListPage() {
-		ModelAndView mav = new ModelAndView("user-list");
+		ModelAndView mav = new ModelAndView("manageuser");
 		List<User> userList = uService.findAllUsers();
 		mav.addObject("userList", userList);
 		return mav;
