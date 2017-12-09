@@ -10,6 +10,7 @@ import sg.edu.iss.team8.model.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 	
+<<<<<<< HEAD
 	/*@Query("SELECT DISTINCT e2.name FROM User u, Employee e1, Employee e2 WHERE u.employeeId = e1.employeeId AND e1.managerId = e2.employeeId AND u.userId=:uid")
 	ArrayList<String> findManagerNameByUID(@Param("uid") String uid);
     
@@ -24,4 +25,14 @@ public interface UserRepository extends JpaRepository<User, String> {
 	
 	@Query("SELECT u FROM User u WHERE u.role=:role")
 	ArrayList<User> findUserByRole(@Param("role") String role);*/
+=======
+	@Query("SELECT u FROM User u WHERE u.username = :un")
+	User findUserByUsername(@Param("un") String username);
+	
+	@Query("SELECT u FROM User u WHERE u.username=:un AND u.password=:pwd")
+	User findUserByUsernamePwd(@Param("un") String username, @Param("pwd") String password);
+	
+	@Query("SELECT u FROM User u WHERE u.role=:role")
+	ArrayList<User> findUserByRole(@Param("role") String role);
+>>>>>>> refs/heads/yx
 }
