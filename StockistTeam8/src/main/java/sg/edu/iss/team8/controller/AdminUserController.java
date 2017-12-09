@@ -48,8 +48,8 @@ public class AdminUserController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView newUserPage() {
 		ModelAndView mav = new ModelAndView("user-new", "user", new User());
-		ArrayList<User> eidList = uService.findAllUsers();
-		mav.addObject("eidlist", eidList);
+		ArrayList<User> userList = uService.findAllUsers();
+		mav.addObject("userList", userList);
 		return mav;
 	}
 
@@ -61,7 +61,7 @@ public class AdminUserController {
 			return new ModelAndView("user-new");
 
 		ModelAndView mav = new ModelAndView();
-		String message = "New user was successfully created.";
+		String message = "The user " + user.getUsername() + " was successfully created.";
 
 		uService.createUser(user);
 		mav.setViewName("redirect:/admin/user/list");
