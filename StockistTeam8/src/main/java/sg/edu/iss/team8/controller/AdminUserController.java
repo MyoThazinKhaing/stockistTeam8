@@ -68,7 +68,7 @@ public class AdminUserController {
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
-	}
+	} 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView userListPage() {
