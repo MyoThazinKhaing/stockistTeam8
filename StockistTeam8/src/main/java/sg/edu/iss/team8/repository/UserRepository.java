@@ -10,8 +10,8 @@ import sg.edu.iss.team8.model.User;
 
 public interface UserRepository extends JpaRepository<User, String> {
 	
-	@Query("SELECT u FROM User u WHERE u.username = :un")
-	User findUserByUsername(@Param("un") String username);
+	/*@Query("SELECT u FROM User u WHERE u.username = :un")
+	User findUserByUsername(@Param("un") String username);*/
 	
 	@Query("SELECT u FROM User u WHERE u.username=:un AND u.password=:pwd")
 	User findUserByUsernamePwd(@Param("un") String username, @Param("pwd") String password);

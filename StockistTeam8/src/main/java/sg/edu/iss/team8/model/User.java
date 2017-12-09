@@ -11,6 +11,7 @@ public class User {
 	@Basic(optional = false)
 	@Column(name = "password")
 	private String password;
+	@Basic(optional = false)
 	@Column(name = "role")
 	private String role;
 	
@@ -30,7 +31,7 @@ public class User {
 	public String getUsername() {
 		return username;
 	}
-	public void setUserName(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	public String getPassword() {
@@ -70,7 +71,7 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [userName=" + username + ", password=" + password + ", role=" + role + "]";
+		return "User [username=" + username + ", password=" + password + ", role=" + role + "]";
 	}
 	
 	

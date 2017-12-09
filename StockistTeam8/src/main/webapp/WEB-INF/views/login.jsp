@@ -2,9 +2,12 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <html>
-<spring:url value="/css/simple.css" var="style"/>
-<link rel="STYLESHEET" type="text/css"
-	href="${style}" />
+<head>
+	<%-- <spring:url value="/css/simple.css" var="style"/>
+	<link rel="STYLESHEET" type="text/css"
+		href="${style}" /> --%>
+</head>
+<body>
 <form:form modelAttribute="user" method="POST" action="${pageContext.request.contextPath}/home/authenticate" >
 	<table class="framed" >
 		<tr>
@@ -31,4 +34,5 @@
 		</tr>
 	</table>
 </form:form>
+</body>
 </html>
