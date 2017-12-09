@@ -34,9 +34,10 @@ public class CommonController {
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ModelAndView authenticate(@ModelAttribute User user, HttpSession session, BindingResult result) {
-		ModelAndView mav = new ModelAndView("login");
-		if (result.hasErrors())
+		ModelAndView mav = new ModelAndView("error");
+		if (result.hasErrors()) {
 			return mav;
+		}			
 		UserSession us = new UserSession();
 		if (user.getUsername() != null && user.getPassword() != null) {
 			User u = uService.authenticate(user.getUsername(), user.getPassword());
@@ -44,8 +45,9 @@ public class CommonController {
 			// PUT CODE FOR SETTING SESSION ID
 			us.setSessionId(session.getId());
 			
-			/*mav = new ModelAndView("redirect:/staff/history");*/
+			mav = new ModelAndView("redirect:/products/catalog");
 		} else {
+			mav = new ModelAndView("invalid");
 			return mav;
 		}
 		session.setAttribute("USERSESSION", us);

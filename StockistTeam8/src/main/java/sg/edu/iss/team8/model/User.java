@@ -7,10 +7,11 @@ import javax.persistence.*;
 public class User {
 	@Id
 	@Column(name = "username")
-	private String userName;
+	private String username;
 	@Basic(optional = false)
 	@Column(name = "password")
 	private String password;
+	@Basic(optional = false)
 	@Column(name = "role")
 	private String role;
 	
@@ -20,18 +21,18 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User(String userName, String password, String role) {
+	public User(String username, String password, String role) {
 		super();
-		this.userName = userName;
+		this.username = username;
 		this.password = password;
 		this.role = role;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;
@@ -49,7 +50,7 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 	@Override
@@ -61,16 +62,16 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (userName == null) {
-			if (other.userName != null)
+		if (username == null) {
+			if (other.username != null)
 				return false;
-		} else if (!userName.equals(other.userName))
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", password=" + password + ", role=" + role + "]";
+		return "User [username=" + username + ", password=" + password + ", role=" + role + "]";
 	}
 	
 	

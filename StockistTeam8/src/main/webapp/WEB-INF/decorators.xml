@@ -3,7 +3,7 @@
 
 	
     <decorator name="default" page="Layout.jsp">
-        <pattern>*</pattern>
+        <pattern>/*</pattern>
      
         
     </decorator>
