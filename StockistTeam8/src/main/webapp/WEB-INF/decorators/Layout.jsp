@@ -12,15 +12,28 @@
 
 <!-- Custom Fonts -->
 <link
-	href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/3.2.1/assets/font-awesome/css/font-awesome.css">	
 
 <style>
 div.dropdown-menu.show{
-    left:auto;
-    right:0;
-    margin-right:-10px;
+    left:auto !important;
+    right: 5 !important;
+    top: 1 !important;
+    margin-right:-6px !important;
 }
+
+.navbox{
+	width:100%;
+	margin:auto;
+	
+}
+
+.bg-primary{
+	background-color: #373a3c !important;
+}
+
 </style>
 
 <dec:head />
@@ -29,18 +42,19 @@ div.dropdown-menu.show{
 </head>
 <body>
 	<%@include file="Header.jsp"%>
-	<table style="width: 100%">
-		<tr>
-			<td style="width: 180; border: 1" valign="top">
+	<table style="width: 100%; min-height: 90%; margin: auto;">
+		<tr style="min-height: 90%;">
+			<td style="width: 15%; min-height: 90%; min-height: 90%; padding: 20px 0px 10px 0px; background-color: #f1f1f1" valign="top">
 				<div>
-
 					<%@ include file="Menu.jsp"%>
 				</div>
 			</td>
-			<td>
-				<div>
+			<td style="width: 80%; padding: 20px 15px 10px 15px" valign="top">
+				<div class="card border-secondary mb-3" style="min-width: 90%; min-height: 90vh; padding: 15px">
 					<h3>
-						<spring:message code="${bodyTitle}" />
+						Body comes here >
+						
+						
 					</h3>
 					<dec:body />
 				</div>
@@ -51,7 +65,7 @@ div.dropdown-menu.show{
 	<!-- ======== Footer ======== -->
 	<div id="footer" align="center">
 		<hr>
-		<small> &copy; ISS NUS SA42 2016 </small>
+		<small> &copy; ISS NUS SA45 2017 </small>
 	</div>
 	<!-- Bootstrap Core JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
