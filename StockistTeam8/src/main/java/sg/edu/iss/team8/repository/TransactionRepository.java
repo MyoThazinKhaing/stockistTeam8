@@ -1,5 +1,5 @@
 package sg.edu.iss.team8.repository;
 
-public interface TransactionRepository {
+public interface TransactionRepository{
 
 }

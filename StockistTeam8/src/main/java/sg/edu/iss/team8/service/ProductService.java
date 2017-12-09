@@ -22,6 +22,8 @@ public interface ProductService {
 	
 	void removeEmployee(Product product);
 	
+	ArrayList<Product> findAllProductIDs();
+	
 	
 	
 

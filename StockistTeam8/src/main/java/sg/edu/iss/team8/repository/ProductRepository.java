@@ -11,16 +11,19 @@ import sg.edu.iss.team8.model.Product;
 public interface ProductRepository extends JpaRepository<Product,Integer>{
 	
 	    @Query("SELECT p from Product p where p.partNumber = :pNo")
-          Product findProductByNo(@Param("pNo") int pNo);
+          Product findProductByNo(@Param("pNo") Integer pNo);
 	   
 	    @Query("SELECT p from Product p where p.colour = :pColour")
         ArrayList<Product> findProductByColour(@Param("pColour") String pColour);
 	    
 
 	    @Query("SELECT p from Product p where p.description = :pDescription")
-	    ArrayList<Product>findProductByDescrption(@Param("pColour") String pDescription);
+	    ArrayList<Product>findProductByDescrption(@Param("pDescription") String pDescription);
 	    
 	    @Query("SELECT p from Product p where p.manufacturer = :pManufacturer")
-	    ArrayList<Product> findProductByManufacturer(@Param("pManufacturer") String pDescription);
+	    ArrayList<Product> findProductByManufacturer(@Param("pManufacturer") String pManufacturer);
+	    
+	    @Query("SELECT p.partNumber from Product p")
+	    ArrayList<Product> findAllProductIDs();
 	    
 }

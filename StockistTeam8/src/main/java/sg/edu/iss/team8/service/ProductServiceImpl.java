@@ -4,23 +4,27 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.iss.team8.model.Product;
 import sg.edu.iss.team8.repository.ProductRepository;
 
+@Service
 public class ProductServiceImpl implements ProductService{
 	
 	@Resource
 	ProductRepository productRepository;
 
 	@Override
+	@Transactional
 	public ArrayList<Product> findAllProducts() {
 		
 		return (ArrayList<Product>) productRepository.findAll();
 	}
 
 	@Override
+	@Transactional
 	public Product findProductByNo(int pNo) {
 		
 		return productRepository.findProductByNo(pNo);
@@ -55,15 +59,24 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+	@Transactional
 	public Product changeProduct(Product product) {
 		
 		return productRepository.saveAndFlush(product);
 	}
 
 	@Override
+	@Transactional
 	public void removeEmployee(Product product) {
 		productRepository.delete(product);
 		
+	}
+
+	@Override
+	@Transactional
+	public ArrayList<Product> findAllProductIDs() {
+		
+		return productRepository.findAllProductIDs();
 	}
 
 }
