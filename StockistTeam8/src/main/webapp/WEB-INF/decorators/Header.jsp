@@ -1,4 +1,5 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <head>
 <style>
 .list-group-item {
@@ -8,14 +9,22 @@
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     background-color: #104982;
 }
+div.dropdown-menu.show{
+    left:auto !important;
+    right: 5 !important;
+    top: 10 !important;
+    margin-right:-6px !important;
+}
 
+.dropdown-item {
+	font-size: 1.25em;
+}
 </style>
 </head>
 
 
 </body>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 
 <div>
 
@@ -23,7 +32,8 @@
 	<div class="navbox">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<h1>
-				<a class="navbar-brand" href="#"> <i class="fa fa-car fa-2x" aria-hidden="true"></i> <span style="font-size:2rem">&nbsp;&nbsp;&nbsp;TEAM 8 STOCKLIST</span></a>
+				<a class="navbar-brand" href="#"> <i class="fa fa-car fa-2x" aria-hidden="true"></i> 
+				<span style="font-size:2rem">&nbsp;&nbsp;&nbsp;TEAM 8 STOCKLIST</span></a>
 			</h1>
 			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarColor03" aria-controls="navbarColor03"

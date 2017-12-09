@@ -1,3 +1,5 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
 <meta name="decorator" content="nodeco" />
@@ -15,59 +17,97 @@
 <link rel="stylesheet"
 	href="http://fortawesome.github.io/Font-Awesome/3.2.1/assets/font-awesome/css/font-awesome.css">
 
-
 <style>
-.box {	
-	padding: 20px;
-	background-color: #eee;
-	width:35%;
+.container-fluid {
+	height: 100%;
+	display: table;
+	width: 100%;
+	padding: 0;
+}
 
-	
+.row-fluid {
+	height: 50%;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.centering {
+	float: none;
+	margin: 0 auto;
+	width: 35%;
+	min-width: 40%;
+}
+
+.form-group {
+	padding: 10px;
+	background-color: #eee;
 }
 </style>
+
+<script type="text/javascript">
+	/*
+	 * Here is an example of how to use Backstretch as a slideshow.
+	 * Just pass in an array of images, and optionally a duration and fade value.
+	 */
+
+	// Duration is the amount of time in between slides,
+	// and fade is value that determines how quickly the next image will fade in
+	$.backstretch([ "http://dl.dropbox.com/u/515046/www/outside.jpg",
+			"http://dl.dropbox.com/u/515046/www/garfield-interior.jpg",
+			"http://dl.dropbox.com/u/515046/www/cheers.jpg" ], {
+		duration : 3000,
+		fade : 750
+	});
+</script>
+
 </head>
 <body>
 	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-	<div class="box">
-		<form:form modelAttribute="user" method="POST"
-			action="${pageContext.request.contextPath}/home/authenticate">
-			<div class="form-group">
-				<label class="col-form-label" for="unInput">Username</label> <input
-					type="text" class="form-control" placeholder="Username"
-					id="unInput"> <label class="col-form-label" for="pwInput">Password</label>
-				<input type="text" class="form-control" placeholder="Password"
-					id="pwInput">
+	<div>
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="centering text-center">
+					<p style="color: white">
+						<i class="fa fa-car fa-5x" aria-hidden="true"></i>
+					</p>
+					<h2 style="margin: 10px 5px; color: white">
+						<strong>TEAM 8 STOCKLIST</strong>
+					</h2>
+
+					<form:form modelAttribute="user" method="POST"
+						action="${pageContext.request.contextPath}/home/authenticate">
+						<div class="form-group">
+							<label class="col-form-label" for="unInput">Username</label> <form:input
+								type="text" class="form-control" placeholder="Username" path="username"
+								id="unInput" /> <label class="col-form-label"
+								for="pwInput">Password</label> <form:input type="password"
+								class="form-control" placeholder="Password" path="password" id="pwInput" />
+							<div style="margin: 20px 0 5px 0;">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</div>
+					</form:form>
+				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form:form>
+		</div>
 	</div>
 
-	<%-- 	<form:form modelAttribute="user" method="POST"
-		action="${pageContext.request.contextPath}/home/authenticate">
-		<table class="framed">
-			<tr>
-				<td><spring:message code="fieldLabel.username" /></td>
-				<td colspan="3"><form:input path="username" size="40" /></td>
-			</tr>
-			<tr>
-				<td><spring:message code="fieldLabel.password" /></td>
-				<td colspan="3"><form:password path="password" size="40" /></td>
-			</tr>
-			<tr>
-				<td colspan="4">&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td><form:button name="submit" type="submit" value="s">
-					</form:button></td>
-				<td><form:button name="clear" type="reset" value="r">
-					</form:button></td>
-			</tr>
-		</table>
-	</form:form> --%>
-
-
+	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/jquery.backstretch.min.js"></script>
+	<script>
+		$
+				.backstretch(
+						[
+								"https://1410inc.xyz/mini-inventory-and-sales-management-system/public/images/backgrounds/1.jpg",
+								"https://1410inc.xyz/mini-inventory-and-sales-management-system/public/images/backgrounds/2.jpg",
+								"https://1410inc.xyz/mini-inventory-and-sales-management-system/public/images/backgrounds/3.jpg" ],
+						{
+							fade : 750,
+							duration : 4000
+						});
+	</script>
 </body>
 </html>
