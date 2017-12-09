@@ -5,6 +5,7 @@
 <spring:url value="/css/simple.css" var="style"/>
 <link rel="STYLESHEET" type="text/css"
 	href="${style}" />
+
 <form:form modelAttribute="user" method="POST" action="${pageContext.request.contextPath}/home/authenticate" >
 	<table class="framed" >
 		<tr>
@@ -19,7 +20,20 @@
 		<tr>
 			<td colspan="4">&nbsp;</td>
 		</tr>
+		
 		<tr>
+			<td>&nbsp;</td>
+			<td>
+			<form:button name="submit" type="submit" value="s">
+					<img src="${pageContext.request.contextPath}/image/button_login.gif" alt="" align="middle">
+				</form:button></td>
+			<td>
+			<form:button name="clear" type="reset" value="r">
+					<img src="${pageContext.request.contextPath}/image/button_clear.gif" alt="" align="middle">
+				</form:button>
+				</td>
+		</tr>
+		<%-- <tr>
 			<td>&nbsp;</td>
 			<td>
 			<form:button name="submit" type="submit" value="s">
@@ -28,7 +42,7 @@
 			<form:button name="clear" type="reset" value="r">
 				</form:button>
 				</td>
-		</tr>
+		</tr> --%>
 	</table>
 </form:form>
 </html>
