@@ -18,9 +18,9 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		User u = (User) target;
-		ValidationUtils.rejectIfEmpty(errors, "userId", "error.user.userid.empty");
-		ValidationUtils.rejectIfEmpty(errors, "employeeId", "error.user.employeeid.empty");
-		ValidationUtils.rejectIfEmpty(errors, "name", "error.user.name.empty");
+		ValidationUtils.rejectIfEmpty(errors, "username", "error.user.username.empty");
+//		ValidationUtils.rejectIfEmpty(errors, "employeeId", "error.user.employeeid.empty");
+		ValidationUtils.rejectIfEmpty(errors, "role", "error.user.role.empty");
 		ValidationUtils.rejectIfEmpty(errors, "password", "error.user.password.empty");
 		System.out.println(u.toString());
 	}
