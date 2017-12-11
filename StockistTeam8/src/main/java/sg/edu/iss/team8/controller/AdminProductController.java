@@ -153,6 +153,9 @@ public class AdminProductController {
 
 	@RequestMapping(value = "/catalogue", method = RequestMethod.GET)
 	public ModelAndView browseCatalogue(HttpSession session, Model model) {
+		if(!new TestController().isUser(session)) {
+			return new ModelAndView("403");
+		}
 		//UserSession us = (UserSession) session.getAttribute("USERSESSION");
 		ModelAndView mav = new ModelAndView("/product-catalogue");
 		mav.addObject("pList", pService.findAllProducts());
@@ -161,9 +164,12 @@ public class AdminProductController {
 	}
 	
 	 @RequestMapping(value="/search", method = RequestMethod.POST)
-	    public ModelAndView searchByDescription(
+	    public ModelAndView searchByDescription(HttpSession session,
 	    		@RequestParam String criteria,
 	            @RequestParam String description) {
+		 if(!new TestController().isUser(session)) {
+				return new ModelAndView("403");
+			}
 	        return new ModelAndView("product-catalogue", "pList", pService.searchProducts(criteria, description));
 	        //return new ModelAndView("product-catalogue", "pList", pService.searchProduct("p.criteria",description));
 	    }
