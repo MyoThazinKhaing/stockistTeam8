@@ -88,21 +88,22 @@ public class AdminSupplierController {
 		return mav;
 	}
 
-	/*@RequestMapping(value = "/edit/{supplierId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public ModelAndView editSupplier(@ModelAttribute @Valid Supplier supplier, BindingResult result,
-			@PathVariable String supplierId, final RedirectAttributes redirectAttributes)  {
+			final RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors())
 			return new ModelAndView("supplier-edit");
 
-		ModelAndView mav = new ModelAndView("redirect:/admin/supplier/list");
-		String message = "Supplier was successfully updated.";
+		ModelAndView mav = new ModelAndView();
+		String message = "Supplier " + supplier.getSupplierId() + " was successfully updated.";
 
 		sService.changeSupplier(supplier);
+		mav.setViewName("redirect:/admin/supplier/list");
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
-	}*/
+	}
 	
 	@RequestMapping(value = "/searchByName/{supplierName}", method = RequestMethod.POST)
 	public ModelAndView editSupplier(@ModelAttribute @Valid Supplier supplier, BindingResult result,

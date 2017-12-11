@@ -22,6 +22,7 @@ public class Supplier {
 	private String contactName;
 	@Pattern(regexp = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "Please enter valid web site")
 	private String website;
+	private String status;
 	public Supplier() {
 		super();
 		
@@ -78,6 +79,14 @@ public class Supplier {
 	}
 	public void setWebsite(String website) {
 		this.website = website;
+	}
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	@Override
 	public String toString() {
