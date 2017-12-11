@@ -10,7 +10,7 @@
 	action="${pageContext.request.contextPath}/mechanic/choosecustomer.html">
 	<form:select path="customerId">
 		<form:option value="" label="...." />
-		<%-- 		<form:options items="${custlist}" /> --%>
+		<form:options items="${custlist}" /> 
 	</form:select>
 	<%-- 				<td><form:errors path="managerId" cssStyle="color: red;" /></td> --%>
 	<c:if test="${fn:length(custList) gt 0}">
@@ -27,8 +27,8 @@
 				<c:forEach var="customer" items="${custList}">
 					<tr class="listRecord">
 						<td>${customer.customerId}</td>
-						<td>${customer.customerrName}</td>
-						<td>${customer.customerContactNumber}</td>
+						<td>${customer.customerName}</td>
+						<td>${customer.contactNumber}</td>
 						<td><input type="submit" value="Create" /></td>
 						<!-- 						<td align="center"><a -->
 						<%-- 							href="${pageContext.request.contextPath}/mechanic/create.html"><spring:message --%>

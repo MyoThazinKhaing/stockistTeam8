@@ -1,17 +1,13 @@
 package sg.edu.iss.team8.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sg.edu.iss.team8.model.Customer;
 import sg.edu.iss.team8.model.Transaction;
 import sg.edu.iss.team8.model.TransactionDetails;
+import sg.edu.iss.team8.repository.CustomerRepository;
 import sg.edu.iss.team8.repository.TransactionRepository;
+import sg.edu.iss.team8.service.CustomerService;
 import sg.edu.iss.team8.service.TransactionDetailsService;
 import sg.edu.iss.team8.service.TransactionService;
 
@@ -33,33 +31,43 @@ public class MechanicController {
 
 	 @Resource
 	 TransactionRepository trepo;
+	 @Resource
+	 CustomerRepository crepo;
 
 	@Autowired
 	private TransactionService tService;
 	@Autowired
 	private TransactionDetailsService tdService;
-	// @Autowired
-	// private CustomerService cService;
+	 @Autowired
+	 private CustomerService cService;
 
 	
 //	private void initEmployeeBinder(WebDataBinder binder) {
-	@InitBinder("transaction")
-	private void initTransactionBinder(WebDataBinder binder) {
-		// binder.addValidators(eValidator);
-	}
+//	@InitBinder("transaction")
+//	private void initTransactionBinder(WebDataBinder binder) {
+//		// binder.addValidators(eValidator);
+//	}
 	
-	@InitBinder("customer")
-	private void initCustomerBinder(WebDataBinder binder) {
-		// binder.addValidators(eValidator);
-	}
+//	@InitBinder("customer")
+//	private void initCustomerBinder(WebDataBinder binder) {
+//		// binder.addValidators(eValidator);
+//	}
 
-	@InitBinder("transaction")
+//	@InitBinder("transaction")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView newTransactionPage() {
-		ModelAndView mav = new ModelAndView("transaction-new", "transaction", new Transaction());
+		ModelAndView mav = new ModelAndView("transaction-new");
+		mav.addObject("transaction", new Transaction());
+		mav.addObject("transDetails", new TransactionDetails());
+		
 		// require the findAllUserName method
-		mav.addObject("eidlist", tService.findAllTransactionIDs());
+//		mav.addObject("eidlist", tService.findAllTransactionIDs());
+		mav.addObject("custlist", cService.findAllCustomerIDs());
 		// require the findAllUserName method
+		
+		// require the findAllUserName method OR autopopulate username
+//		mav.addObject("eidlist", cService.findAllCustomerIDs());
+		// require the findAllUserName method OR autopopulate username
 		return mav;
 
 		// ModelAndView mav = new ModelAndView("transaction-new", "customer", new
@@ -68,7 +76,7 @@ public class MechanicController {
 		// return mav;
 	}
 
-	@InitBinder("transaction")
+//	@InitBinder("transaction")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView createNewTransaction(@ModelAttribute @Valid Transaction transaction, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
@@ -80,6 +88,12 @@ public class MechanicController {
 		String message = "New transaction " + transaction.getTransactionId() + " was successfully created.";
 
 		tService.createTransaction(transaction);
+		
+//		for(TransactionDetails t : )
+//		{
+//			
+//		}
+			
 		// require to create foreach action for transaction details
 		// transactiondetails
 		mav.setViewName("redirect:/mechanic/list");
@@ -89,20 +103,20 @@ public class MechanicController {
 	}
 
 	// @GetMapping("/choosecustomer")
-	@InitBinder("customer")
+//	@InitBinder("customer")
 	@RequestMapping(value = "/choosecustomer", method = RequestMethod.GET)
-	public ModelAndView chooseCustomerPage(/*@PathVariable String id*/) {
+	public ModelAndView chooseCustomerPage() {/*@ModelAttribute @Valid Customer customer*/
 		// require the CustomerService interface
-		ModelAndView mav = new ModelAndView("transaction-choose-customer");
+		ModelAndView mav = new ModelAndView("transaction-choose-customer","customer", new Customer()/*ArrayList<Customer>()*/);
 
-		// mav.addObject("custlist", cService.findAllCustomerIDs());
+		mav.addObject("custlist", cService.findAllCustomerIDs());
 
-		mav.addObject("custlist", tService.findAllTransactionIDs());
+		//mav.addObject("custlist", tService.findAllTransactionIDs());
 		// comment out above line when CustomerService interface added
 		return mav;
 	}
 
-	@InitBinder("customer")
+//	@InitBinder("customer")
 	@RequestMapping(value = "/choosecustomer", method = RequestMethod.POST)
 	public ModelAndView chooseCustomer(@ModelAttribute @Valid Customer customer, BindingResult result,
 			@PathVariable String id, final RedirectAttributes redirectAttributes) /* throws EmployeeNotFound */ {

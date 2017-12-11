@@ -8,13 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "customer")
+@Table(name="customer")
 public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customerid")
-	private Integer customerId;
+	private String customerId;
 	@Column(name = "customername")
 	private String customerName;
 	@Column(name = "address")
@@ -30,7 +30,7 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Customer(Integer customerId, String customerName, String address, String country, String contactNumber) {
+	public Customer(String customerId, String customerName, String address, String country, String contactNumber) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -39,10 +39,10 @@ public class Customer {
 		this.contactNumber = contactNumber;
 	}
 
-	public Integer getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
-	public void setCustomerId(Integer customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 	public String getCustomerName() {
@@ -68,6 +68,44 @@ public class Customer {
 	}
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
+	}
+
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+		result = prime * result + ((customerName == null) ? 0 : customerName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (customerId == null) {
+			if (other.customerId != null)
+				return false;
+		} else if (!customerId.equals(other.customerId))
+			return false;
+		if (customerName == null) {
+			if (other.customerName != null)
+				return false;
+		} else if (!customerName.equals(other.customerName))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", address=" + address
+				+ ", country=" + country + ", contactNumber=" + contactNumber + "]";
 	}
 	
 

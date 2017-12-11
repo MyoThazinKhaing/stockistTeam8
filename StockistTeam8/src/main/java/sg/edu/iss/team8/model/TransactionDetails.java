@@ -14,6 +14,7 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
+@Table(name = "transactiondetails")
 public class TransactionDetails {
 
 	@Id
