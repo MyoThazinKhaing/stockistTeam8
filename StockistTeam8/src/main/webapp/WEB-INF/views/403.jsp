@@ -15,6 +15,7 @@
                     You do not have permission to access this page!</h2>
 		</c:otherwise>
 	</c:choose>
+	<a href="${pageContext.request.contextPath}/login">Press here to login again!</a>
 
 </body>
 </html>
