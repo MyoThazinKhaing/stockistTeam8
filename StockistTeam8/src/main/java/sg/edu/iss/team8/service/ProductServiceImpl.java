@@ -74,9 +74,16 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	@Transactional
-	public ArrayList<Product> findAllProductIDs() {
+	public ArrayList<Integer> findAllProductIDs() {
 		
 		return productRepository.findAllProductIDs();
 	}
 
+	@Override
+	public ArrayList<Integer> findAllSupplierIDs() {
+		// TODO Auto-generated method stub
+		return productRepository.findAllSupplierIDs();
+	}
+
+	
 }

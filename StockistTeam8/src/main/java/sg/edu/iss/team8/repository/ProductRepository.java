@@ -24,6 +24,8 @@ public interface ProductRepository extends JpaRepository<Product,Integer>{
 	    ArrayList<Product> findProductByManufacturer(@Param("pManufacturer") String pManufacturer);
 	    
 	    @Query("SELECT p.partNumber from Product p")
-	    ArrayList<Product> findAllProductIDs();
+	    ArrayList<Integer> findAllProductIDs();
 	    
+	    @Query("SELECT p.supplierId from Product p")
+	   ArrayList<Integer> findAllSupplierIDs();
 }

@@ -22,7 +22,9 @@ public interface ProductService {
 	
 	void removeEmployee(Product product);
 	
-	ArrayList<Product> findAllProductIDs();
+	ArrayList<Integer> findAllProductIDs();
+	
+	ArrayList<Integer> findAllSupplierIDs();
 	
 	
 	
