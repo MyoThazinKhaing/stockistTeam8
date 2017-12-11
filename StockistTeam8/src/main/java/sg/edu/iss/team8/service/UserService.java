@@ -9,6 +9,8 @@ import sg.edu.iss.team8.model.User;
 public interface UserService {
 
 	ArrayList<User> findAllUsers();
+	
+	ArrayList<User> searchUsers(String criteria, String description);
 
 	User findUser(String username);
 

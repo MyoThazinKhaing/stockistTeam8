@@ -47,7 +47,7 @@ public class AdminProductController {
 
 	@Autowired
 	private ProductService pService;
-	
+
 	@Autowired
 	private SupplierService sService;
 
@@ -59,27 +59,24 @@ public class AdminProductController {
 		// UserSession us = (UserSession) session.getAttribute("USERSESSION");
 		ModelAndView mav = new ModelAndView("product-catalogue");
 		ArrayList<Product> pList = (ArrayList<Product>) pService.findAllProducts();
-		//mav.addObject("pList", pList);
+		// mav.addObject("pList", pList);
 		PagedListHolder<Product> pagedListHolder = new PagedListHolder<>(pList);
 		pagedListHolder.setPageSize(8);
 		mav.addObject("maxPages", pagedListHolder.getPageCount());
-		
-		//if(page==null || page < 1 || page > pagedListHolder.getPageCount())page=1;
+
+		// if(page==null || page < 1 || page > pagedListHolder.getPageCount())page=1;
 
 		mav.addObject("page", page);
-        if(page == null || page < 1 || page > pagedListHolder.getPageCount()){
-            pagedListHolder.setPage(0);
-            mav.addObject("pList", pagedListHolder.getPageList());
-        }
-        else if(page <= pagedListHolder.getPageCount()) {
-            pagedListHolder.setPage(page-1);
-            mav.addObject("pList", pagedListHolder.getPageList());
-        }
-		
+		if (page == null || page < 1 || page > pagedListHolder.getPageCount()) {
+			pagedListHolder.setPage(0);
+			mav.addObject("pList", pagedListHolder.getPageList());
+		} else if (page <= pagedListHolder.getPageCount()) {
+			pagedListHolder.setPage(page - 1);
+			mav.addObject("pList", pagedListHolder.getPageList());
+		}
+
 		return mav;
 	}
-	
-	
 
 	@RequestMapping(value = "/catalogue", method = RequestMethod.POST)
 	public ModelAndView searchProducts(HttpSession session, @RequestParam String criteria,
@@ -91,7 +88,7 @@ public class AdminProductController {
 		// return new ModelAndView("product-catalogue", "pList",
 		// pService.searchProduct("p.criteria",description));
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView viewProductDetails(HttpSession session, @PathVariable String id) {
 		if (!new TestController().isUser(session)) {
@@ -100,13 +97,11 @@ public class AdminProductController {
 		ModelAndView mav = new ModelAndView("product-view");
 		Product p = pService.findProduct(Integer.parseInt(id));
 		Supplier s = sService.findSupplier(p.getSupplierId());
-		
+
 		mav.addObject("product", p);
 		mav.addObject("supplier", s);
-		
-		
+
 		return mav;
 	}
-	
-	
+
 }
