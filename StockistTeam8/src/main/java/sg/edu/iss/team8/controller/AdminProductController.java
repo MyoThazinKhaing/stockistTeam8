@@ -1,6 +1,5 @@
 package sg.edu.iss.team8.controller;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -157,31 +156,21 @@ public class AdminProductController {
 		if(!new TestController().isUser(session)) {
 			return new ModelAndView("403");
 		}
+		//UserSession us = (UserSession) session.getAttribute("USERSESSION");
 		ModelAndView mav = new ModelAndView("/product-catalogue");
 		mav.addObject("pList", pService.findAllProducts());
 		model.addAttribute("product", new Product());
 		return mav;
 	}
 	
-	 @RequestMapping(value="/catalogue", method = RequestMethod.POST)
-	    public ModelAndView searchProduct(
+	 @RequestMapping(value="/search", method = RequestMethod.POST)
+	    public ModelAndView searchByDescription(HttpSession session,
 	    		@RequestParam String criteria,
 	            @RequestParam String description) {
+		 if(!new TestController().isUser(session)) {
+				return new ModelAndView("403");
+			}
 	        return new ModelAndView("product-catalogue", "pList", pService.searchProducts(criteria, description));
 	        //return new ModelAndView("product-catalogue", "pList", pService.searchProduct("p.criteria",description));
 	    }
-	 
-	 @RequestMapping(value="/pagin/{pageid}")  
-	    public ModelAndView edit(@PathVariable int pageid){  
-	        int total=5;  
-	        if(pageid==1){}  
-	        else{  
-	            pageid=(pageid-1)*total+1;  
-	        }  
-	        ArrayList<Product> list=pService.getProductByPage(pageid, total);  
-	          
-	        return new ModelAndView("pagin_Test","list",list);  
-	    }  
 	 }
-
-

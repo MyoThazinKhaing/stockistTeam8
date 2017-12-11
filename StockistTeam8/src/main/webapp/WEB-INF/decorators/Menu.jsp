@@ -38,7 +38,7 @@ a{
 					<c:when test="${role eq 'admin'}">
 						<spring:url value="/admin/user/list" var="ulist" htmlEscape="true" />
 						<a href="${ulist}"
-							class="list-group-item list-group-item-action active"> <spring:message
+							class="list-group-item list-group-item-action"> <spring:message
 								code="menu.admin.ulist" />
 						</a>
 						<spring:url value="/admin/role/list" var="rlist" htmlEscape="true" />

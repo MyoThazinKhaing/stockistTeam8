@@ -26,16 +26,6 @@ div.dropdown-menu.show {
 
 
 </body>
-<spring:url value="/logout" var="logoutUrl" htmlEscape="true"/>
-<form action="${logoutUrl}" method="post" id="logoutForm">
-	<input type="hidden" name="${_csrf.parameterName}"
-		value="${_csrf.token}" />
-</form>
-<script>
-	function formSubmit() {
-		document.getElementById("logoutForm").submit();
-	}
-</script>
 <div>
 	<!-- Main Navbar-->
 	<div class="navbox">
@@ -63,8 +53,9 @@ div.dropdown-menu.show {
 							style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
 							<a class="dropdown-item" href="#">Manage account</a>
 							<div class="dropdown-divider"></div>
+							<spring:url value="/logout" var="logout" htmlEscape="true" />
 							<a class="dropdown-item"
-								href="javascript:formSubmit()">Logout</a>
+								href="${logout}">Logout</a>
 						</div></li>
 				</ul>
 
