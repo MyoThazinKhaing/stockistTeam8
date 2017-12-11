@@ -5,9 +5,9 @@
 <html>
 <head>
 <!-- Bootstrap Litera CSS -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.css"
+<link href="${pageContext.request.contextPath}/css/bootstrap-litera.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+<link href="${pageContext.request.contextPath}/css/bootstrap-litera.min.css"
 	rel="stylesheet">
 
 <!-- Custom Fonts -->
