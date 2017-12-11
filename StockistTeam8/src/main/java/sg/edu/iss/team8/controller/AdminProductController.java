@@ -32,7 +32,9 @@ public class AdminProductController {
 	
 	 @RequestMapping(value="/search", method = RequestMethod.POST)
 	    public ModelAndView searchByDescription(
+	    		@RequestParam String criteria,
 	            @RequestParam String description) {
-	        return new ModelAndView("product-catalogue", "pList", pService.searchProductByDescrption(description));
+	        return new ModelAndView("product-catalogue", "pList", pService.searchProducts(criteria, description));
+	        //return new ModelAndView("product-catalogue", "pList", pService.searchProduct("p.criteria",description));
 	    }
 	 }

@@ -23,11 +23,11 @@
 					src="${pageContext.request.contextPath}/image/icon_search.gif"
 					alt="" align="middle"></td>
 				<td>
-				<td><select name="searchCriteria">
+				<td><select name="criteria">
 						<option value="partNumber">Part number</option>
 						<option value="description">Description</option>
 						<option value="colour">Colour</option>
-						<option value="manufacturer">Manufacture</option>
+						<option value="manufacturer">Manufacturer</option>
 				</select></td>
 				<td colspan="3"><input type="text" name="description" size="40" /></td>
 
@@ -73,6 +73,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</c:if> 
+		<c:if test="${fn:length(pList) eq 0}">
+		<p>No records found.</p>
 		</c:if>
 	</form:form>
 </body>

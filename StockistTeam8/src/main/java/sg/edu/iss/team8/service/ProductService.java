@@ -10,9 +10,16 @@ public interface ProductService {
 
 	ArrayList<Product> findAllProducts();
 
-	ArrayList<Product> searchProductByDescrption(String description);
-	
-	/*ArrayList<Product> searchProduct(String searchCriteria, String searchValue);*/
+	// For SEARCH
+	ArrayList<Product> searchProductByDescription(String description);
+
+	ArrayList<Product> searchProducts(String criteria, String description);
+
+	// ArrayList<Product> searchProductByDescription(String like, String
+	// description);
+
+	// SEARCH PRODUCT ALL IN ONE
+	//ArrayList<Product> searchProduct(String searchCriteria, String searchValue);
 
 	Product findProduct(Integer partNumber);
 
