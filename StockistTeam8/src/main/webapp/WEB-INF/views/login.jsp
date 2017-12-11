@@ -48,10 +48,15 @@
 	color: white;
 }
 
-.welcome {color =#C7F2C2
-	
-}
-</style>
+	// Duration is the amount of time in between slides,
+	// and fade is value that determines how quickly the next image will fade in
+	$.backstretch([ "http://www.mobilemechanichoustonpros.com/wp-content/uploads/2014/04/auto-repair-promo.jpg",
+			"https://latestautocar.com/wp-content/uploads/2017/03/perfect-cool-ford-cars-with-img-f9zu-cool-ford-cars-ideas-by-gallery.jpg",
+			"https://img.gaadicdn.com/images/mycar/large/audi/a5/marketing/Audi-A5.webp" ], {
+		duration : 3000,
+		fade : 750
+	});
+</script>
 
 </head>
 <body>
@@ -117,9 +122,9 @@
 		$
 				.backstretch(
 						[
-								"https://wallup.net/wp-content/uploads/2016/01/136695-car-motion_blur-concept_cars-orange_cars.jpg",
-								"https://wallup.net/wp-content/uploads/2016/01/45711-car-red_cars-motion_blur-trees.jpg",
-								"https://hdwallsource.com/img/2016/9/formula-1-motion-blur-wallpaper-49938-51620-hd-wallpapers.jpg" ],
+								"http://www.mobilemechanichoustonpros.com/wp-content/uploads/2014/04/auto-repair-promo.jpg",
+								"https://latestautocar.com/wp-content/uploads/2017/03/perfect-cool-ford-cars-with-img-f9zu-cool-ford-cars-ideas-by-gallery.jpg",
+								"https://img.gaadicdn.com/images/mycar/large/audi/a5/marketing/Audi-A5.webp" ],
 						{
 							fade : 750,
 							duration : 4000
