@@ -18,4 +18,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 	
 	@Query("SELECT u FROM User u WHERE u.role=:role")
 	ArrayList<User> findUserByRole(@Param("role") String role);
+	
+	@Query("SELECT DISTINCT u.role FROM User u")
+	ArrayList<String> ListRoles();
+
 }

@@ -99,16 +99,16 @@ public class AdminUserController {
 		mav.addObject("userList", userList);
 		return mav;
 	}
-
+//need to change this controller method to map the roles to the dropdownlist
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView editUserPage(@PathVariable String id, HttpSession session) {
 		if (!new TestController().isAdmin(session))
 			return new ModelAndView("403");
-		ModelAndView mav = new ModelAndView("user-edit");
+		ModelAndView mav = new ModelAndView("edituser");
 		User user = uService.findUser(id);
 		mav.addObject("user", user);
-		ArrayList<User> userList = uService.findAllUsers();
-		mav.addObject("userList", userList);
+		ArrayList<String> eidList = uService.ListRoles();
+		mav.addObject("eidlist", eidList);
 		return mav;
 	}
 
@@ -119,7 +119,7 @@ public class AdminUserController {
 			return new ModelAndView("403");
 
 		if (result.hasErrors())
-			return new ModelAndView("user-edit");
+			return new ModelAndView("edituser");
 
 		ModelAndView mav = new ModelAndView("redirect:/admin/user/list");
 		String message = "User was successfully updated.";
