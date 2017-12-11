@@ -69,11 +69,11 @@
 						</h2>
 						<c:if test="${sessionScope.USERSESSION != null}">
 							<h3 class="welcome">
-								<p>
+								<p style="color: #CFEDFC">
 									Welcome back&nbsp;
 									<c:out value="${sessionScope.USERSESSION.user.username}" />
 								</p>
-								<spring:url value="/products/catalog" var="catalog"
+								<spring:url value="/product/catalogue" var="catalog"
 									htmlEscape="true" />
 								<p>
 									<a href="${catalog}"> Browse catalog </a>

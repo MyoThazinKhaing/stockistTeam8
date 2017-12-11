@@ -73,7 +73,7 @@ public class CommonController {
 		return new ModelAndView("redirect:/login", "error", "Invalid name or password!");
 	}
 
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpSession session) {
 		if (session.getAttribute("USERSESSION") != null) {
 			session.removeAttribute("USERSESSION");
