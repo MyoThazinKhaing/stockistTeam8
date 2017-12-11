@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/WEB-INF/decorators/">
-
-	
-    <decorator name="default" page="Layout.jsp">
-        <pattern>*</pattern>
-     
-        
-    </decorator>
-
+	<decorator name="default" page="Layout.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	<decorator name="nodeco" page=""></decorator>
 </decorators>

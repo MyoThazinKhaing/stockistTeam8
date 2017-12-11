@@ -28,6 +28,7 @@ import sg.edu.iss.team8.service.TransactionService;
 @RequestMapping(value = "/mechanic")
 @Controller
 public class MechanicController {
+	
 
 	 @Resource
 	 TransactionRepository trepo;
