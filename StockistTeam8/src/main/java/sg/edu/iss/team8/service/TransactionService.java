@@ -40,5 +40,7 @@ public interface TransactionService {
 
 	ArrayList<Transaction> findTransactionsByDate(String eid, String eid2);
 
+	ArrayList<String> findAllTransactionIDs();
+
 
 }

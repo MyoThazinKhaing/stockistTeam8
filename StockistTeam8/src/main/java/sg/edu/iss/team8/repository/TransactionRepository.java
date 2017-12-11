@@ -10,11 +10,14 @@ import sg.edu.iss.team8.model.Transaction;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Integer>{
 
-	@Query("SELECT t from transaction t WHERE t.transactionid = :eid")
+	@Query("SELECT t from Transaction t WHERE t.transactionId = :eid")
 	ArrayList<Transaction> findTransactionsByEID(@Param("eid") String eid);
 	
-	@Query("SELECT t from transaction t WHERE (date_field BETWEEN ':eid' AND ':eid2'")
+	@Query("SELECT t from Transaction t WHERE t.consumeDate BETWEEN :eid AND :eid2")
 	ArrayList<Transaction> findTransactionsByDate(@Param("eid") String eid, @Param("eid2") String eid2);
+	
+	@Query("SELECT DISTINCT t.transactionId FROM Transaction t")
+	ArrayList<String> findAllTransactionIDs();
 //	@Query("SELECT t.transactionid FROM transaction t")
 //	ArrayList<String> findTransactionByDateRange();
 //	

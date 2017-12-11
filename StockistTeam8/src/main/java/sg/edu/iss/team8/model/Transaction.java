@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
@@ -22,34 +23,38 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "transaction")
-//@SecondaryTable(name = "transactiondetails", pkJoinColumns = @PrimaryKeyJoinColumn(name = "transactionid"))
+// @SecondaryTable(name = "transactiondetails", pkJoinColumns =
+// @PrimaryKeyJoinColumn(name = "transactionid"))
 public class Transaction {
-	
+
 	@Id
 	@Column(name = "transactionid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int transactionId;
-	
+
 	@Column(name = "customerid")
 	private int customerId;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "consumedate")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date consumeDate;
-	
+
 	@Column(name = "username")
 	private String userName;
-	
-	@OneToMany(mappedBy="course", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<TransactionDetails> transactionEvent = new ArrayList<TransactionDetails>();
+
+	@OneToMany(mappedBy = "transactionDetailsMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)//EAGER)
+//	@JoinColumn(name="transactionid")
+	public List<TransactionDetails> transactionEvent;// = new ArrayList<TransactionDetails>();
+//	public List<TransactionDetails> getTransactionDetails(this.getTransactionId()){
+//		
+//	}
+//	public List<TransactionDetails> transactionEvent;// = new ArrayList<TransactionDetails>();
 
 	public Transaction() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
 
 	public Transaction(int transactionId, int customerId, Date consumeDate, String userName,
 			List<TransactionDetails> transactionEvent) {
@@ -60,8 +65,6 @@ public class Transaction {
 		this.userName = userName;
 		this.transactionEvent = transactionEvent;
 	}
-
-
 
 	public int getTransactionId() {
 		return transactionId;
@@ -94,19 +97,14 @@ public class Transaction {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
 
 	public List<TransactionDetails> getTransactionEvent() {
 		return transactionEvent;
 	}
 
-
-
 	public void setTransactionEvent(List<TransactionDetails> transactionEvent) {
 		this.transactionEvent = transactionEvent;
 	}
-
-
 
 	@Override
 	public int hashCode() {

@@ -85,4 +85,9 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionRepository.findTransactionsByDate(eid, eid2);
 	}
 
+	@Override
+	@Transactional
+	public ArrayList<String> findAllTransactionIDs(){
+		return transactionRepository.findAllTransactionIDs();
+	}
 }
