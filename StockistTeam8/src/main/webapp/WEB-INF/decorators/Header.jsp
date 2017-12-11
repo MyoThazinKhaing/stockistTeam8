@@ -26,7 +26,7 @@ div.dropdown-menu.show {
 
 
 </body>
-<c:url value="/logout" var="logoutUrl" />
+<spring:url value="/logout" var="logoutUrl" htmlEscape="true"/>
 <form action="${logoutUrl}" method="post" id="logoutForm">
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />

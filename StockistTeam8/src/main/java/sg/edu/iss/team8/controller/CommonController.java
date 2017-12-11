@@ -70,7 +70,7 @@ public class CommonController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public ModelAndView logout(HttpSession session) {
 		if (session.getAttribute("USERSESSION") != null) {
 			session.removeAttribute("USERSESSION");
