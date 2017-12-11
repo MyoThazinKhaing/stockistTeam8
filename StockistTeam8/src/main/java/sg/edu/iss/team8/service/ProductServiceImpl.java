@@ -10,9 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 import sg.edu.iss.team8.model.Product;
 import sg.edu.iss.team8.repository.ProductRepository;
 
+
+import java.sql.ResultSet;  
+import java.sql.SQLException;  
+import java.util.List;  
+import org.springframework.jdbc.core.JdbcTemplate;  
+import org.springframework.jdbc.core.RowMapper;  
+
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
+	JdbcTemplate template;  
+	
 	@Resource
 	private ProductRepository pRepository;
 
@@ -94,6 +104,10 @@ public class ProductServiceImpl implements ProductService {
 		ArrayList<Product> searchResult = new ArrayList<Product>();
 		switch (criteria) {
 		case "partNumber":
+			if(description=="") {
+				return searchResult =(ArrayList<Product>) pRepository.findAll();
+				
+			}
 			try {
 				searchResult = pRepository.searchProductByNo(Integer.parseInt(description));
 
@@ -117,5 +131,19 @@ public class ProductServiceImpl implements ProductService {
 
 		return searchResult;
 	}
+	
+	public ArrayList<Product> getProductByPage(int pageid,int total){  
+	    String sql="select * from Product limit "+(pageid-1)+","+total;  
+	    return (ArrayList<Product>) template.query(sql,new RowMapper<Product>(){  
+	        public Product mapRow(ResultSet rs, int row) throws SQLException {  
+	            Product p=new Product();  
+	            p.setPartNumber(rs.getInt(1));  
+	            p.setUnitPrice(rs.getDouble(2));  
+	            p.setDescription(rs.getString(3)); 
+	            p.setColour(rs.getString(4));
+	            return p;  
+	        }  
+	    });  
+	}  
 
 }

@@ -1,5 +1,6 @@
 package sg.edu.iss.team8.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -153,18 +154,34 @@ public class AdminProductController {
 
 	@RequestMapping(value = "/catalogue", method = RequestMethod.GET)
 	public ModelAndView browseCatalogue(HttpSession session, Model model) {
-		//UserSession us = (UserSession) session.getAttribute("USERSESSION");
+		if(!new TestController().isUser(session)) {
+			return new ModelAndView("403");
+		}
 		ModelAndView mav = new ModelAndView("/product-catalogue");
 		mav.addObject("pList", pService.findAllProducts());
 		model.addAttribute("product", new Product());
 		return mav;
 	}
 	
-	 @RequestMapping(value="/search", method = RequestMethod.POST)
-	    public ModelAndView searchByDescription(
+	 @RequestMapping(value="/catalogue", method = RequestMethod.POST)
+	    public ModelAndView searchProduct(
 	    		@RequestParam String criteria,
 	            @RequestParam String description) {
 	        return new ModelAndView("product-catalogue", "pList", pService.searchProducts(criteria, description));
 	        //return new ModelAndView("product-catalogue", "pList", pService.searchProduct("p.criteria",description));
 	    }
+	 
+	 @RequestMapping(value="/pagin/{pageid}")  
+	    public ModelAndView edit(@PathVariable int pageid){  
+	        int total=5;  
+	        if(pageid==1){}  
+	        else{  
+	            pageid=(pageid-1)*total+1;  
+	        }  
+	        ArrayList<Product> list=pService.getProductByPage(pageid, total);  
+	          
+	        return new ModelAndView("pagin_Test","list",list);  
+	    }  
 	 }
+
+

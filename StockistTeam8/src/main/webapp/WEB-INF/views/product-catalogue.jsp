@@ -15,7 +15,7 @@
 	<h3>Product Catalogue</h3>
 
 	<form:form modelAttribute="product" method="POST"
-		action="${pageContext.request.contextPath}/product/search">
+		action="${pageContext.request.contextPath}/product/catalogue">
 		<table class="framed">
 			<tr>
 
