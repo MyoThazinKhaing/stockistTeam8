@@ -1,11 +1,13 @@
 package sg.edu.iss.team8.controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,17 +52,34 @@ public class AdminProductController {
 	private SupplierService sService;
 
 	@RequestMapping(value = "/catalogue", method = RequestMethod.GET)
-	public ModelAndView browseCatalogue(HttpSession session, Model model) {
+	public ModelAndView browseCatalogue(HttpSession session, @RequestParam(required = false) Integer page) {
 		if (!new TestController().isUser(session)) {
 			return new ModelAndView("403");
 		}
 		// UserSession us = (UserSession) session.getAttribute("USERSESSION");
-		ModelAndView mav = new ModelAndView("/product-catalogue");
-		mav.addObject("pList", pService.findAllProducts());
-		model.addAttribute("product", new Product());
+		ModelAndView mav = new ModelAndView("product-catalogue");
+		ArrayList<Product> pList = (ArrayList<Product>) pService.findAllProducts();
+		//mav.addObject("pList", pList);
+		PagedListHolder<Product> pagedListHolder = new PagedListHolder<>(pList);
+		pagedListHolder.setPageSize(8);
+		mav.addObject("maxPages", pagedListHolder.getPageCount());
+		
+		//if(page==null || page < 1 || page > pagedListHolder.getPageCount())page=1;
+
+		mav.addObject("page", page);
+        if(page == null || page < 1 || page > pagedListHolder.getPageCount()){
+            pagedListHolder.setPage(0);
+            mav.addObject("pList", pagedListHolder.getPageList());
+        }
+        else if(page <= pagedListHolder.getPageCount()) {
+            pagedListHolder.setPage(page-1);
+            mav.addObject("pList", pagedListHolder.getPageList());
+        }
 		
 		return mav;
 	}
+	
+	
 
 	@RequestMapping(value = "/catalogue", method = RequestMethod.POST)
 	public ModelAndView searchProducts(HttpSession session, @RequestParam String criteria,
