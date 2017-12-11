@@ -48,8 +48,8 @@
 	color: white;
 }
 
-.welcome{
-	color=#C7F2C2
+.welcome {color =#C7F2C2
+	
 }
 </style>
 
@@ -69,7 +69,9 @@
 						</h2>
 						<c:if test="${sessionScope.USERSESSION != null}">
 							<h3 class="welcome">
-								<p>Welcome back&nbsp;<c:out value="${sessionScope.USERSESSION.user.username}" />
+								<p>
+									Welcome back&nbsp;
+									<c:out value="${sessionScope.USERSESSION.user.username}" />
 								</p>
 								<spring:url value="/products/catalog" var="catalog"
 									htmlEscape="true" />
@@ -83,19 +85,22 @@
 							</h3>
 						</c:if>
 						<c:if test="${sessionScope.USERSESSION == null}">
-							<spring:url value="/authenticate" var="login"
-									htmlEscape="true" />
-							<form:form modelAttribute="user" method="POST"
-								action="${login}">
-									<label class="col-form-label" for="unInput">Username</label>
-									<form:input type="text" class="form-control"
-										placeholder="Username" path="username" id="unInput" />
-									<label class="col-form-label" for="pwInput">Password</label>
-									<form:input type="password" class="form-control"
-										placeholder="Password" path="password" id="pwInput" />
-									<div style="margin: 20px 0 5px 0;">
-										<button type="submit" class="btn btn-primary">Submit</button>
-									</div>
+							<spring:url value="/authenticate" var="login" htmlEscape="true" />
+							<form:form modelAttribute="user" method="POST" action="${login}">
+								<label class="col-form-label" for="unInput">Username</label>
+								<form:input type="text" class="form-control"
+									placeholder="Username" path="username" id="unInput" />
+								<label class="col-form-label" for="pwInput">Password</label>
+								<form:input type="password" class="form-control"
+									placeholder="Password" path="password" id="pwInput" />
+								<div style="margin: 20px 0 5px 0;">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+								<div>
+									<c:if test="${not empty error}">
+										<div class="error">${error}</div>
+									</c:if>
+								</div>
 							</form:form>
 						</c:if>
 
@@ -109,7 +114,8 @@
 	<script
 		src="${pageContext.request.contextPath}/js/jquery.backstretch.min.js"></script>
 	<script>
-		$.backstretch(
+		$
+				.backstretch(
 						[
 								"https://wallup.net/wp-content/uploads/2016/01/136695-car-motion_blur-concept_cars-orange_cars.jpg",
 								"https://wallup.net/wp-content/uploads/2016/01/45711-car-red_cars-motion_blur-trees.jpg",

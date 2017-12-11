@@ -39,35 +39,38 @@ public class CommonController {
 	@RequestMapping(value = "/**", method = RequestMethod.GET)
 	public String firstTime(HttpServletRequest request, HttpSession session) {
 		Map<RequestMappingInfo, HandlerMethod> mapping = requestMappingHandlerMapping.getHandlerMethods();
-		return new TestController().testURL(request, session, mapping); 
+		return new TestController().testURL(request, session, mapping);
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
-		model.addAttribute("user", new User());
-		return "login";
+	public ModelAndView login(ModelAndView mav, HttpSession session, @RequestParam(value = "error", required = false) String error) {
+		if (session.getAttribute("USERNAME") == null) {
+			mav.addObject("user", new User());
+		} 
+		if (!mav.getModel().containsKey("error")) {
+			mav.addObject("error", "");
+		}
+		mav.setViewName("login");
+		return mav;
 	}
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ModelAndView authenticate(@ModelAttribute User user, HttpSession session, BindingResult result) {
-		ModelAndView mav = new ModelAndView("error");
 		if (result.hasErrors()) {
-			return mav;
+			return new ModelAndView("error");
 		}
 		UserSession us = new UserSession();
 		if (user.getUsername() != null && user.getPassword() != null) {
 			User u = uService.authenticate(user.getUsername(), user.getPassword());
-			us.setUser(u);
-			// PUT CODE FOR SETTING SESSION ID
-			us.setSessionId(session.getId());
-
-			mav = new ModelAndView("redirect:/products/catalog");
-		} else {
-			mav = new ModelAndView("invalid");
-			return mav;
+			if (u != null) {
+				us.setUser(u);
+				// PUT CODE FOR SETTING SESSION ID
+				us.setSessionId(session.getId());
+				session.setAttribute("USERSESSION", us);
+				return new ModelAndView("redirect:/product/catalogue");
+			}
 		}
-		session.setAttribute("USERSESSION", us);
-		return mav;
+		return new ModelAndView("redirect:/login", "error", "Invalid name or password!");
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
@@ -75,6 +78,7 @@ public class CommonController {
 		if (session.getAttribute("USERSESSION") != null) {
 			session.removeAttribute("USERSESSION");
 		}
+
 		ModelAndView mav = new ModelAndView("redirect:/login");
 		return mav;
 	}

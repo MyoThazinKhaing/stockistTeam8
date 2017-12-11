@@ -43,7 +43,7 @@
 	<form:form method="GET"
 		action="${pageContext.request.contextPath}/product/catalogue">
 		<a href="${pageContext.request.contextPath}/admin/product/create">Add
-			User</a>
+			Product</a>
 		<c:if test="${fn:length(pList) gt 0}">
 			<table style="cellspacing: 2; cellpadding: 2; border: 1;">
 				<thead>
