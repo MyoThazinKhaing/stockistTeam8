@@ -11,10 +11,9 @@
 <td class="supplierHeader"><form:form method="POST" modelAttribute="supplier"
 	action="${pageContext.request.contextPath}/admin/supplier/searchByName/${supplierName}.html">
 
+	Search By name
+	<form:input path="supplierName"  style="width: 300px;" onfocus="this.value='';"/>
 	
-	<form:input path="supplierName" value="Search By Supplier Name" style="width: 300px;" onfocus="this.value='';"/>
-	
-	 <form:input path="supplierName" id="supplierName"value="Search By Supplier Name" style="width: 300px;" onfocus="this.value='';"/>
 	 <input type="submit" value="Search" class="blcass"/>
 	
 
