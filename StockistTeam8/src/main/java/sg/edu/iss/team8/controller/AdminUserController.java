@@ -62,12 +62,14 @@ public class AdminUserController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView newUserPage(HttpSession session) {
+	public ModelAndView newUserPage(HttpSession session, RedirectAttributes redirect) {
 		if (!new TestController().isAdmin(session))
 			return new ModelAndView("403");
-		ModelAndView mav = new ModelAndView("user-new", "user", new User());
+		ModelAndView mav = new ModelAndView("adduser", "user", new User());
 		ArrayList<User> userList = uService.findAllUsers();
 		mav.addObject("userList", userList);
+		ArrayList<String> eidList = uService.ListRoles();
+		mav.addObject("eidlist", eidList);
 		return mav;
 	}
 
@@ -77,18 +79,28 @@ public class AdminUserController {
 		if (!new TestController().isAdmin(session))
 			return new ModelAndView("403");
 		
-		if (result.hasErrors())
-			return new ModelAndView("user-new");
-
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("adduser");
+		boolean isRepeat = false;
+		if(uService.findUser(user.getUsername())!=null) {
+			isRepeat=true;
+			mav.addObject("repeatUser", isRepeat);
+		}
+		if (result.hasErrors() || isRepeat) {
+			ArrayList<String> eidList = uService.ListRoles();
+			mav.addObject("eidlist", eidList);
+			return mav;
+		}
+			
 		String message = "The user " + user.getUsername() + " was successfully created.";
 
 		uService.createUser(user);
-		mav.setViewName("redirect:/admin/user/list");
+		mav.setViewName("redirect:/admin/user/create");
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
+	
+	
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView userListPage(HttpSession session) {
@@ -99,7 +111,7 @@ public class AdminUserController {
 		mav.addObject("userList", userList);
 		return mav;
 	}
-//need to change this controller method to map the roles to the dropdownlist
+
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView editUserPage(@PathVariable String id, HttpSession session) {
 		if (!new TestController().isAdmin(session))
@@ -122,7 +134,7 @@ public class AdminUserController {
 			return new ModelAndView("edituser");
 
 		ModelAndView mav = new ModelAndView("redirect:/admin/user/list");
-		String message = "User was successfully updated.";
+		String message = "error";
 
 		uService.changeUser(user);
 

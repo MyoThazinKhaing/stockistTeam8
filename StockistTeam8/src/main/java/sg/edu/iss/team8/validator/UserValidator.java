@@ -22,6 +22,8 @@ public class UserValidator implements Validator {
 //		ValidationUtils.rejectIfEmpty(errors, "employeeId", "error.user.employeeid.empty");
 		ValidationUtils.rejectIfEmpty(errors, "role", "error.user.role.empty");
 		ValidationUtils.rejectIfEmpty(errors, "password", "error.user.password.empty");
+	
+
 		System.out.println(u.toString());
 	}
 
