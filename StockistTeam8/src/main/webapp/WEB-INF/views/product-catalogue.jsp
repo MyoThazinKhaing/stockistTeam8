@@ -64,6 +64,9 @@
 							<td>${product.description}</td>
 							<td>${product.colour}</td>
 							<td align="center"><a
+								href="${pageContext.request.contextPath}/product/${product.partNumber}.html"><spring:message
+										code="caption.detail" /></a></td>
+							<td align="center"><a
 								href="${pageContext.request.contextPath}/admin/product/edit/${product.partNumber}.html"><spring:message
 										code="caption.edit" /></a></td>
 							<td><a
@@ -73,9 +76,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</c:if> 
+		</c:if>
 		<c:if test="${fn:length(pList) eq 0}">
-		<p>No records found.</p>
+			<p>No records found.</p>
 		</c:if>
 	</form:form>
 </body>
