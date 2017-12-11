@@ -56,15 +56,15 @@ public class AdminProductController {
 		if (!new TestController().isUser(session)) {
 			return new ModelAndView("403");
 		}
-		// UserSession us = (UserSession) session.getAttribute("USERSESSION");
+		
 		ModelAndView mav = new ModelAndView("product-catalogue");
 		ArrayList<Product> pList = (ArrayList<Product>) pService.findAllProducts();
-		// mav.addObject("pList", pList);
+		
 		PagedListHolder<Product> pagedListHolder = new PagedListHolder<>(pList);
 		pagedListHolder.setPageSize(8);
 		mav.addObject("maxPages", pagedListHolder.getPageCount());
 
-		// if(page==null || page < 1 || page > pagedListHolder.getPageCount())page=1;
+		
 
 		mav.addObject("page", page);
 		if (page == null || page < 1 || page > pagedListHolder.getPageCount()) {
