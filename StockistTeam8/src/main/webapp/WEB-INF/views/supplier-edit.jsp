@@ -5,7 +5,7 @@
 
 <h3>Edit Supplier page</h3>
 <form:form method="POST" modelAttribute="supplier"
-	action="${pageContext.request.contextPath}/admin/supplier/create.html">
+	action="${pageContext.request.contextPath}/admin/supplier/edit.html">
 	<table>
 		<tbody>
 			<tr>
@@ -43,7 +43,15 @@
 				<td><form:input path="website" style="width: 300px;"/></td>
 				<td><form:errors path="website" cssStyle="color: red;" /></td>
 			</tr>
-		
+		    
+		    <tr>
+				<td>Supplier Status</td>
+				<td><form:select path="status" style="width: 300px;">
+						<form:option value="Active"/>
+						<form:option value="InActive"/>
+				</form:select></td>
+				<td><form:errors path="status" cssStyle="color: red;" /></td>
+			</tr>
 			<tr>
 			<td></td>
 				<td><input type="submit" style="width: 100px;" value="Edit" class="blcass"/></td>

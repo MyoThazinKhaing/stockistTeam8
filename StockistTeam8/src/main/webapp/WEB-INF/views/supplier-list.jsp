@@ -39,6 +39,7 @@
 				<th>Supplier Contact Number</th>
 				<th>Supplier Contact Name</th>
 				<th>Supplier Website</th>
+				<th>Supplier Status</th>
 				<th><spring:message code="caption.edit" /></th>
 				<%-- <th><spring:message code="caption.delete" /></th> --%>
 			</tr>
@@ -53,6 +54,7 @@
 					<td>${supplier.contactNumber}</td>
 					<td>${supplier.contactName}</td>
 					<td>${supplier.website}</td>
+					<td>${supplier.status}</td>
 					
 					<td align="center"><a
 						href="${pageContext.request.contextPath}/admin/supplier/edit/${supplier.supplierId}.html"><spring:message

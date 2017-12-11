@@ -43,7 +43,14 @@
 				<td><form:input path="website" style="width: 300px;"/></td>
 				<td><form:errors path="website" cssStyle="color: red;" /></td>
 			</tr>
-		
+		 <tr>
+				<td>Supplier Status</td>
+				<td><form:select path="status" style="width: 300px;">
+						<form:option value="Active"/>
+						<form:option value="InActive"/>
+				</form:select></td>
+				<td><form:errors path="status" cssStyle="color: red;" /></td>
+			</tr>
 			<tr>
 			<td></td>
 				<td><input type="submit" value="Create" style="width: 100px;" class="blcass"/></td>
