@@ -14,7 +14,7 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customerid")
-	private String customerId;
+	private int customerId;
 	@Column(name = "customername")
 	private String customerName;
 	@Column(name = "address")
@@ -30,7 +30,7 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Customer(String customerId, String customerName, String address, String country, String contactNumber) {
+	public Customer(int customerId, String customerName, String address, String country, String contactNumber) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -39,10 +39,10 @@ public class Customer {
 		this.contactNumber = contactNumber;
 	}
 
-	public String getCustomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
 	public String getCustomerName() {
@@ -69,14 +69,12 @@ public class Customer {
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
-		result = prime * result + ((customerName == null) ? 0 : customerName.hashCode());
+		result = prime * result + customerId;
 		return result;
 	}
 
@@ -89,15 +87,7 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (customerId == null) {
-			if (other.customerId != null)
-				return false;
-		} else if (!customerId.equals(other.customerId))
-			return false;
-		if (customerName == null) {
-			if (other.customerName != null)
-				return false;
-		} else if (!customerName.equals(other.customerName))
+		if (customerId != other.customerId)
 			return false;
 		return true;
 	}

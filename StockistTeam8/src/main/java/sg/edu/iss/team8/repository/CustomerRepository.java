@@ -18,6 +18,6 @@ public interface CustomerRepository extends JpaRepository<Customer, String>{
 	Customer findCustomerById(@Param("id") String id);
 	
 	@Query("SELECT DISTINCT e.customerId FROM Customer e")
-	ArrayList<String> findAllCustomerIDs();
+	ArrayList<Integer> findAllCustomerIDs();
 
 }

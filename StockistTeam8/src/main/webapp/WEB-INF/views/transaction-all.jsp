@@ -32,7 +32,6 @@
 									<td align="left">${custList.customerName}</td>
 								</c:if>
 							</c:forEach>
-							
 							<td align="left"><fmt:formatDate value="${transList.consumeDate}" pattern="d MMMM yyyy" /></td>
 							<td align="left">${transList.userName}</td>
 						</c:if>

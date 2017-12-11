@@ -21,6 +21,8 @@ import sg.edu.iss.team8.model.Transaction;
 import sg.edu.iss.team8.model.TransactionDetails;
 import sg.edu.iss.team8.repository.CustomerRepository;
 import sg.edu.iss.team8.repository.TransactionRepository;
+import sg.edu.iss.team8.service.CustomerService;
+import sg.edu.iss.team8.service.CustomerServiceImpl;
 //import sg.edu.iss.team8.service.CustomerService;
 import sg.edu.iss.team8.service.TransactionDetailsService;
 import sg.edu.iss.team8.service.TransactionService;
@@ -38,32 +40,34 @@ public class MechanicController {
 	private TransactionService tService;
 	@Autowired
 	private TransactionDetailsService tdService;
-	/*
-	 * @Autowired private CustomerService cService;
-	 */
+	
+	@Autowired 
+	private CustomerService cService;
+	 
 
 	@RequestMapping(value = "/transactions/{pNo}", method = RequestMethod.GET)
-	public ModelAndView newTransactionDetailsPage(@PathVariable int pNo) {
-		// ModelAndView mav = new ModelAndView("transaction-history",
-		// "transactionDetails", new TransactionDetails());
-
-		// mav.addObject("translist",
-		// tdService.findTransactionDetailsByPartNumber(pNo));
-		// return mav;
+	public ModelAndView showProductTransaction(@PathVariable int pNo) {
 		ModelAndView mav = new ModelAndView("transaction-history");
 		ArrayList<TransactionDetails> transDetailList = tdService.findTransactionDetailsByPartNumber(pNo);
-		// mav.addObject("transactionDetailsList", transDetailList);
-		ArrayList<Integer> transIdList = new ArrayList<Integer>();
-		for (TransactionDetails td : transDetailList) {
-			transIdList.add(td.getTransactionId());
-		}
-		ArrayList<Transaction> transList = new ArrayList<Transaction>();
-		for (Integer tId : transIdList) {
-			transList.add(tService.findTransaction(tId));
-		}
+		
+		ArrayList<Customer> custList = cService.findAllCustomers();
+		ArrayList<Transaction> transList = tService.findAllTransactions();
+		
 		mav.addObject("transDetailList", transDetailList);
-		mav.addObject("transIdList", transIdList);
 		mav.addObject("transList", transList);
+		mav.addObject("custList", custList);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
+	public ModelAndView showAllTransaction() {
+		ModelAndView mav = new ModelAndView("transaction-all");
+		ArrayList<TransactionDetails> transDetailList = tdService.findAllTransactions();
+		ArrayList<Customer> custList = cService.findAllCustomers();
+		ArrayList<Transaction> transList = tService.findAllTransactions();
+		mav.addObject("transDetailList", transDetailList);
+		mav.addObject("transList", transList);
+		mav.addObject("custList", custList);
 		return mav;
 	}
 
