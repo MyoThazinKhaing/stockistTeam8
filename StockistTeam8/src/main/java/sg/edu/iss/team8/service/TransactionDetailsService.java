@@ -33,6 +33,6 @@ public interface TransactionDetailsService {
 	 */
 	void removeTransaction(TransactionDetails transaction);
 	
-	public ArrayList<TransactionDetails> findTransactionDetailsByPartNumber(String eid);
+	public ArrayList<TransactionDetails> findTransactionDetailsByPartNumber(int eid);
 
 }

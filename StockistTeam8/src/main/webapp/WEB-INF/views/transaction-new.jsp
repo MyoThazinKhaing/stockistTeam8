@@ -20,7 +20,7 @@
 		});
 	});
 	
-	jQuery(function(){
+	/* jQuery */$(document).ready(function(){
 	    var counter = 1;
 	    jQuery('a.add-author').click(function(event){
 	        event.preventDefault();
@@ -79,10 +79,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="transactiondetails">
+<!-- 			<c:forEach var="transactiondetails"> -->
 				<tr class="listRecord">
-					<td>${transactiondetails.partNumber}</td>
-					<td>${transactiondetails.quantity}</td>
+				<td><form:input path="userName" /></td>
+				<td><form:input path="userName" /></td>
 					<td align="center"><a
 						href="${pageContext.request.contextPath}/admin/employee/edit/${employee.employeeId}.html"><spring:message
 								code="caption.edit" /></a></td>
@@ -90,7 +90,7 @@
 						href="#"><spring:message
 								code="caption.delete" /></a></td>
 				</tr>
-			</c:forEach>
+<!-- 			</c:forEach> -->
 		</tbody>
 	</table>
 	<a href="#" title="" class="add-author">Add part number</a>

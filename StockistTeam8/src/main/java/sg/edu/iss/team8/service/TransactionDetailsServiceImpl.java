@@ -69,7 +69,7 @@ public class TransactionDetailsServiceImpl implements TransactionDetailsService 
 		transactionDetailsRepository.delete(transaction);
 	}
 	
-	public ArrayList<TransactionDetails> findTransactionDetailsByPartNumber(String eid)
+	public ArrayList<TransactionDetails> findTransactionDetailsByPartNumber(int eid)
 	{
 		return transactionDetailsRepository.findTransactionDetailsByPartNumber(eid);
 	}

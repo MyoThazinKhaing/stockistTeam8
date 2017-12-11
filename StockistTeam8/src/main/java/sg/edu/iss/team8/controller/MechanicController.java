@@ -41,6 +41,8 @@ public class MechanicController {
 	private TransactionDetailsService tdService;
 	 @Autowired
 	 private CustomerService cService;
+	 @Autowired
+	 private UserSession uService;
 
 	
 //	private void initEmployeeBinder(WebDataBinder binder) {
@@ -54,32 +56,20 @@ public class MechanicController {
 //		// binder.addValidators(eValidator);
 //	}
 
-//	@InitBinder("transaction")
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView newTransactionPage() {
 		ModelAndView mav = new ModelAndView("transaction-new");
 		mav.addObject("transaction", new Transaction());
 		mav.addObject("transDetails", new TransactionDetails());
 		
-		// require the findAllUserName method
-//		mav.addObject("eidlist", tService.findAllTransactionIDs());
 		mav.addObject("custlist", cService.findAllCustomerIDs());
-		// require the findAllUserName method
-		
-		// require the findAllUserName method OR autopopulate username
-//		mav.addObject("eidlist", cService.findAllCustomerIDs());
-		// require the findAllUserName method OR autopopulate username
+//		mav.addObject("eidlist", uService.getUser().getUsername());
 		return mav;
 
-		// ModelAndView mav = new ModelAndView("transaction-new", "customer", new
-		// Customer());
-		// mav.addObject("eidlist", tService.findAllCustomerIDs());
-		// return mav;
 	}
 
-//	@InitBinder("transaction")
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ModelAndView createNewTransaction(@ModelAttribute @Valid Transaction transaction, BindingResult result,
+	public ModelAndView createNewTransaction(@ModelAttribute @Valid Transaction transaction,@ModelAttribute @Valid TransactionDetails transactionDetails, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors())
@@ -89,78 +79,39 @@ public class MechanicController {
 		String message = "New transaction " + transaction.getTransactionId() + " was successfully created.";
 
 		tService.createTransaction(transaction);
+		transactionDetails.setTransactionId(transaction.getTransactionId());
+		tdService.createTransaction(transactionDetails);
 		
 //		for(TransactionDetails t : )
 //		{
 //			
 //		}
 			
-		// require to create foreach action for transaction details
-		// transactiondetails
 		mav.setViewName("redirect:/mechanic/list");
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
 
-	// @GetMapping("/choosecustomer")
-//	@InitBinder("customer")
 	@RequestMapping(value = "/choosecustomer", method = RequestMethod.GET)
-	public ModelAndView chooseCustomerPage() {/*@ModelAttribute @Valid Customer customer*/
-		// require the CustomerService interface
-		ModelAndView mav = new ModelAndView("transaction-choose-customer","customer", new Customer()/*ArrayList<Customer>()*/);
+	public ModelAndView chooseCustomerPage() {
+		ModelAndView mav = new ModelAndView("transaction-choose-customer","customer", new Customer());
 
 		mav.addObject("custlist", cService.findAllCustomerIDs());
 
-		//mav.addObject("custlist", tService.findAllTransactionIDs());
-		// comment out above line when CustomerService interface added
 		return mav;
 	}
 
-//	@InitBinder("customer")
 	@RequestMapping(value = "/choosecustomer", method = RequestMethod.POST)
 	public ModelAndView chooseCustomer(@ModelAttribute @Valid Customer customer, BindingResult result,
-			@PathVariable String id, final RedirectAttributes redirectAttributes) /* throws EmployeeNotFound */ {
+			@PathVariable String id, final RedirectAttributes redirectAttributes){
 
 		if (result.hasErrors())
 			return new ModelAndView("transaction-choose-customer");
 
 		ModelAndView mav = new ModelAndView("redirect:/mechanic/create");
-		mav.addObject("customerchosen", customer); // require the getCustomerId method from Customer class
-		// String message = "Employee was successfully updated.";
-		// eService.changeEmployee(employee);
-
-		// redirectAttributes.addFlashAttribute("message", message);
+		mav.addObject("customerchosen", customer); 
 		return mav;
 	}
-
-	// @RequestMapping(value = "/create", method = RequestMethod.GET)
-	// public ModelAndView newEmployeePage() {
-	// ModelAndView mav = new ModelAndView("employee-new", "employee", new
-	// Employee());
-	// mav.addObject("eidlist", eService.findAllEmployeeIDs());
-	// return mav;
-	// }
-
-	// @RequestMapping(value = "/createtransaction")
-	// public ModelAndView createTransaction(HttpSession session) {
-	//
-	// UserSession us = (UserSession) session.getAttribute("USERSESSION");
-	// HashMap<Transaction,TransactionDetails> submap = new
-	// HashMap<Transaction,TransactionDetails>();
-	//
-	// //for (Employee subordinate : us.getSubordinates()) {
-	// //submap.put(subordinate,
-	// //cService.findCoursesByEID(subordinate.getEmployeeId()));
-	// //}
-	// ModelAndView mav = new ModelAndView("login");
-	// if (us.getSessionId() != null && us.getSubordinates() != null) {
-	// mav = new ModelAndView("/transactioncomplete");
-	// mav.addObject("submap", submap);
-	// return mav;
-	// }
-	// return mav;
-	//
-	// }
 
 }

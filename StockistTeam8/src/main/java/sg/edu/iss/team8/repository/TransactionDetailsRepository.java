@@ -10,6 +10,6 @@ import sg.edu.iss.team8.model.TransactionDetails;
 
 public interface TransactionDetailsRepository extends JpaRepository<TransactionDetails, Integer>{
 	@Query("SELECT t from TransactionDetails t WHERE t.partNumber = :eid")
-	ArrayList<TransactionDetails> findTransactionDetailsByPartNumber(@Param("eid") String eid);
+	ArrayList<TransactionDetails> findTransactionDetailsByPartNumber(@Param("eid") int eid);
 
 }
