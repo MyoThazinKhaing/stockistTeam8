@@ -17,21 +17,21 @@ public interface UserService {
 	User changeUser(User user);
 
 	void removeUser(User user);
+	
 
-	/* (non-Javadoc)
-	 * @see edu.iss.cats.service.UserService#findRoleNamesForUser(java.lang.String)
-	 */
-	/*
-	@Transactional
-	public ArrayList<String> findRoleNamesForUser(String userId) {
-		ArrayList<Role> rset =  (ArrayList<Role>) userRepository.findOne(userId).getRoleSet();
-		ArrayList<String> rnames = new ArrayList<String>();
-		for (Role role : rset) {
-			rnames.add(role.getName());
-		}
-		return rnames;
-	}
-	*/
+//	(non-Javadoc)
+//	 * @see edu.iss.cats.service.UserService#findRoleNamesForUser(java.lang.String)
+//	
+//	@Transactional
+//	public ArrayList<String> findRoleNamesForUser(String userId) {
+//		ArrayList<User> rset =  (ArrayList<User>) UserRepository.findUserByRole.getRoleSet();
+//		ArrayList<String> rnames = new ArrayList<String>();
+//		for (Role role : rset) {
+//			rnames.add(role.getName());
+//		}
+//		return rnames;
+//	}
+	
 	/* (non-Javadoc)
 	 * @see edu.iss.cats.service.UserService#findManagerNameByUID(java.lang.String)
 	 */
@@ -42,5 +42,7 @@ public interface UserService {
 	}
 	*/
 	User authenticate(String username, String password);
+	
+	ArrayList<String> ListRoles();
 
 }

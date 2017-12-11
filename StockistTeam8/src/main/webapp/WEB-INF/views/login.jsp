@@ -52,9 +52,9 @@
 
 	// Duration is the amount of time in between slides,
 	// and fade is value that determines how quickly the next image will fade in
-	$.backstretch([ "http://dl.dropbox.com/u/515046/www/outside.jpg",
-			"http://dl.dropbox.com/u/515046/www/garfield-interior.jpg",
-			"http://dl.dropbox.com/u/515046/www/cheers.jpg" ], {
+	$.backstretch([ "http://www.mobilemechanichoustonpros.com/wp-content/uploads/2014/04/auto-repair-promo.jpg",
+			"https://latestautocar.com/wp-content/uploads/2017/03/perfect-cool-ford-cars-with-img-f9zu-cool-ford-cars-ideas-by-gallery.jpg",
+			"https://img.gaadicdn.com/images/mycar/large/audi/a5/marketing/Audi-A5.webp" ], {
 		duration : 3000,
 		fade : 750
 	});
@@ -101,9 +101,9 @@
 		$
 				.backstretch(
 						[
-								"https://1410inc.xyz/mini-inventory-and-sales-management-system/public/images/backgrounds/1.jpg",
-								"https://1410inc.xyz/mini-inventory-and-sales-management-system/public/images/backgrounds/2.jpg",
-								"https://1410inc.xyz/mini-inventory-and-sales-management-system/public/images/backgrounds/3.jpg" ],
+								"http://www.mobilemechanichoustonpros.com/wp-content/uploads/2014/04/auto-repair-promo.jpg",
+								"https://latestautocar.com/wp-content/uploads/2017/03/perfect-cool-ford-cars-with-img-f9zu-cool-ford-cars-ideas-by-gallery.jpg",
+								"https://img.gaadicdn.com/images/mycar/large/audi/a5/marketing/Audi-A5.webp" ],
 						{
 							fade : 750,
 							duration : 4000

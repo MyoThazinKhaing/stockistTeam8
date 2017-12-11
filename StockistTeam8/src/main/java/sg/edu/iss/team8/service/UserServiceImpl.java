@@ -10,19 +10,21 @@ import org.springframework.transaction.annotation.Transactional;
 import sg.edu.iss.team8.model.User;
 import sg.edu.iss.team8.repository.UserRepository;
 
-
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	@Resource
 	private UserRepository userRepository;
-	
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see edu.iss.cats.service.UserService#findAllUsers()
 	 */
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sg.edu.iss.team8.service.UserService#findAllUsers()
 	 */
 	@Override
@@ -31,12 +33,16 @@ public class UserServiceImpl implements UserService {
 		ArrayList<User> ul = (ArrayList<User>) userRepository.findAll();
 		return ul;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see edu.iss.cats.service.UserService#findUser(java.lang.String)
 	 */
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sg.edu.iss.team8.service.UserService#findUser(java.lang.String)
 	 */
 	@Override
@@ -46,12 +52,17 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see edu.iss.cats.service.UserService#createUser(edu.iss.cats.model.User)
 	 */
-	
-	/* (non-Javadoc)
-	 * @see sg.edu.iss.team8.service.UserService#createUser(sg.edu.iss.team8.model.User)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * sg.edu.iss.team8.service.UserService#createUser(sg.edu.iss.team8.model.User)
 	 */
 	@Override
 	@Transactional
@@ -59,13 +70,17 @@ public class UserServiceImpl implements UserService {
 		return userRepository.saveAndFlush(user);
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see edu.iss.cats.service.UserService#changeUser(edu.iss.cats.model.User)
 	 */
-	
-	/* (non-Javadoc)
-	 * @see sg.edu.iss.team8.service.UserService#changeUser(sg.edu.iss.team8.model.User)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * sg.edu.iss.team8.service.UserService#changeUser(sg.edu.iss.team8.model.User)
 	 */
 	@Override
 	@Transactional
@@ -73,62 +88,74 @@ public class UserServiceImpl implements UserService {
 		return userRepository.saveAndFlush(user);
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see edu.iss.cats.service.UserService#removeUser(edu.iss.cats.model.User)
 	 */
-	
-	/* (non-Javadoc)
-	 * @see sg.edu.iss.team8.service.UserService#removeUser(sg.edu.iss.team8.model.User)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * sg.edu.iss.team8.service.UserService#removeUser(sg.edu.iss.team8.model.User)
 	 */
 	@Override
 	@Transactional
 	public void removeUser(User user) {
 		userRepository.delete(user);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see edu.iss.cats.service.UserService#findRolesForUser(java.lang.String)
 	 */
-	
+
 	/*
-	 * @Transactional
-	public ArrayList<Role> findRolesForUser(String userId) {
-		return (ArrayList<Role>)userRepository.findOne(userId).getRoleSet();
-	}
-	*/
-	
-	/* (non-Javadoc)
+	 * @Transactional public ArrayList<Role> findRolesForUser(String userId) {
+	 * return (ArrayList<Role>)userRepository.findOne(userId).getRoleSet(); }
+	 */
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see edu.iss.cats.service.UserService#findRoleNamesForUser(java.lang.String)
 	 */
 	/*
-	@Transactional
-	public ArrayList<String> findRoleNamesForUser(String userId) {
-		ArrayList<Role> rset =  (ArrayList<Role>) userRepository.findOne(userId).getRoleSet();
-		ArrayList<String> rnames = new ArrayList<String>();
-		for (Role role : rset) {
-			rnames.add(role.getName());
-		}
-		return rnames;
-	}
-	*/
-	/* (non-Javadoc)
+	 * @Transactional public ArrayList<String> findRoleNamesForUser(String userId) {
+	 * ArrayList<Role> rset = (ArrayList<Role>)
+	 * userRepository.findOne(userId).getRoleSet(); ArrayList<String> rnames = new
+	 * ArrayList<String>(); for (Role role : rset) { rnames.add(role.getName()); }
+	 * return rnames; }
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see edu.iss.cats.service.UserService#findManagerNameByUID(java.lang.String)
 	 */
 	/*
-	@Transactional
-	public ArrayList<String> findManagerNameByUID(String userId) {
-		return userRepository.findManagerNameByUID(userId);
-	}
-	*/
-	/* (non-Javadoc)
-	 * @see sg.edu.iss.team8.service.UserService#authenticate(java.lang.String, java.lang.String)
+	 * @Transactional public ArrayList<String> findManagerNameByUID(String userId) {
+	 * return userRepository.findManagerNameByUID(userId); }
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sg.edu.iss.team8.service.UserService#authenticate(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
 	@Transactional
 	public User authenticate(String username, String password) {
 		User u = userRepository.findUserByUsernamePwd(username, password);
 		return u;
+	}
+
+	@Override
+	@Transactional
+	public ArrayList<String> ListRoles() {
+		return userRepository.ListRoles();
+
 	}
 
 }
