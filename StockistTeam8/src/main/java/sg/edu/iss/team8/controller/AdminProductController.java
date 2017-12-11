@@ -17,8 +17,10 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sg.edu.iss.team8.model.Product;
+import sg.edu.iss.team8.model.Supplier;
 import sg.edu.iss.team8.model.User;
 import sg.edu.iss.team8.service.ProductService;
+import sg.edu.iss.team8.service.SupplierService;
 
 @Controller
 @RequestMapping(value = "/product")
@@ -43,6 +45,9 @@ public class AdminProductController {
 
 	@Autowired
 	private ProductService pService;
+	
+	@Autowired
+	private SupplierService sService;
 
 	@RequestMapping(value = "/catalogue", method = RequestMethod.GET)
 	public ModelAndView browseCatalogue(HttpSession session, Model model) {
@@ -53,6 +58,7 @@ public class AdminProductController {
 		ModelAndView mav = new ModelAndView("/product-catalogue");
 		mav.addObject("pList", pService.findAllProducts());
 		model.addAttribute("product", new Product());
+		
 		return mav;
 	}
 
@@ -68,11 +74,20 @@ public class AdminProductController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView viewProductDetails(@PathVariable String id) {
+	public ModelAndView viewProductDetails(HttpSession session, @PathVariable String id) {
+		if (!new TestController().isUser(session)) {
+			return new ModelAndView("403");
+		}
 		ModelAndView mav = new ModelAndView("product-view");
 		Product p = pService.findProduct(Integer.parseInt(id));
+		Supplier s = sService.findSupplier(p.getSupplierId());
 		
 		mav.addObject("product", p);
+		mav.addObject("supplier", s);
+		
+		
 		return mav;
 	}
+	
+	
 }

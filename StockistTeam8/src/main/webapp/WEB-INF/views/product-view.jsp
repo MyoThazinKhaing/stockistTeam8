@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,8 +9,7 @@
 </head>
 <body>
 	<h3>Product Catalogue</h3>
-	<table width='500' id="sig" cellspacing='0' cellpadding='0'
-		border-spacing='0' style="margin: 0; padding: 0;">
+	<table width='500' ; style="cellspacing: 2; cellpadding: 2; border: 1;">
 		<tbody>
 			<tr>
 				<th><b>Part Number</th>
@@ -30,7 +30,7 @@
 			</tr>
 			<tr>
 				<th>Supplier</th>
-				<td>${product.supplierId}</td>
+				<td>${supplier.supplierName}</td>
 			</tr>
 			<tr>
 				<th>Stock Level</th>
@@ -46,11 +46,18 @@
 			</tr>
 		</tbody>
 	</table>
-	
+
 	&nbsp;
+	
+	<input type="button"
+		onclick="location.href='${pageContext.request.contextPath}/product/catalogue';"
+		style="width: 20%; text-align: center; text-decoration: none;"
+		value="<Back to product catalogue" />
 	<input type="button"
 		onclick="location.href='${pageContext.request.contextPath}/product/transaction-history/${product.partNumber}.html';"
-		style="width:15%; background-color: #4CAF50; /* Green */ border: none; color: white; padding: 5px 5px; text-align: center; text-decoration: none; display: inline-block;"
-		value="View Transaction History" />
+		style="width: 20%; text-align: center; text-decoration: none;"
+		value="View transaction history>" />
+
+
 </body>
 </html>

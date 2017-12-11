@@ -45,33 +45,43 @@
 		<a href="${pageContext.request.contextPath}/admin/product/create">Add
 			Product</a>
 		<c:if test="${fn:length(pList) gt 0}">
-			<table style="cellspacing: 2; cellpadding: 2; border: 1;">
+			<table width='600'
+				; style="cellspacing: 2; cellpadding: 2; border: 1;">
 				<thead>
 					<tr class="listHeading">
 						<th><spring:message code="Part Number" /></th>
 						<th><spring:message code="Unit Price" /></th>
 						<th><spring:message code="Description" /></th>
 						<th><spring:message code="Colour" /></th>
-						<th><spring:message code="caption.edit" /></th>
-						<th><spring:message code="caption.delete" /></th>
+						<th><spring:message code="Status" /></th>
+						<th><spring:message code="caption.detail" /></th>
+						<c:if test="${sessionScope.USERSESSION.user.role eq 'admin'}">
+							<th><spring:message code="caption.edit" /></th>
+						</c:if>
+						<%-- This one is disable bcause Delete will be included in the edit function
+						<th><spring:message code="caption.delete" /></th> --%>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="product" items="${pList}">
 						<tr class="listRecord">
 							<td>${product.partNumber}</td>
-							<td>${product.unitPrice}</td>
+							<td align=right style="padding-right: 1cm;">${product.unitPrice}</td>
 							<td>${product.description}</td>
 							<td>${product.colour}</td>
-							<td align="center"><a
+							<td>${product.status}</td>
+							<td><a
 								href="${pageContext.request.contextPath}/product/${product.partNumber}.html"><spring:message
 										code="caption.detail" /></a></td>
-							<td align="center"><a
-								href="${pageContext.request.contextPath}/admin/product/edit/${product.partNumber}.html"><spring:message
-										code="caption.edit" /></a></td>
+							<c:if test="${sessionScope.USERSESSION.user.role eq 'admin'}">
+								<td><a
+									href="${pageContext.request.contextPath}/admin/product/edit/${product.partNumber}.html"><spring:message
+											code="caption.edit" /></a></td>
+							</c:if>
+							<%-- This one is disable bcause Delete will be included in the edit function
 							<td><a
 								href="${pageContext.request.contextPath}/admin/product/delete/${product.partNumber}.html"><spring:message
-										code="caption.delete" /></a></td>
+										code="caption.delete" /></a></td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>
