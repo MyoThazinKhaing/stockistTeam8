@@ -22,6 +22,7 @@ import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.method.HandlerMethod;
 
 import sg.edu.iss.team8.model.User;
@@ -43,12 +44,15 @@ public class CommonController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(ModelAndView mav, HttpSession session, @RequestParam(value = "error", required = false) String error) {
-		if (session.getAttribute("USERNAME") == null) {
+	public ModelAndView login(ModelAndView mav, HttpSession session) {
+		if (session.getAttribute("USERSESSION") == null) {
 			mav.addObject("user", new User());
-		} 
-		if (!mav.getModel().containsKey("error")) {
-			mav.addObject("error", "");
+		}
+		if(session.getAttribute("AUTHENTICATE") == "fail") {
+			session.setAttribute("LOGIN", "fail");
+			session.setAttribute("AUTHENTICATE", "");
+		}else {
+			session.setAttribute("LOGIN", "");
 		}
 		mav.setViewName("login");
 		return mav;
@@ -69,8 +73,9 @@ public class CommonController {
 				session.setAttribute("USERSESSION", us);
 				return new ModelAndView("redirect:/product/catalogue");
 			}
-		}
-		return new ModelAndView("redirect:/login", "error", "Invalid name or password!");
+		}		
+		session.setAttribute("AUTHENTICATE", "fail");
+		return new ModelAndView("redirect:/login");
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
