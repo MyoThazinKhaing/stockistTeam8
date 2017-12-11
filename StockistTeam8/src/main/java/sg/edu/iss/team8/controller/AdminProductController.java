@@ -1,32 +1,21 @@
 package sg.edu.iss.team8.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.*;
+
+import sg.edu.iss.team8.model.Product;
+import sg.edu.iss.team8.model.User;
+import sg.edu.iss.team8.service.ProductService;
 
 @Controller
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/product")
 public class AdminProductController {
 	
 	@Autowired
@@ -155,4 +144,23 @@ public class AdminProductController {
 			 * cService.changeCourse(course); ceService.createCourseEvent(ce);
 			 * redirectAttributes.addFlashAttribute("message", message); return mav; }
 			 */
-}
+	@Autowired
+	private ProductService pService;
+
+	@RequestMapping(value = "/catalogue", method = RequestMethod.GET)
+	public ModelAndView browseCatalogue(HttpSession session, Model model) {
+		//UserSession us = (UserSession) session.getAttribute("USERSESSION");
+		ModelAndView mav = new ModelAndView("/product-catalogue");
+		mav.addObject("pList", pService.findAllProducts());
+		model.addAttribute("product", new Product());
+		return mav;
+	}
+	
+	 @RequestMapping(value="/search", method = RequestMethod.POST)
+	    public ModelAndView searchByDescription(
+	    		@RequestParam String criteria,
+	            @RequestParam String description) {
+	        return new ModelAndView("product-catalogue", "pList", pService.searchProducts(criteria, description));
+	        //return new ModelAndView("product-catalogue", "pList", pService.searchProduct("p.criteria",description));
+	    }
+	 }
