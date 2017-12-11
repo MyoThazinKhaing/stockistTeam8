@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <head>
 <style>
 hr.style13 {
@@ -23,7 +24,6 @@ a{
 
 </head>
 <body>
-	<c:url value="/logout" var="logout" />
 	<div class="list-group">
 		<spring:url value="/products/catalog" var="catalog" htmlEscape="true" />
 		<a href="${catalog}" class="list-group-item list-group-item-action">
@@ -35,7 +35,7 @@ a{
 		<c:if test="${sessionScope.USERSESSION.user.username != null}">
 			<c:forEach var="role" items="${sessionScope.USERSESSION.user.role}">
 				<c:choose>
-					<c:when test="${role eq 'admin' }">
+					<c:when test="${role eq 'admin'}">
 						<spring:url value="/admin/user/list" var="ulist" htmlEscape="true" />
 						<a href="${ulist}"
 							class="list-group-item list-group-item-action active"> <spring:message

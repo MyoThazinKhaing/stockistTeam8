@@ -6,14 +6,16 @@
 	background-color: transparent;
 	border: none;
 }
+
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: #104982;
+	background-color: #104982;
 }
-div.dropdown-menu.show{
-    left:auto !important;
-    right: 5 !important;
-    top: 10 !important;
-    margin-right:-6px !important;
+
+div.dropdown-menu.show {
+	left: auto !important;
+	right: 5 !important;
+	top: 10 !important;
+	margin-right: -6px !important;
 }
 
 .dropdown-item {
@@ -24,23 +26,31 @@ div.dropdown-menu.show{
 
 
 </body>
-
-
+<spring:url value="/logout" var="logoutUrl" htmlEscape="true"/>
+<form action="${logoutUrl}" method="post" id="logoutForm">
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
+</form>
+<script>
+	function formSubmit() {
+		document.getElementById("logoutForm").submit();
+	}
+</script>
 <div>
-
 	<!-- Main Navbar-->
 	<div class="navbox">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<h1>
-				<a class="navbar-brand" href="#"> <i class="fa fa-car fa-2x" aria-hidden="true"></i> 
-				<span style="font-size:2rem">&nbsp;&nbsp;&nbsp;TEAM 8 STOCKLIST</span></a>
+				<a class="navbar-brand" href="#"> <i class="fa fa-car fa-2x"
+					aria-hidden="true"></i> <span style="font-size: 2rem">&nbsp;&nbsp;&nbsp;TEAM
+						8 STOCKLIST</span></a>
 			</h1>
 			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarColor03" aria-controls="navbarColor03"
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button> -->
-			
+
 			<div class="collapse navbar-collapse" id="navbarColor03">
 				<ul class="nav nav-pills" style="margin-left: auto;">
 					<li class="nav-item dropdown"><a
@@ -53,10 +63,11 @@ div.dropdown-menu.show{
 							style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
 							<a class="dropdown-item" href="#">Manage account</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Logout</a>
+							<a class="dropdown-item"
+								href="javascript:formSubmit()">Logout</a>
 						</div></li>
 				</ul>
-				
+
 			</div>
 
 		</nav>
