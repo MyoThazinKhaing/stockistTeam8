@@ -6,9 +6,9 @@
 <meta name="decorator" content="nodeco" />
 <head>
 <!-- Bootstrap Litera CSS -->
-<link href="${pageContext.request.contextPath}/css/bootstrap.css"
+<link href="https://bootswatch.com/4/litera/bootstrap.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+<link href="https://bootswatch.com/4/litera/bootstrap.min.css"
 	rel="stylesheet">
 
 <!-- Custom Fonts -->
@@ -46,6 +46,15 @@
 .welcome {color =#C7F2C2
 	
 }
+
+h4{
+	color:white;
+}
+
+.error{
+	color:red;
+}
+
 </style>
 
 </head>
@@ -63,21 +72,19 @@
 							<strong>TEAM 8 STOCKLIST</strong>
 						</h2>
 						<c:if test="${sessionScope.USERSESSION != null}">
-							<h3 class="welcome">
-								<p style="color: #CFEDFC">
-									Welcome back&nbsp;
-									<c:out value="${sessionScope.USERSESSION.user.username}" />
-								</p>
-								<spring:url value="/product/catalogue" var="catalog"
-									htmlEscape="true" />
-								<p>
-									<a href="${catalog}"> Browse catalog </a>
-								</p>
-								<spring:url value="/logout" var="logout" htmlEscape="true" />
-								<p>
-									<a href="${logout}"> Logout </a>
-								</p>
-							</h3>
+							<h4 class="text-warning">
+								Welcome back&nbsp;
+								<c:out value="${sessionScope.USERSESSION.user.username}" />
+							</h4>
+							<spring:url value="/product/catalogue" var="catalog"
+								htmlEscape="true" />
+							<h5>
+								<a class="text-info" href="${catalog}"> Browse catalog </a>
+							</h5>
+							<spring:url value="/logout" var="logout" htmlEscape="true" />
+							<h5>
+								<a class="text-info" href="${logout}"> Logout </a>
+							</h5>
 						</c:if>
 						<c:if test="${sessionScope.USERSESSION == null}">
 							<spring:url value="/authenticate" var="login" htmlEscape="true" />
@@ -92,8 +99,10 @@
 									<button type="submit" class="btn btn-primary">Submit</button>
 								</div>
 								<div>
-									<c:if test="${not empty error}">
-										<div class="error">${error}</div>
+									<c:if test="${sessionScope.LOGIN == 'fail'}">
+										<p class="text-danger">
+											<spring:message code="error.loginfail" />
+										<p>
 									</c:if>
 								</div>
 							</form:form>
@@ -105,9 +114,10 @@
 		</div>
 	</div>
 
-	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script
-		src="${pageContext.request.contextPath}/js/jquery.backstretch.min.js"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
 	<script>
 		$
 				.backstretch(
