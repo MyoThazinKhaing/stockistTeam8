@@ -23,7 +23,6 @@ a{
 
 </head>
 <body>
-	<c:url value="/logout" var="logout" />
 	<div class="list-group">
 		<spring:url value="/products/catalog" var="catalog" htmlEscape="true" />
 		<a href="${catalog}" class="list-group-item list-group-item-action">

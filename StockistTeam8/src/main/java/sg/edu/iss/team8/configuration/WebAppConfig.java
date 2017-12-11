@@ -16,6 +16,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+//import org.springframework.security.access.SecurityConfig;
+//import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
@@ -36,6 +39,7 @@ import org.springframework.web.servlet.view.JstlView;
 @PropertySource({ "classpath:application.properties",
 		"classpath:/i18n/messages.properties" })
 @EnableJpaRepositories("sg.edu.iss.team8.repository")
+//@Import({SecurityConfig.class})
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
 	private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
@@ -65,6 +69,19 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		return dataSource;
 	}
 
+	/*@Bean(name = "dataSource")
+	public DriverManagerDataSource dataSource() {
+	    DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+	    driverManagerDataSource.setDriverClassName(env
+				.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+	    driverManagerDataSource.setUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
+	    driverManagerDataSource.setUsername(env
+				.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
+	    driverManagerDataSource.setPassword(env
+				.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
+	    return driverManagerDataSource;
+	}*/
+	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();

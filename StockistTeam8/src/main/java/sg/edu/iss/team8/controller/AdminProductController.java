@@ -3,7 +3,9 @@ package sg.edu.iss.team8.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -17,28 +19,40 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(value = "/products")
 public class AdminProductController {
+	
+	@Autowired
+	private RequestMappingHandlerMapping requestMappingHandlerMapping;
+	
+	@RequestMapping(value = "/**", method = RequestMethod.GET)
+	public String firstTime(HttpServletRequest request, HttpSession session) {
+		Map<RequestMappingInfo, HandlerMethod> mapping = requestMappingHandlerMapping.getHandlerMethods();
+		return new TestController().testURL(request, session, mapping); 
+	}
 
 	@RequestMapping(value = "/catalog")
-	public ModelAndView employeeCourseHistory(HttpSession session) {
-		ModelAndView mav = new ModelAndView("redirect:/home/login");
-		if (session.getAttribute("USERSESSION") != null) {
-			UserSession us = (UserSession) session.getAttribute("USERSESSION");
-			if (us.getSessionId() != null) {
-				mav = new ModelAndView("products-catalog");
-				/*
-				 * mav.addObject("chistory",
-				 * cService.findCoursesByEID(us.getEmployee().getEmployeeId()));
-				 */
-				return mav;
-			}
+	public ModelAndView viewProductCatalog(HttpSession session) {
+		if(!new TestController().isUser(session)) {
+			return new ModelAndView("403");
 		}
-		return mav;
+		return new ModelAndView("products-catalog");
+		/*if (us.getSessionId() != null) {
+			ModelAndView mav = new ModelAndView("products-catalog");
+			
+			 * mav.addObject("chistory",
+			 * cService.findCoursesByEID(us.getEmployee().getEmployeeId()));
+			 
+			return mav;
+		}
+		return new ModelAndView("error");*/
 
 	}
 
