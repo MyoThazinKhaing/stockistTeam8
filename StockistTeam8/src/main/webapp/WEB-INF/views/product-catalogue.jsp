@@ -74,8 +74,8 @@
 					<tbody>
 						<c:forEach var="product" items="${pList}">
 							<tr class="table-light">
-								<td>${product.partNumber}</td>
-								<td>${product.unitPrice}</td>
+								<td width = "120cm">${product.partNumber}</td>
+								<td align="right" width = "120cm"><fmt:formatNumber value="${product.unitPrice}" pattern="$#,##0.00" /></td>
 								<td>${product.description}</td>
 								<td>${product.colour}</td>
 								<td><a
