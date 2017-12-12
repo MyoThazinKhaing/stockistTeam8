@@ -44,5 +44,7 @@ public interface UserService {
 	User authenticate(String username, String password);
 	
 	ArrayList<String> ListRoles();
+	
+	ArrayList<String> ListStatus();
 
 }

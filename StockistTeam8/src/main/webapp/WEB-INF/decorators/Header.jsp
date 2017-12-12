@@ -52,13 +52,13 @@ div.dropdown-menu.show {
 				<ul class="nav nav-pills" style="margin-left: auto;">
 					<li class="nav-item dropdown"><a
 						style="color: white; font-size: 1.25em"
-						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+						class="nav-link dropdown-toggle" data-toggle="dropdown" 
 						role="button" aria-haspopup="true" aria-expanded="false"> <i
 							class="fa fa-user fa-2x" aria-hidden="true"></i>
 					</a>
 						<div class="dropdown-menu" x-placement="bottom-start"
 							style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
-							<a class="dropdown-item" href="#">Change password</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/changepw/${sessionScope.USERSESSION.user.username}">Change password</a>
 							<div class="dropdown-divider"></div>
 							<spring:url value="/logout" var="logout" htmlEscape="true" />
 							<a class="dropdown-item"

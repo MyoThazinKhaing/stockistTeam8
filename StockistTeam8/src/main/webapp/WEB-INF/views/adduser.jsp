@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
 <h3>Fill in the following to create a new user</h3>
+
 <form:form method="POST" commandName="user"
 	action="${pageContext.request.contextPath}/admin/user/create.html">
 	<table>
@@ -30,6 +31,11 @@
 				<td><spring:message code="fieldLabel.role" /></td>
 				<td><form:select path="role" items="${eidlist}" /></td>
 				<td><form:errors path="role" cssStyle="color: red;" /></td>
+			</tr>
+			<tr>
+				<td><spring:message code="fieldLabel.status" /></td>
+				<td><form:select path="status" items="${statuslist}" /></td>
+				<td><form:errors path="status" cssStyle="color: red;" /></td>
 			</tr>
 
 			<tr>

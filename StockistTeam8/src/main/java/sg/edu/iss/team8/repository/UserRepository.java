@@ -22,5 +22,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 	@Query("SELECT DISTINCT u.role FROM User u")
 	ArrayList<String> ListRoles();
 	
+	@Query("SELECT DISTINCT u.status FROM User u")
+	ArrayList<String> ListStatus();
 
 }

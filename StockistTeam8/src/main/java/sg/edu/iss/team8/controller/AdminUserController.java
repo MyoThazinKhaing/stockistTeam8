@@ -31,6 +31,7 @@ import sg.edu.iss.team8.service.UserService;
 import sg.edu.iss.team8.validator.UserValidator;
 
 @RequestMapping(value = "/admin/user")
+
 @Controller
 public class AdminUserController {
 
@@ -54,44 +55,40 @@ public class AdminUserController {
 
 	@Autowired
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
-	
-	@RequestMapping(value = "/**", method = RequestMethod.GET)
-	public String firstTime(HttpServletRequest request, HttpSession session) {
-		Map<RequestMappingInfo, HandlerMethod> mapping = requestMappingHandlerMapping.getHandlerMethods();
-		return new TestController().testURL(request, session, mapping); 
-	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView newUserPage(HttpSession session, RedirectAttributes redirect) {
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
+		
 		ModelAndView mav = new ModelAndView("adduser", "user", new User());
 		ArrayList<User> userList = uService.findAllUsers();
 		mav.addObject("userList", userList);
 		ArrayList<String> eidList = uService.ListRoles();
 		mav.addObject("eidlist", eidList);
+		ArrayList<String> statusList = uService.ListStatus();
+		mav.addObject("statuslist", statusList);
+		
 		return mav;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@ModelAttribute @Valid User user, BindingResult result,
 			final RedirectAttributes redirectAttributes, HttpSession session) {
-		
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
+
 		
 		ModelAndView mav = new ModelAndView("adduser");
 		boolean isRepeat = false;
-		if(uService.findUser(user.getUsername())!=null) {
-			isRepeat=true;
+		if (uService.findUser(user.getUsername()) != null) {
+			isRepeat = true;
 			mav.addObject("repeatUser", isRepeat);
 		}
 		if (result.hasErrors() || isRepeat) {
 			ArrayList<String> eidList = uService.ListRoles();
 			mav.addObject("eidlist", eidList);
+			ArrayList<String> statusList = uService.ListStatus();
+			mav.addObject("statuslist", statusList);
 			return mav;
 		}
-			
+
 		String message = "The user " + user.getUsername() + " was successfully created.";
 
 		uService.createUser(user);
@@ -100,13 +97,10 @@ public class AdminUserController {
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
-	
-	
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView userListPage(HttpSession session) {
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
+		
 		ModelAndView mav = new ModelAndView("manageuser");
 		List<User> userList = uService.findAllUsers();
 		mav.addObject("userList", userList);
@@ -115,39 +109,67 @@ public class AdminUserController {
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView editUserPage(@PathVariable String id, HttpSession session) {
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
+		
 		ModelAndView mav = new ModelAndView("edituser");
 		User user = uService.findUser(id);
 		mav.addObject("user", user);
 		ArrayList<String> eidList = uService.ListRoles();
 		mav.addObject("eidlist", eidList);
+		ArrayList<String> statusList = uService.ListStatus();
+		mav.addObject("statuslist", statusList);
 		return mav;
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
 	public ModelAndView editUser(@ModelAttribute @Valid User user, BindingResult result, @PathVariable String id,
 			final RedirectAttributes redirectAttributes, HttpSession session) throws UserNotFound {
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
+		
+		ModelAndView mav = new ModelAndView("redirect:/admin/user/edit/" + id);
+	
+		if (result.hasErrors()) {
+			ArrayList<String> eidList = uService.ListRoles();
+			mav.addObject("eidlist", eidList);
+			ArrayList<String> statusList = uService.ListStatus();
+			mav.addObject("statuslist", statusList);
+			return mav;
+		}
 
-		if (result.hasErrors())
-			return new ModelAndView("edituser");
-
-		ModelAndView mav = new ModelAndView("redirect:/admin/user/list");
-		String message = "";
+		String message = "The user " + user.getUsername() + " was successfully created.";
 
 		uService.changeUser(user);
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
+		
+/*		else if (result.hasErrors())
+		return new ModelAndView("edituser");
+
+		ModelAndView mav = new ModelAndView("edituser");
+		boolean isRepeat = false;
+		if (uService.findUser(user.getUsername()) != null) {
+			isRepeat = true;
+			mav.addObject("repeatUser", isRepeat);
+		}
+		if (result.hasErrors() || isRepeat) {
+			ArrayList<String> eidList = uService.ListRoles();
+			mav.addObject("eidlist", eidList);
+			ArrayList<String> statusList = uService.ListStatus();
+			mav.addObject("statuslist", statusList);
+			return mav;
+		}
+	
+		uService.changeUser(user);
+		String message = "The user " + user.getUsername() + " was successfully edited.";
+		mav.setViewName("redirect:/admin/user/edit");
+
+	redirectAttributes.addFlashAttribute("message", message);
+		return mav;*/
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView deleteUser(@PathVariable String id, final RedirectAttributes redirectAttributes, HttpSession session)
-			throws UserNotFound {
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
+	public ModelAndView deleteUser(@PathVariable String id, final RedirectAttributes redirectAttributes,
+			HttpSession session) throws UserNotFound {
+		
 		ModelAndView mav = new ModelAndView("redirect:/admin/user/list");
 		User user = uService.findUser(id);
 		uService.removeUser(user);
@@ -156,4 +178,8 @@ public class AdminUserController {
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
+
+
+
+
 }

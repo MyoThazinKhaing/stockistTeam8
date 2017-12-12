@@ -157,5 +157,12 @@ public class UserServiceImpl implements UserService {
 		return userRepository.ListRoles();
 
 	}
+	
+	@Override
+	@Transactional
+	public ArrayList<String> ListStatus() {
+		return userRepository.ListStatus();
+
+	}
 
 }
