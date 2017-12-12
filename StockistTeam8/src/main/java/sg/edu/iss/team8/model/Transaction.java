@@ -1,5 +1,6 @@
 package sg.edu.iss.team8.model;
 
-public class Transaction {
+public class Transaction 
+{
 
 }
