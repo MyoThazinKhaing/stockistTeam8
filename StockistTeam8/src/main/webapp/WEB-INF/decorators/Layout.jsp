@@ -14,20 +14,27 @@
 <link
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/3.2.1/assets/font-awesome/css/font-awesome.css">	
+<link rel="stylesheet"
+	href="http://fortawesome.github.io/Font-Awesome/3.2.1/assets/font-awesome/css/font-awesome.css">
 
 <style>
-
-.navbox{
-	width:100%;
-	margin:auto;
-	
+.navbox {
+	width: 100%;
+	margin: auto;
 }
 
-.bg-primary{
+.bg-primary {
 	background-color: #373a3c !important;
 }
 
+.layout-body {
+	background: url("http://www.xsjjys.com/data/out/286/WHDQ-514189697.jpg")
+		!important;
+	border-left: solid; min-width : 90%; min-height : 90vh;
+	padding: 15px;
+	min-width: 90%;
+	min-height: 90vh;
+}
 </style>
 
 <dec:head />
@@ -36,25 +43,28 @@
 </head>
 <body>
 	<%@include file="Header.jsp"%>
-	<table style="width: 100%; min-height: 90%; margin: auto;">
+	<!-- <table style="width: 100%; min-height: 90%; margin: auto;">
 		<tr style="min-height: 90%;">
-			<td style="width: 15%; min-height: 90%; min-height: 90%; padding: 20px 0px 10px 0px; background-color: #f1f1f1" valign="top">
-				<div>
-					<%@ include file="Menu.jsp"%>
-				</div>
-			</td>
-			<td style="width: 80%; padding: 20px 15px 10px 15px" valign="top">
-				<div class="card border-secondary mb-3" style="min-width: 90%; min-height: 90vh; padding: 15px">
-					<h3>
-						Body comes here >
-						
-						
-					</h3>
-					<dec:body />
-				</div>
-			</td>
+			<td style="width: 15%; min-height: 90%; min-height: 90%; padding: 20px 0px 10px 0px; background-color: #f1f1f1"
+				valign="top">-->
+	<div class="row" style="min-width: 90%; min-height: 90vh;">
+		<div class="col-sm-2"
+			style="background: 
+			url('https://www.desktopbackground.org/p/2010/04/17/3423_look-this-cool-and-clean-white-background-images-wallpapers-for_3888x2592_h.jpg'); background-size:cover; padding: 5px;">
+			<%@ include file="Menu.jsp"%>
+		</div>
+		<!-- </td> -->
+		<!-- <td style="width: 80%;padding: 20px 15px 10px 15px" valign="top"> -->
+		<div class="col-sm-10"
+			style="padding: 10px 10px 10px 20px;">
+			<div>
+				<dec:body />
+			</div>
+		</div>
+	</div>
+	<!-- </td>
 		</tr>
-	</table>
+	</table> -->
 
 	<!-- ======== Footer ======== -->
 	<div id="footer" align="center">
