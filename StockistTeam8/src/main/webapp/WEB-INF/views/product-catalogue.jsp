@@ -59,7 +59,7 @@
 		action="${pageContext.request.contextPath}/product/catalogue">
 		<div style="padding: 30 30 30 0;">
 			<c:if test="${fn:length(pList) gt 0}">
-				<table class="table table-hover" style="font-size:1em">
+				<table class="table table-hover" style="font-size: 1em">
 					<thead>
 						<tr>
 							<th scope="col"><spring:message code="Part Number" /></th>
@@ -87,6 +87,35 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<div id="pagination">
+
+					<c:url value="/product/catalogue" var="prev">
+						<c:param name="page" value="${page-1}" />
+					</c:url>
+					<c:if test="${page > 1}">
+						<a href="<c:out value="${prev}" />" class="pn prev">Prev</a>
+					</c:if>
+
+					<c:forEach begin="1" end="${maxPages}" step="1" varStatus="i">
+						<c:choose>
+							<c:when test="${page == i.index}">
+								<span>${i.index}</span>
+							</c:when>
+							<c:otherwise>
+								<c:url value="/product/catalogue" var="url">
+									<c:param name="page" value="${i.index}" />
+								</c:url>
+								<a href='<c:out value="${url}" />'>${i.index}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:url value="/product/catalogue" var="next">
+						<c:param name="page" value="${page + 1}" />
+					</c:url>
+					<c:if test="${page + 1 <= maxPages}">
+						<a href='<c:out value="${next}" />' class="pn next">Next</a>
+					</c:if>
+				</div>
 			</c:if>
 		</div>
 		<c:if test="${fn:length(pList) eq 0}">
