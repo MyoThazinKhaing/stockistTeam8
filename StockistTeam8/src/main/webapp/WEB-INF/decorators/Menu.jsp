@@ -20,13 +20,20 @@ hr.style14 {
 a{
 	font-size:1em;
 }
+
+.list-group-item-action{
+	text-align:center;
+	font-weight: bold;
+	font-size: 1.25em;
+}
+
 </style>
 
 </head>
 <body>
 	<div class="list-group">
-		<spring:url value="/products/catalog" var="catalog" htmlEscape="true" />
-		<a href="${catalog}" class="list-group-item list-group-item-action">
+		<spring:url value="/login" var="home" htmlEscape="true" />
+		<a href="${home}" class="list-group-item list-group-item-action">
 			Home </a>
 
 		<div>

@@ -11,6 +11,11 @@
 	background-color: #104982;
 }
 
+.bg-primary{
+	/* background: rgba(255, 207, 15, 0.84) !important; */
+	background: #563d7c !important;
+}
+
 div.dropdown-menu.show {
 	left: auto !important;
 	right: 5 !important;
@@ -21,6 +26,8 @@ div.dropdown-menu.show {
 .dropdown-item {
 	font-size: 1.25em;
 }
+
+
 </style>
 </head>
 
@@ -31,8 +38,8 @@ div.dropdown-menu.show {
 	<div class="navbox">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<h1>
-				<a class="navbar-brand" href="#"> <i class="fa fa-car fa-2x"
-					aria-hidden="true"></i> <span style="font-size: 2rem">&nbsp;&nbsp;&nbsp;TEAM
+				<a class="navbar-brand" href="#"> <i class="fa fa-car fa-2x" style="color: white;"
+					aria-hidden="true"></i> <span style="font-size: 2rem; color:white;">&nbsp;&nbsp;&nbsp;TEAM
 						8 STOCKLIST</span></a>
 			</h1>
 			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -51,7 +58,7 @@ div.dropdown-menu.show {
 					</a>
 						<div class="dropdown-menu" x-placement="bottom-start"
 							style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
-							<a class="dropdown-item" href="#">Manage account</a>
+							<a class="dropdown-item" href="#">Change password</a>
 							<div class="dropdown-divider"></div>
 							<spring:url value="/logout" var="logout" htmlEscape="true" />
 							<a class="dropdown-item"
