@@ -19,7 +19,7 @@
 <%-- <h3>Inventory Reorder Report for supplier ${plist.supplierId}</h3> --%>
 
  <c:set var = "total" scope = "session" value = "0"/>
-			<table style="cellspacing: 2; cellpadding: 2; border: 1;width:100%">
+			<table class="table table-hover" style="cellspacing: 2; cellpadding: 2; border: 1;width:100%">
 				<tr class="listHeading">
 					<th>Part No. </th>
 					<th>Unit.Price</th>
@@ -31,8 +31,9 @@
 				</tr>
 				<c:forEach var="product" items="${plist}">
 					<tr class="listRecord">
-						<td>${product.partNumber}</td>
-						<td>${product.unitPrice}</td>
+						<td> ${product.partNumber}</td>
+						<td>$<fmt:formatNumber
+						value="${product.unitPrice}" type="number" pattern="#,##0.00" /></td>
 						<td>${product.stock}</td>
 						<td>${product.reorderLevel}</td>
 						<td>${product.minimumReorderQuantity}</td>

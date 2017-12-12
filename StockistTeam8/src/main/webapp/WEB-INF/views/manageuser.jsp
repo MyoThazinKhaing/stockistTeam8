@@ -2,7 +2,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<head>
 
+<style>
+.editrow{
+	margin: 20px 0px;
+}
+.label-field{
+text-align:right; 
+padding-top:5;
+}
+</style>
+</head>
 <h3>User List page</h3>
 
 <form:form method="POST"
@@ -48,17 +59,18 @@
 					<td>${user.password}</td>
 					<td>${user.role}</td>
 					<td align="center"><a
-						href="${pageContext.request.contextPath}/admin/user/edit/${user.username}.html"><spring:message
-								code="caption.edit" /></a></td>
+						href="${pageContext.request.contextPath}/admin/user/edit/${user.username}.html"><i
+										class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
 					<td><a
-						href="${pageContext.request.contextPath}/admin/user/delete/${user.username}.html"><spring:message
-								code="caption.delete" /></a></td>
+						href="${pageContext.request.contextPath}/admin/user/delete/${user.username}.html"><i
+										class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<div id="pagination">
-
+		<ul class="pagination">
+		
 		<c:url value="/admin/user/list" var="prev">
 			<c:param name="page" value="${page-1}" />
 		</c:url>
@@ -85,6 +97,7 @@
 		<c:if test="${page + 1 <= maxPages}">
 			<a href='<c:out value="${next}" />' class="pn next">Next</a>
 		</c:if>
+		</ul>
 	</div>
 </c:if>
 <c:if test="${fn:length(userList) eq 0}">
