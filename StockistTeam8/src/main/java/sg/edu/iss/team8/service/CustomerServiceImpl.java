@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 */
 	@Override
 	@Transactional
-	public Customer findCustomer(String empid) {
+	public Customer findCustomer(int empid) {
 		return customerRepository.findOne(empid);
 
 	}
@@ -86,7 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
 	 */
 	@Override
 	@Transactional
-	public Customer findCustomerById(String s) {
+	public Customer findCustomerById(int s) {
 		return customerRepository.findCustomerById(s);
 	}
 

@@ -32,12 +32,12 @@ public class TransactionDetailsServiceImpl implements TransactionDetailsService 
 	/* (non-Javadoc)
 	 * @see sg.edu.iss.team8.service.TransactionDetailsService#findTransaction(java.lang.Integer)
 	 */
-	@Override
-	@Transactional
-	public TransactionDetails findTransaction(Integer ceid) {
-		return transactionDetailsRepository.findOne(ceid);
-
-	}
+//	@Override
+//	@Transactional
+//	public TransactionDetails findTransaction(Integer ceid) {
+//		return transactionDetailsRepository.findOne(ceid);
+//
+//	}
 
 	/* (non-Javadoc)
 	 * @see sg.edu.iss.team8.service.TransactionDetailsService#createTransaction(sg.edu.iss.team8.model.TransactionDetails)

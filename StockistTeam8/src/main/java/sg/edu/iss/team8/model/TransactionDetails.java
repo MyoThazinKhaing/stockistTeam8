@@ -7,26 +7,29 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "transactiondetails")
+@IdClass(TransactionId.class)
 public class TransactionDetails {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Id
 	@Column(name = "transactionid")
-	private int transactionId;
+	private Integer transactionId;
+	@Id
 	@Column(name = "partnumber")
 	private int partNumber;
 	@Column(name = "quantity")
-	private int quantity;
+	private Integer quantity;
 
 //	@JoinColumn(name = "transactionid"/*,referencedColumnName="transactionid"*/)
+	@Transient
 	@ManyToOne(/*cascade = CascadeType.ALL,*/ fetch = FetchType.LAZY)
 	public Transaction transactionDetailsMapping;
 
@@ -42,11 +45,11 @@ public class TransactionDetails {
 		this.quantity = quantity;
 	}
 
-	public int getTransactionId() {
+	public Integer getTransactionId() {
 		return transactionId;
 	}
 
-	public void setTransactionId(int transactionId) {
+	public void setTransactionId(Integer transactionId) {
 		this.transactionId = transactionId;
 	}
 
@@ -58,11 +61,11 @@ public class TransactionDetails {
 		this.partNumber = partNumber;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 

@@ -42,5 +42,5 @@ public interface TransactionService {
 
 	ArrayList<String> findAllTransactionIDs();
 
-
+Transaction findLastRow();
 }

@@ -11,10 +11,10 @@ import sg.edu.iss.team8.model.Customer;
 
 
 
-public interface CustomerRepository extends JpaRepository<Customer, String>{
+public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	
 	@Query("SELECT e FROM Customer e where e.customerId = :id")
-	Customer findCustomerById(@Param("id") String id);
+	Customer findCustomerById(@Param("id") int id);
 	
 	@Query("SELECT DISTINCT e.customerId FROM Customer e")
 	ArrayList<String> findAllCustomerIDs();

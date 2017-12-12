@@ -14,8 +14,9 @@ import sg.edu.iss.team8.repository.TransactionRepository;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
+	
 	@Resource
-	private TransactionRepository transactionRepository;
+	 TransactionRepository transactionRepository;
 	
 
 
@@ -47,7 +48,10 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	@Transactional
 	public Transaction createTransaction(Transaction transaction) {
-		return transactionRepository.saveAndFlush(transaction);
+		
+			return transactionRepository.saveAndFlush(transaction);
+			
+		
 		//return transactionDetailsRepository.saveAndFlush(transactionDetails);
 	}
 
@@ -89,5 +93,12 @@ public class TransactionServiceImpl implements TransactionService {
 	@Transactional
 	public ArrayList<String> findAllTransactionIDs(){
 		return transactionRepository.findAllTransactionIDs();
+	}
+
+
+	@Override
+	public Transaction findLastRow() {
+		
+		return transactionRepository.findLastRow();
 	}
 }

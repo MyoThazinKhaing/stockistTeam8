@@ -10,7 +10,7 @@ public interface CustomerService {
 
 	ArrayList<Customer> findAllCustomers();
 
-	Customer findCustomer(String empid);
+	Customer findCustomer(int empid);
 
 	Customer createCustomer(Customer emp);
 
@@ -18,7 +18,7 @@ public interface CustomerService {
 
 	void removeCustomer(Customer emp);
 
-	Customer findCustomerById(String s);
+	Customer findCustomerById(int s);
 
 	ArrayList<String> findAllCustomerIDs();
 

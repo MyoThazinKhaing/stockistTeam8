@@ -28,7 +28,7 @@ public class TestController {
 		String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 
 		for (Map.Entry<RequestMappingInfo, HandlerMethod> info : mapping.entrySet()) {
-			if (info.getKey().getName() == path) {
+			if (info.getKey().getPatternsCondition().toString().equals(path)) {
 				if (session.getAttribute("USERSESSION") != null) {
 					return "redirect:" + path;
 				} else {
