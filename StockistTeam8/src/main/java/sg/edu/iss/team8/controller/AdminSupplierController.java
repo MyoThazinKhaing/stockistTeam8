@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,12 +46,25 @@ public class AdminSupplierController {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView supplierListPage() {
+	public ModelAndView supplierListPage(@RequestParam(required = false) Integer page) {
 		Supplier s=new Supplier();
 		ModelAndView mav = new ModelAndView("supplier-list", "supplier", s);
 		
 		List<Supplier> supplierList = sService.findAllSuppliers();
-		mav.addObject("supplierList", supplierList);
+		//mav.addObject("supplierList", supplierList);
+		
+		PagedListHolder<Supplier> pagedListHolder = new PagedListHolder<>(supplierList);
+		pagedListHolder.setPageSize(4);
+		mav.addObject("maxPages", pagedListHolder.getPageCount());
+		mav.addObject("page", page);
+		if (page == null || page < 1 || page > pagedListHolder.getPageCount()) {
+			pagedListHolder.setPage(0);
+			mav.addObject("supplierList", pagedListHolder.getPageList());
+		} else if (page <= pagedListHolder.getPageCount()) {
+			pagedListHolder.setPage(page - 1);
+			mav.addObject("supplierList", pagedListHolder.getPageList());
+		}
+		
 		return mav;
 	}
 	
