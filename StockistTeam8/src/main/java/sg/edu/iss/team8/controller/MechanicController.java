@@ -1,5 +1,7 @@
 package sg.edu.iss.team8.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -54,6 +57,14 @@ private void initTransactionBinder(WebDataBinder binder) {
 //	private void initCustomerBinder(WebDataBinder binder) {
 //		// binder.addValidators(eValidator);
 //	}
+	 @InitBinder("course")
+		private void initCourseBinder(WebDataBinder binder) {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			dateFormat.setLenient(false);
+			binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+			binder.addValidators(transactionValidator);
+
+		}
 	 static Transaction t=null;
 	 static 
 	 {

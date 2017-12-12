@@ -22,6 +22,8 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
+
 @Entity
 @Table(name = "transaction")
 // @SecondaryTable(name = "transactiondetails", pkJoinColumns =
@@ -36,9 +38,9 @@ public class Transaction {
 	@Column(name = "customerid")
 	private Integer customerId;
 
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
 	@Column(name = "consumedate")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	//@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date consumeDate;
 
 	@Column(name = "username")

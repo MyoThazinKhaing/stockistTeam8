@@ -30,7 +30,7 @@
 			<tr>
 				<td>Customer Name</td>
 				<td><form:select path="customerId">
-						<form:option value="123" label="...." />
+						<%-- <form:option value="123" label="...." /> --%>
 						<form:options items="${custlist}" />
 					</form:select></td><td></td><td></td>
 				<%-- 				<td><form:errors path="managerId" cssStyle="color: red;" /></td> --%>
@@ -43,7 +43,7 @@
       
       <tr>
 		<td>Date</td>	
-       <td><form:input size="16" path="consumeDate" id="datepicker1" type="date" pattern="dd/MM/yyyy"/>
+       <td><form:input size="16" path="consumeDate" id="datepicker1" type="date"/>
        <form:errors path="consumeDate" cssStyle="color: red;" /></td></td><td></td><td></td>
 
 	
