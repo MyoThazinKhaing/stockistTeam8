@@ -29,4 +29,6 @@ public interface ProductService {
 
 	void removeUser(Product product);
 
+	ArrayList<Product> findAllProduct();
+	ArrayList<Product> findAllProductBySupplierId(int sid);
 }
