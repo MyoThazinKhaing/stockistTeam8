@@ -25,29 +25,24 @@
 	width: 100%;
 	padding: 0;
 }
-
 .row-fluid {
 	height: 50%;
 	display: table-cell;
 	vertical-align: middle;
 }
-
 .centering {
 	float: none;
 	margin: 0 auto;
 	width: 35%;
 	min-width: 40%;
 }
-
 .form-group {
 	padding: 10px 30px;
 	background-color: rgba(38, 12, 12, 0.7);
 }
-
 .col-form-label {
 	color: white;
 }
-
 .welcome {color =#C7F2C2
 	
 }

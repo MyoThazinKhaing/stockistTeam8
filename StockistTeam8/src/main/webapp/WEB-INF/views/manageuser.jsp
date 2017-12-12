@@ -6,12 +6,14 @@
 <a href="${pageContext.request.contextPath}/admin/user/create">Add
 	User</a>
 <c:if test="${fn:length(userList) gt 0}">
-	<table style="cellspacing: 2; cellpadding: 2; border: 1;">
+	<table class="table table-hover">
 		<thead>
 			<tr class="listHeading">
 				<th><spring:message code="fieldLabel.username" /></th>
 				<th><spring:message code="fieldLabel.password" /></th>
 				<th><spring:message code="fieldLabel.role" /></th>
+				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
