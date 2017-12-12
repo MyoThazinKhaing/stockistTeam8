@@ -40,10 +40,11 @@ public class CommonController {
 	@Autowired
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
-	@RequestMapping(value = "/**", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String firstTime(HttpServletRequest request, HttpSession session) {
-		Map<RequestMappingInfo, HandlerMethod> mapping = requestMappingHandlerMapping.getHandlerMethods();
-		return new TestController().testURL(request, session, mapping);
+//		Map<RequestMappingInfo, HandlerMethod> mapping = requestMappingHandlerMapping.getHandlerMethods();
+//		return new TestController().testURL(request, session, mapping);
+		return "404";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -93,8 +94,8 @@ public class CommonController {
 	
 	@RequestMapping(value = "/changepw/{id}", method = RequestMethod.GET)
 	public ModelAndView changepwUserPage(@PathVariable String id, HttpSession session) {
-		if (!new TestController().isUser(session))
-			return new ModelAndView("403");
+/*		if (!new TestController().isUser(session))
+			return new ModelAndView("403");*/
 		ModelAndView mav = new ModelAndView("changepassword");
 		User user = uService.findUser(id);
 		mav.addObject("user", user);
@@ -106,10 +107,10 @@ public class CommonController {
 	@RequestMapping(value = "/changepw/{id}", method = RequestMethod.POST)
 	public ModelAndView changepwUser(@ModelAttribute @Valid User user, BindingResult result, @PathVariable String id,
 			final RedirectAttributes redirectAttributes, HttpSession session) throws UserNotFound {
-		if (!new TestController().isUser(session) )
+/*		if (!new TestController().isUser(session) )
 			return new ModelAndView("403");
 		if (result.hasErrors())
-			return new ModelAndView("changepassword");
+			return new ModelAndView("changepassword");*/
 
 		ModelAndView mav = new ModelAndView("redirect:/changepw/"+id);
 		

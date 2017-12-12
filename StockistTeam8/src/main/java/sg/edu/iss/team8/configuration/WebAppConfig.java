@@ -32,6 +32,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import sg.edu.iss.team8.controller.MappingInterceptor;
+
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
@@ -157,6 +159,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		localeChangeInterceptor.setParamName("lang");
 		registry.addInterceptor(localeChangeInterceptor);
+		
+		registry.addInterceptor(new MappingInterceptor());
 	}
 
 	@Bean

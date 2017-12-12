@@ -53,17 +53,17 @@ public class AdminProductController {
 	@Autowired
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
 	
-	@RequestMapping(value = "/**", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/**", method = RequestMethod.GET)
 	public String firstTime(HttpServletRequest request, HttpSession session) {
 		Map<RequestMappingInfo, HandlerMethod> mapping = requestMappingHandlerMapping.getHandlerMethods();
 		return new TestController().testURL(request, session, mapping); 
-	}
+	}*/
 
 	@RequestMapping(value = "/catalog")
 	public ModelAndView viewProductCatalog(HttpSession session) {
-		if(!new TestController().isUser(session)) {
+/*		if(!new TestController().isUser(session)) {
 			return new ModelAndView("403");
-		}
+		}*/
 		return new ModelAndView("products-catalog");
 		/*if (us.getSessionId() != null) {
 			ModelAndView mav = new ModelAndView("products-catalog");
@@ -79,9 +79,9 @@ public class AdminProductController {
 
 		@RequestMapping(value = "/catalogue", method = RequestMethod.GET)
 	public ModelAndView browseCatalogue(HttpSession session, @RequestParam(required = false) Integer page) {
-		if (!new TestController().isUser(session)) {
+/*		if (!new TestController().isUser(session)) {
 			return new ModelAndView("403");
-		}
+		}*/
 		
 		ModelAndView mav = new ModelAndView("product-catalogue");
 		ArrayList<Product> pList = (ArrayList<Product>) productService.findAllProducts();
