@@ -34,7 +34,7 @@ a{
 	<div class="list-group">
 		<spring:url value="/login" var="home" htmlEscape="true" />
 		<a href="${home}" class="list-group-item list-group-item-action">
-			Home </a>
+			<spring:message code="menu.home" /> </a>
 
 		<div>
 			<hr class="style14">
@@ -43,40 +43,40 @@ a{
 			<c:forEach var="role" items="${sessionScope.USERSESSION.user.role}">
 				<c:choose>
 					<c:when test="${role eq 'admin'}">
-						<spring:url value="/admin/user/list" var="ulist" htmlEscape="true" />
+						<%-- <c:if test="${requestScope['javax.servlet.forward.request_uri'] eq ulist}"></c:if> --%>
+						<spring:url value="/product/catalogue" var="ulist" htmlEscape="true" />
 						<a href="${ulist}"
-							class="list-group-item list-group-item-action"> <spring:message
-								code="menu.admin.ulist" />
+							class="list-group-item list-group-item-action"><spring:message code="menu.browseCatalog" />
 						</a>
-						<spring:url value="/admin/role/list" var="rlist" htmlEscape="true" />
+						<spring:url value="/mechanic/transactions/list" var="rlist" htmlEscape="true" />
 						<a href="${rlist}" class="list-group-item list-group-item-action">
-							<spring:message code="menu.admin.rlist" />
+							<spring:message code="menu.browseTransaction" />
 						</a>
-						<spring:url value="/admin/employee/list" var="elist"
+						<spring:url value="/admin/user/list" var="elist"
 							htmlEscape="true" />
 						<a href="${elist}" class="list-group-item list-group-item-action">
-							<spring:message code="menu.admin.elist" />
+							<spring:message code="menu.manageUser" />
 						</a>
-						<spring:url value="/admin/department/list" var="dlist"
+						<spring:url value="/admin/supplier/list" var="dlist"
 							htmlEscape="true" />
 						<a href="${dlist}" class="list-group-item list-group-item-action">
-							<spring:message code="menu.admin.dlist" />
+							<spring:message code="menu.browseSupplier" />
+						</a>
+						<spring:url value="/admin/reorderreport/list" var="dlist"
+							htmlEscape="true" />
+						<a href="${dlist}" class="list-group-item list-group-item-action">
+							<spring:message code="menu.ReorderReport" />
 						</a>
 					</c:when>
 					<c:when test="${role eq 'mechanic' }">
-						<spring:url value="/manager/pending" var="pending"
-							htmlEscape="true" />
-						<a href="${pending}"
-							class="list-group-item list-group-item-action"> <spring:message
-								code="menu.coursesForApproval" />
+						<spring:url value="/product/catalogue" var="ulist" htmlEscape="true" />
+						<a href="${ulist}"
+							class="list-group-item list-group-item-action"><spring:message code="menu.browseCatalog" />
 						</a>
-						<spring:url value="/manager/shistory" var="shistory"
-							htmlEscape="true" />
-						<a href="${shistory}"
-							class="list-group-item list-group-item-action"> <spring:message
-								code="menu.subordinateHistory" />
+						<spring:url value="/mechanic/transactions/list" var="rlist" htmlEscape="true" />
+						<a href="${rlist}" class="list-group-item list-group-item-action">
+							<spring:message code="menu.browseTransaction" />
 						</a>
-
 					</c:when>
 
 				</c:choose>

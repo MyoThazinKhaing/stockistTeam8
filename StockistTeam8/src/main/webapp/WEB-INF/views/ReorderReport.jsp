@@ -24,9 +24,9 @@
 					<th>Part No. </th>
 					<th>Unit.Price</th>
 					<th>Qty.</th>
-					<th>Reorder Qty.</th>
+					<th>Reorder Level</th>
 					<th>Min.Ord.Qty.</th>
-					<th>Qrd.Qty.</th>
+					<th>Ord.Qty.</th>
 					<th>Price</th>
 				</tr>
 				<c:forEach var="product" items="${plist}">
@@ -51,7 +51,7 @@
 ${product.minimumReorderQuantity} </td>
  </c:when> 
   <c:otherwise><td>
-  <c:set var = "price" scope = "session" value = "minusVal"/>
+  <c:set var = "price" scope = "session" value = "${minusVal}"/>
    <c:out value="${minusVal}"/>  </td></c:otherwise> 
   </c:choose>							
 </c:when>	
@@ -59,7 +59,7 @@ ${product.minimumReorderQuantity} </td>
  <c:set var = "price" scope = "session" value = "0"/>
  <c:out value="0"/>  </td></c:otherwise> 
 </c:choose>
-	            
+	     <%--        <fmt:parseNumber var = "i" type = "number" value = "${price}" /> --%>
 				<c:set var = "total" scope = "session" value = "${(product.unitPrice*price)+total}"/>
 						<td>${product.unitPrice*price}</td>
 						
@@ -77,4 +77,3 @@ ${product.minimumReorderQuantity} </td>
 
 
 </body>
-</html>

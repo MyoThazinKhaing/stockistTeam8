@@ -77,18 +77,14 @@ public class AdminProductController {
 
 	}
 
-	
-	@Autowired
-	private ProductService pService;
-
-	@RequestMapping(value = "/catalogue", method = RequestMethod.GET)
+		@RequestMapping(value = "/catalogue", method = RequestMethod.GET)
 	public ModelAndView browseCatalogue(HttpSession session, @RequestParam(required = false) Integer page) {
 		if (!new TestController().isUser(session)) {
 			return new ModelAndView("403");
 		}
 		
 		ModelAndView mav = new ModelAndView("product-catalogue");
-		ArrayList<Product> pList = (ArrayList<Product>) pService.findAllProducts();
+		ArrayList<Product> pList = (ArrayList<Product>) productService.findAllProducts();
 		
 		PagedListHolder<Product> pagedListHolder = new PagedListHolder<>(pList);
 		pagedListHolder.setPageSize(5);
@@ -115,7 +111,7 @@ public class AdminProductController {
 		 if(!new TestController().isUser(session)) {
 				return new ModelAndView("403");
 			}
-	        return new ModelAndView("product-catalogue", "pList", pService.searchProducts(criteria, description));
+	        return new ModelAndView("product-catalogue", "pList", productService.searchProducts(criteria, description));
 	        //return new ModelAndView("product-catalogue", "pList", pService.searchProduct("p.criteria",description));
 	    }
 	 
@@ -226,5 +222,6 @@ public class AdminProductController {
 
 	}
 
+	
 	
 }

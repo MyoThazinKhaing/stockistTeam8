@@ -59,7 +59,7 @@ public class MechanicController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/transactions", method = RequestMethod.GET)
+	@RequestMapping(value = "/transactions/list", method = RequestMethod.GET)
 	public ModelAndView showAllTransaction() {
 		ModelAndView mav = new ModelAndView("transaction-all");
 		ArrayList<TransactionDetails> transDetailList = tdService.findAllTransactions();

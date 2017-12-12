@@ -29,8 +29,11 @@ public class TestController {
 		if(path.equals("/")||path.equals("/login")) {
 			return "redirect:/login";
 		}
+		if(path.endsWith("/*")||path.endsWith("/**")) {
+			return "404";
+		}
 		for (Map.Entry<RequestMappingInfo, HandlerMethod> info : mapping.entrySet()) {			
-			if (info.getKey().getName().equals(path)) {
+			if (info.getKey().getPatternsCondition().toString().equals(path)) {
 				if (session.getAttribute("USERSESSION") != null) {					
 					return "redirect:" + path;
 				} else {

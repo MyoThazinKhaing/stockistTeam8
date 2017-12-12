@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,7 +52,7 @@
 					code="Display all products" /></a>
 		</div>
 		<div class="col-sm-6" style="text-align: right; padding: 0 30 0 0;">
-			<a href="${pageContext.request.contextPath}/admin/product/create">Add
+			<a href="${pageContext.request.contextPath}/product/create">Add
 				Product</a>
 		</div>
 	</div>
@@ -62,10 +63,12 @@
 				<table class="table table-hover" style="font-size: 1em">
 					<thead>
 						<tr>
-							<th scope="col"><spring:message code="Part Number" /></th>
-							<th scope="col"><spring:message code="Unit Price" /></th>
+							<th scope="col"><spring:message code="Part Number" /></th>							
 							<th scope="col"><spring:message code="Description" /></th>
+							<th style="min-width:300px"></th>
 							<th scope="col"><spring:message code="Colour" /></th>
+							<td align="right" ><strong><spring:message
+									code="Unit Price" /></strong></td>
 							<th scope="col"><spring:message code="caption.edit" /></th>
 							<th scope="col"><spring:message code="caption.delete" /></th>
 						</tr>
@@ -73,15 +76,16 @@
 					<tbody>
 						<c:forEach var="product" items="${pList}">
 							<tr class="table-light">
-								<td>${product.partNumber}</td>
-								<td>${product.unitPrice}</td>
-								<td>${product.description}</td>
+								<td>${product.partNumber}</td>								
+								<td colspan=2>${product.description}</td>
 								<td>${product.colour}</td>
+								<td align="right">$<fmt:formatNumber
+										value="${product.unitPrice}" type="number" pattern="#,##0.00" /></td>
 								<td><a
-									href="${pageContext.request.contextPath}/admin/product/edit/${product.partNumber}.html"><i
+									href="${pageContext.request.contextPath}/product/edit/${product.partNumber}.html"><i
 										class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
 								<td><a
-									href="${pageContext.request.contextPath}/admin/product/delete/${product.partNumber}.html"><i
+									href="${pageContext.request.contextPath}/product/delete/${product.partNumber}.html"><i
 										class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
 							</tr>
 						</c:forEach>

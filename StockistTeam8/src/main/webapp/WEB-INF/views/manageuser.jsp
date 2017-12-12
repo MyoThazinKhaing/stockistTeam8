@@ -87,3 +87,6 @@
 		</c:if>
 	</div>
 </c:if>
+<c:if test="${fn:length(userList) eq 0}">
+			<p>No records found.</p>
+		</c:if>
