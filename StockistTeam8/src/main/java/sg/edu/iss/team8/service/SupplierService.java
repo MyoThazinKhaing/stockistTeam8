@@ -22,4 +22,12 @@ public interface SupplierService {
 
 	ArrayList<Supplier> searchSupplierByName(String name);
 
+	ArrayList<Integer> findAllSupplierIDs();
+	ArrayList<String> findAllSupplierNames();
+	
+	ArrayList<Supplier> findAllSupplier();
+	
+	ArrayList<Supplier> findAllSupplierByStatus();
+	
+
 }

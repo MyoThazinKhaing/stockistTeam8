@@ -21,7 +21,6 @@ public interface ProductService {
 	// SEARCH PRODUCT ALL IN ONE
 	//ArrayList<Product> searchProduct(String searchCriteria, String searchValue);
 
-	Product findProduct(Integer partNumber);
 
 	Product createUser(Product product);
 
@@ -31,4 +30,25 @@ public interface ProductService {
 
 	ArrayList<Product> findAllProduct();
 	ArrayList<Product> findAllProductBySupplierId(int sid);
+	
+	Product findProductByNo(int pNo);
+	
+	ArrayList<Product> findProductByColour(String pColour);
+	
+	
+	ArrayList<Product> findProductByManufacturer(String pManufacturer);
+	
+	Product createProduct(Product product);
+	
+	Product changeProduct(Product product);
+	
+	void removeEmployee(Product product);
+	
+	ArrayList<Integer> findAllProductIDs();
+	
+	ArrayList<Integer> findAllSupplierIDs();
+	
+	
+	
+
 }

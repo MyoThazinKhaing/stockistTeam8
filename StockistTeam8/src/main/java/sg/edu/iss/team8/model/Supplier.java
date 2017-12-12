@@ -8,6 +8,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.persistence.Column;
 
+
+
 @Entity
 @Table(name="supplier")
 public class Supplier {
@@ -102,6 +104,7 @@ public class Supplier {
 		result = prime * result + supplierId;
 		return result;
 	}
+
 
 	
 	

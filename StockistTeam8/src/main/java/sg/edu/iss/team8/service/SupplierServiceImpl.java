@@ -88,4 +88,33 @@ public class SupplierServiceImpl implements SupplierService {
 	public ArrayList<Supplier> searchSupplierByName(String name) {
 		return supplierRepository.findSupplierByName(name);
 	}
+
+	@Override
+	@Transactional
+	public ArrayList<Integer> findAllSupplierIDs() {
+	
+		return supplierRepository.findAllSupplierIDs();
+	}
+
+	@Override
+	@Transactional
+	public ArrayList<String> findAllSupplierNames() {
+		
+		return supplierRepository.findAllSupplierNames();
+	}
+
+	@Override
+	@Transactional
+    public ArrayList<Supplier> findAllSupplier() {
+		// TODO Auto-generated method stub
+		return  supplierRepository.findAllSuppliers();
+	}
+
+	@Override
+	public ArrayList<Supplier> findAllSupplierByStatus() {
+		// TODO Auto-generated method stub
+		return supplierRepository.findAllSupplierByStatus();
+	}
+
+	
 }

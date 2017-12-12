@@ -28,16 +28,7 @@ public class ProductServiceImpl implements ProductService {
 		return pl;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sg.edu.iss.team8.service.ProductService#findProduct(java.lang.Integer)
-	 */
-	@Override
-	@Transactional
-	public Product findProduct(Integer partNumber) {
-		return pRepository.findOne(partNumber);
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -130,4 +121,62 @@ public class ProductServiceImpl implements ProductService {
 		return l;
 	}
 
+	
+	@Override
+	@Transactional
+	public Product findProductByNo(int pNo) {
+		
+		return pRepository.findProductByNo(pNo);
+	}
+
+	@Override
+	@Transactional
+	public ArrayList<Product> findProductByColour(String pColour) {
+		
+		return pRepository.findProductByColour(pColour);
+	}
+
+
+	@Override
+	@Transactional
+	public ArrayList<Product> findProductByManufacturer(String pManufacturer) {
+		
+		return pRepository.findProductByManufacturer(pManufacturer);
+	}
+
+	@Override
+	@Transactional
+	public Product createProduct(Product product) {
+		
+		return  pRepository.saveAndFlush(product);
+	}
+
+	@Override
+	@Transactional
+	public Product changeProduct(Product product) {
+		
+		return pRepository.saveAndFlush(product);
+	}
+
+	@Override
+	@Transactional
+	public void removeEmployee(Product product) {
+		pRepository.delete(product);
+		
+	}
+
+	@Override
+	@Transactional
+	public ArrayList<Integer> findAllProductIDs() {
+		
+		return pRepository.findAllProductIDs();
+	}
+
+	@Override
+	public ArrayList<Integer> findAllSupplierIDs() {
+		// TODO Auto-generated method stub
+		return pRepository.findAllSupplierIDs();
+	}
+
+	
 }

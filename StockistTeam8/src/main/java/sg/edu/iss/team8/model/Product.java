@@ -10,10 +10,10 @@ import javax.persistence.Table;
 public class Product {
 	@Id
 	@Column(name = "partnumber")
-	private int partNumber; 
+	private Integer partNumber; 
 
 	@Column(name = "unitprice")
-	private double unitPrice;
+	private Double unitPrice;
 
 	@Column(name = "description")
 	private String description;
@@ -28,38 +28,48 @@ public class Product {
 	private String manufacturer;
 
 	@Column(name = "supplierid")
-	private int supplierId;
+	private Integer supplierId;
 
 	@Column(name = "reorderlevel")
-	private int reorderLevel;
+	private Integer reorderLevel;
 
 	@Column(name = "minimumreorderquantity")
-	private int minimumReorderQuantity;
+	private Integer minimumReorderQuantity;
 
-	@Column(name = "Shelflocation")
-	private String ShelfLocation;
+	@Column(name = "shelflocation")
+	private String shelfLocation;
+
+	
 
 	@Column(name = "stock")
-	private int stock;
-
+	private Integer stock;
+	
+    @Column(name="status")
+	private String status;
+	
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getPartNumber() {
+	public Integer getPartNumber() {
 		return partNumber;
 	}
 
-	public void setPartNumber(int partNumber) {
+
+	public void setPartNumber(Integer partNumber) {
+		
+			
 		this.partNumber = partNumber;
+		
+		
 	}
 
-	public double getUnitPrice() {
+	public Double getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(double unitPrice) {
+	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
@@ -67,25 +77,37 @@ public class Product {
 		return description;
 	}
 
+
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+
 
 	public String getColour() {
 		return colour;
 	}
 
+
+
 	public void setColour(String colour) {
 		this.colour = colour;
 	}
+
+
 
 	public String getDimension() {
 		return dimension;
 	}
 
+
+
 	public void setDimension(String dimension) {
 		this.dimension = dimension;
 	}
+
+
 
 	public String getManufacturer() {
 		return manufacturer;
@@ -95,45 +117,67 @@ public class Product {
 		this.manufacturer = manufacturer;
 	}
 
-	public int getSupplierId() {
+
+	public Integer getSupplierId() {
 		return supplierId;
 	}
 
-	public void setSupplierId(int supplierId) {
+
+	public void setSupplierId(Integer supplierId) {
 		this.supplierId = supplierId;
 	}
 
-	public int getReorderLevel() {
+
+	public Integer getReorderLevel() {
 		return reorderLevel;
 	}
 
-	public void setReorderLevel(int reorderLevel) {
+	public void setReorderLevel(Integer reorderLevel) {
 		this.reorderLevel = reorderLevel;
 	}
 
-	public int getMinimumReorderQuantity() {
+	public Integer getMinimumReorderQuantity() {
 		return minimumReorderQuantity;
 	}
 
-	public void setMinimumReorderQuantity(int minimumReorderQuantity) {
+	public void setMinimumReorderQuantity(Integer minimumReorderQuantity) {
 		this.minimumReorderQuantity = minimumReorderQuantity;
 	}
 
 	public String getShelfLocation() {
-		return ShelfLocation;
+		return shelfLocation;
 	}
+
+
 
 	public void setShelfLocation(String shelfLocation) {
-		ShelfLocation = shelfLocation;
+		this.shelfLocation = shelfLocation;
 	}
+	
 
-	public int getStock() {
+
+
+	public Integer getStock() {
 		return stock;
 	}
 
-	public void setStock(int stock) {
+
+
+	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -156,5 +200,6 @@ public class Product {
 			return false;
 		return true;
 	}
+
 
 }

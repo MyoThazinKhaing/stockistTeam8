@@ -48,6 +48,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	@Query("SELECT p from Product p where p.supplierId = :sId")
     ArrayList<Product> findProductBySupplierId(@Param("sId") int sId);
-
+	
+	    @Query("SELECT p.partNumber from Product p")
+	    ArrayList<Integer> findAllProductIDs();
+	    
+	    @Query("SELECT p.supplierId from Product p")
+	   ArrayList<Integer> findAllSupplierIDs();
 }
-
