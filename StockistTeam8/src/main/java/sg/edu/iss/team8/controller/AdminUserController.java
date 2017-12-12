@@ -134,14 +134,14 @@ public class AdminUserController {
 		if (result.hasErrors())
 			return new ModelAndView("edituser");
 
-		ModelAndView mav = new ModelAndView("redirect:/admin/user/edit");
+		ModelAndView mav = new ModelAndView("redirect:/admin/user/list");
 		String message = "";
 
 		uService.changeUser(user);
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
-	}
+	}  
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView deleteUser(@PathVariable String id, final RedirectAttributes redirectAttributes, HttpSession session)
