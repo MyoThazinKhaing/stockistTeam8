@@ -22,7 +22,7 @@
 			<!-- 			</tr> -->
 			<tr>
 				<td><spring:message code="fieldLabel.password" /></td>
-				<td><form:input path="password" /></td>
+				<td><form:input path="password" type="password"/></td>
 				<td><form:errors path="password" cssStyle="color: red;" /></td>
 			</tr>
 			<tr>
