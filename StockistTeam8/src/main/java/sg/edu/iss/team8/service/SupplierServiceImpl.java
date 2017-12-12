@@ -7,6 +7,17 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import sg.edu.iss.team8.model.Product;
+import sg.edu.iss.team8.model.Supplier;
+import sg.edu.iss.team8.repository.ProductRepository;
+import sg.edu.iss.team8.repository.SupplierRepository;
+
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import sg.edu.iss.team8.model.Supplier;
 import sg.edu.iss.team8.repository.SupplierRepository;
 

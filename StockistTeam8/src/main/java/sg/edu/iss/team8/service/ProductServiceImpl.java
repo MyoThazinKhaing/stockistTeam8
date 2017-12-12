@@ -117,5 +117,17 @@ public class ProductServiceImpl implements ProductService {
 
 		return searchResult;
 	}
+	@Override
+	@Transactional
+	public ArrayList<Product> findAllProduct() {
+		ArrayList<Product> l = (ArrayList<Product>) pRepository.findAll();
+		return l;
+	}
+	@Override
+	@Transactional
+	public ArrayList<Product> findAllProductBySupplierId(int sid) {
+		ArrayList<Product> l = (ArrayList<Product>) pRepository.findProductBySupplierId(sid);
+		return l;
+	}
 
 }

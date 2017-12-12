@@ -19,4 +19,5 @@ public interface SupplierRepository extends JpaRepository<Supplier, Integer>{
 	@Query(value = "SELECT * FROM supplier WHERE suppliername like %?1%", nativeQuery = true)
 	ArrayList<Supplier> findSupplierByName(@Param("name") String name);
 
+
 }

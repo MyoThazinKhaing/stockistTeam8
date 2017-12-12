@@ -1,7 +1,9 @@
 package sg.edu.iss.team8.model;
 
 import javax.persistence.Column;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "product")

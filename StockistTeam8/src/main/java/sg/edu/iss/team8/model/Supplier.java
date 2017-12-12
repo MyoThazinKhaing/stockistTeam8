@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
+import javax.persistence.Column;
 
 @Entity
 @Table(name="supplier")
@@ -101,19 +102,7 @@ public class Supplier {
 		result = prime * result + supplierId;
 		return result;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Supplier other = (Supplier) obj;
-		if (supplierId != other.supplierId)
-			return false;
-		return true;
-	}
+
 	
 	
 
