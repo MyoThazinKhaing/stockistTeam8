@@ -48,14 +48,14 @@
 			<td style="width: 15%; min-height: 90%; min-height: 90%; padding: 20px 0px 10px 0px; background-color: #f1f1f1"
 				valign="top">-->
 	<div class="row" style="min-width: 90%; min-height: 90vh;">
-		<div class="col-sm-2" style="background:rgba(2, 117, 216, 0.1); padding: 5px;">
+		<div class="col-sm-2" style="background:rgba(214, 97, 2, 0.18); padding: 5px;">
 			<%@ include file="Menu.jsp"%>
 		</div>
 		<!-- </td> -->
 		<!-- <td style="width: 80%;padding: 20px 15px 10px 15px" valign="top"> -->
 		<div class="col-sm-10"
-			style=" padding: 10px 10px 10px 20px;">
-			<div>
+			style="padding: 10px 10px 10px 20px;" >
+			<div >
 				<dec:body />
 			</div>
 		</div>
