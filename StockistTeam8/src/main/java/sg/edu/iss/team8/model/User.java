@@ -17,6 +17,8 @@ public class User {
 	@Basic(optional = false)
 	@Column(name = "status")
 	private String status;
+	@Transient
+    private String retypePassword;
 	
 	
 	public User() {
@@ -56,6 +58,14 @@ public class User {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getRetypePassword() {
+		return retypePassword;
+	}
+
+	public void setRetypePassword(String retypePassword) {
+		this.retypePassword = retypePassword;
 	}
 
 	@Override

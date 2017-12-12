@@ -44,10 +44,12 @@
 		</tbody>
 	</table>
 
-	<c:if test="${message !=error}">
-		<div>
-			<spring:message code="message.successUser" />
-		</div>
+	<c:choose>
+		<c:when test="${message == null}"><div></div></c:when>
+		<c:when test="${message == true}"><spring:message code="message.successUser" /></c:when>
+		<c:when test="${message == false}"><spring:message code="error.user.password.empty" /></c:when>
+		
 
-	</c:if> 
+		<c:otherwise><div> </div></c:otherwise>	
+		</c:choose>
 </form:form>

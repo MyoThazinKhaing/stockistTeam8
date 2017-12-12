@@ -77,14 +77,22 @@
 					<div class="col-sm-3 label-field"></div>
 					<div class="col-sm-5"><input type="submit" value="Create" 
 						class="btn btn-primary" /></div>
-
 				</div>
 
 		</div>
+		<c:choose>
+		<c:when test="${message == null}"><div></div></c:when>
+		<c:when test="${message == true}"><spring:message code="message.successUserCreate" /></c:when>
+		<c:when test="${message == false}"><spring:message code="error.username.repeat" /></c:when>
+		<c:otherwise><div> </div></c:otherwise>	
+		</c:choose>
+<%-- 
 			<c:if test="${message != error}">
 		<div>
 		<spring:message code="message.successUserCreate" />
 		</div>
 
-	</c:if>
+	</c:if> --%>
+
+	
 	</form:form>
