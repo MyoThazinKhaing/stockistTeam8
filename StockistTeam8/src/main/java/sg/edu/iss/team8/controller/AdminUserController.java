@@ -72,6 +72,8 @@ public class AdminUserController {
 		mav.addObject("userList", userList);
 		ArrayList<String> eidList = uService.ListRoles();
 		mav.addObject("eidlist", eidList);
+		String[] statusList = uService.ListStatus();
+		mav.addObject("statuslist", statusList);
 		return mav;
 	}
 
@@ -91,6 +93,8 @@ public class AdminUserController {
 		if (result.hasErrors() || isRepeat) {
 			ArrayList<String> eidList = uService.ListRoles();
 			mav.addObject("eidlist", eidList);
+			String[] statusList = uService.ListStatus();
+			mav.addObject("statuslist", statusList);
 			return mav;
 		}
 
