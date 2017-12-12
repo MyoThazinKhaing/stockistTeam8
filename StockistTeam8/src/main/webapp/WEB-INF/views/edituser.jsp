@@ -6,7 +6,7 @@
 
 <h3>Edit User page</h3>
 
-<form:form method="POST" modelAttribute="user"
+<form:form method="POST" commandName="user"
 	action="${pageContext.request.contextPath}/admin/user/edit/${user.username}.html">
 	<table>
 		<tbody>
@@ -30,6 +30,11 @@
 				<td><form:select path="role" items="${eidlist}" /></td>
 				<td><form:errors path="role" cssStyle="color: red;" /></td>
 			</tr>
+			<tr>
+				<td><spring:message code="fieldLabel.status" /></td>
+				<td><form:select path="status" items="${statuslist}" /></td>
+				<td><form:errors path="status" cssStyle="color: red;" /></td>
+			</tr>
 
 			<tr>
 				<td><input type="submit" value="Update" /></td>
@@ -39,11 +44,10 @@
 		</tbody>
 	</table>
 
-	<c:if test="${message != error}">
+	<c:if test="${message !=error}">
 		<div>
-			<spring:message code="message.successUserCreate" />
+			<spring:message code="message.successUser" />
 		</div>
 
-	</c:if>
+	</c:if> 
 </form:form>
-

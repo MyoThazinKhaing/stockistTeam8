@@ -15,6 +15,8 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UserRepository userRepository;
+	
+	private final String[] STATUS = { "active", "inactive" };
 
 	/*
 	 * (non-Javadoc)
@@ -171,6 +173,11 @@ public class UserServiceImpl implements UserService {
 		}
 		return userList;
 		
+	}
+	
+	@Override
+	public String[] ListStatus() {
+		return STATUS;
 	}
 
 }

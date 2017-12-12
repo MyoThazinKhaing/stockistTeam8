@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.method.HandlerMethod;
 
+import sg.edu.iss.team8.exception.UserNotFound;
 import sg.edu.iss.team8.model.User;
 import sg.edu.iss.team8.service.UserService;
 
@@ -85,6 +88,45 @@ public class CommonController {
 		}
 
 		ModelAndView mav = new ModelAndView("redirect:/login");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/changepw/{id}", method = RequestMethod.GET)
+	public ModelAndView changepwUserPage(@PathVariable String id, HttpSession session) {
+		if (!new TestController().isUser(session))
+			return new ModelAndView("403");
+		ModelAndView mav = new ModelAndView("changepassword");
+		User user = uService.findUser(id);
+		mav.addObject("user", user);
+		ArrayList<String> eidList = uService.ListRoles();
+		mav.addObject("eidlist", eidList);
+		return mav;
+	}
+
+	@RequestMapping(value = "/changepw/{id}", method = RequestMethod.POST)
+	public ModelAndView changepwUser(@ModelAttribute @Valid User user, BindingResult result, @PathVariable String id,
+			final RedirectAttributes redirectAttributes, HttpSession session) throws UserNotFound {
+		if (!new TestController().isUser(session) )
+			return new ModelAndView("403");
+		if (result.hasErrors())
+			return new ModelAndView("changepassword");
+
+		ModelAndView mav = new ModelAndView("redirect:/changepw/"+id);
+		
+		if (result.hasErrors()) {
+			ArrayList<String> eidList = uService.ListRoles();
+			mav.addObject("eidlist", eidList);
+			String[] statusList = uService.ListStatus();
+			mav.addObject("statuslist", statusList);
+			return mav;
+		}
+		
+		String message = "The user " + user.getUsername() + " was successfully created.";
+
+		uService.changeUser(user);
+
+
+		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
 

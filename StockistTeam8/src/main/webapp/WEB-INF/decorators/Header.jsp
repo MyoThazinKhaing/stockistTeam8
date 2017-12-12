@@ -58,7 +58,7 @@ div.dropdown-menu.show {
 					</a>
 						<div class="dropdown-menu" x-placement="bottom-start"
 							style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;">
-							<a class="dropdown-item" href="#">Change password</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/changepw/${sessionScope.USERSESSION.user.username}">Change password</a>
 							<div class="dropdown-divider"></div>
 							<spring:url value="/logout" var="logout" htmlEscape="true" />
 							<a class="dropdown-item"

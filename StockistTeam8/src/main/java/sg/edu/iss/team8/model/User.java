@@ -14,6 +14,9 @@ public class User {
 	@Basic(optional = false)
 	@Column(name = "role")
 	private String role;
+	@Basic(optional = false)
+	@Column(name = "status")
+	private String status;
 	
 	
 	public User() {
@@ -46,6 +49,15 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,4 +88,3 @@ public class User {
 	
 	
 }
-	

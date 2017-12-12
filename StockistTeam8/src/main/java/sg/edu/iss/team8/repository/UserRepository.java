@@ -28,5 +28,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 	
 	@Query("SELECT u FROM User u WHERE u.username LIKE %:un%")
 	ArrayList<User> searchUserByUserName(@Param("un") String un);
+	
+	@Query("SELECT DISTINCT u.status FROM User u")
+	ArrayList<String> ListStatus();
 
 }
