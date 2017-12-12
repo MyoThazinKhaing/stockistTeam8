@@ -141,7 +141,7 @@ public class AdminUserController {
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
-	}  
+	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView deleteUser(@PathVariable String id, final RedirectAttributes redirectAttributes, HttpSession session)
