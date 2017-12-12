@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
@@ -54,11 +56,11 @@ public class AdminUserController {
 
 	@Autowired
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
-	
+
 	@RequestMapping(value = "/**", method = RequestMethod.GET)
 	public String firstTime(HttpServletRequest request, HttpSession session) {
 		Map<RequestMappingInfo, HandlerMethod> mapping = requestMappingHandlerMapping.getHandlerMethods();
-		return new TestController().testURL(request, session, mapping); 
+		return new TestController().testURL(request, session, mapping);
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -76,14 +78,14 @@ public class AdminUserController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@ModelAttribute @Valid User user, BindingResult result,
 			final RedirectAttributes redirectAttributes, HttpSession session) {
-		
+
 		if (!new TestController().isAdmin(session))
 			return new ModelAndView("403");
-		
+
 		ModelAndView mav = new ModelAndView("adduser");
 		boolean isRepeat = false;
-		if(uService.findUser(user.getUsername())!=null) {
-			isRepeat=true;
+		if (uService.findUser(user.getUsername()) != null) {
+			isRepeat = true;
 			mav.addObject("repeatUser", isRepeat);
 		}
 		if (result.hasErrors() || isRepeat) {
@@ -91,7 +93,7 @@ public class AdminUserController {
 			mav.addObject("eidlist", eidList);
 			return mav;
 		}
-			
+
 		String message = "The user " + user.getUsername() + " was successfully created.";
 
 		uService.createUser(user);
@@ -100,16 +102,39 @@ public class AdminUserController {
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
-	
-	
+
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	public ModelAndView searchUser(HttpSession session, @RequestParam String criteria,
+			@RequestParam String description) {
+		if (!new TestController().isUser(session)) {
+			return new ModelAndView("403");
+		}
+		return new ModelAndView("manageuser", "userList", uService.searchUsers(criteria, description));
+		// return new ModelAndView("product-catalogue", "pList",
+		// pService.searchProduct("p.criteria",description));
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView userListPage(HttpSession session) {
+	public ModelAndView userListPage(HttpSession session, @RequestParam(required = false) Integer page) {
 		if (!new TestController().isAdmin(session))
 			return new ModelAndView("403");
+
 		ModelAndView mav = new ModelAndView("manageuser");
 		List<User> userList = uService.findAllUsers();
-		mav.addObject("userList", userList);
+		PagedListHolder<User> pagedListHolder = new PagedListHolder<>(userList);
+		pagedListHolder.setPageSize(8);
+		mav.addObject("maxPages", pagedListHolder.getPageCount());
+
+		// if(page==null || page < 1 || page > pagedListHolder.getPageCount())page=1;
+
+		mav.addObject("page", page);
+		if (page == null || page < 1 || page > pagedListHolder.getPageCount()) {
+			pagedListHolder.setPage(0);
+			mav.addObject("userList", pagedListHolder.getPageList());
+		} else if (page <= pagedListHolder.getPageCount()) {
+			pagedListHolder.setPage(page - 1);
+			mav.addObject("userList", pagedListHolder.getPageList());
+		}
 		return mav;
 	}
 
@@ -141,11 +166,11 @@ public class AdminUserController {
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
-	}  
+	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView deleteUser(@PathVariable String id, final RedirectAttributes redirectAttributes, HttpSession session)
-			throws UserNotFound {
+	public ModelAndView deleteUser(@PathVariable String id, final RedirectAttributes redirectAttributes,
+			HttpSession session) throws UserNotFound {
 		if (!new TestController().isAdmin(session))
 			return new ModelAndView("403");
 		ModelAndView mav = new ModelAndView("redirect:/admin/user/list");
