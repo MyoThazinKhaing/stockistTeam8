@@ -76,6 +76,7 @@ public class AdminUserController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@ModelAttribute @Valid User user, BindingResult result,
 			final RedirectAttributes redirectAttributes, HttpSession session) {
+		
 		if (!new TestController().isAdmin(session))
 			return new ModelAndView("403");
 		
@@ -133,8 +134,8 @@ public class AdminUserController {
 		if (result.hasErrors())
 			return new ModelAndView("edituser");
 
-		ModelAndView mav = new ModelAndView("redirect:/admin/user/list");
-		String message = "error";
+		ModelAndView mav = new ModelAndView("redirect:/admin/user/edit");
+		String message = "";
 
 		uService.changeUser(user);
 

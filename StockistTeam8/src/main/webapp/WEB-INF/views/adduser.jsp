@@ -38,10 +38,11 @@
 				<td></td>
 			</tr>
 		</tbody>
-	</table>
-	<c:if test="${message eq 'error'}">
-		<p class="text-danger">
-			<spring:message code="message.successUser" />
-		<p>
+	</table> 
+	<c:if test="${message != error}">
+		<div>
+		<spring:message code="message.successUserCreate" />
+		</div>
+
 	</c:if>
 </form:form>
