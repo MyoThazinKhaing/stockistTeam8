@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sg.edu.iss.team8.model.Customer;
 import sg.edu.iss.team8.model.Product;
+import sg.edu.iss.team8.model.TransAndTransDetails;
 import sg.edu.iss.team8.model.Transaction;
 import sg.edu.iss.team8.model.TransactionDetails;
 import sg.edu.iss.team8.service.CustomerService;
@@ -70,6 +71,29 @@ private void initTransactionBinder(WebDataBinder binder) {
 	 {
 		 t=new Transaction();
 	 }
+	/* @RequestMapping(value = "/create", method = RequestMethod.GET)
+		public ModelAndView newTransactionPage() {
+			ModelAndView mav = new ModelAndView("transaction-new");
+			//mav.addObject("transactionform", new TransactionForm());
+			//mav.addObject("transactionform");
+			
+			mav.addObject("transaction", new Transaction());
+			HashMap<Integer,String> map=new HashMap<Integer,String>();
+			List<Customer> clist=cService.findAllCustomers();
+			for(Customer c:clist) {
+				map.put(c.getCustomerId(), c.getCustomerName());
+			}
+			mav.addObject("custlist",map);
+		
+			List<Product> plist=pService.findAllProducts();
+			mav.addObject("plist",plist);
+			System.out.println("Create get");
+			List<TransactionDetails> transDet=tdService.findAllTransactions();
+			mav.addObject("transDetail",transDet);
+			return mav;
+
+	 }*/
+	 
 	 @RequestMapping(value = "/create", method = RequestMethod.GET)
 		public ModelAndView newTransactionPage() {
 			ModelAndView mav = new ModelAndView("transaction-new");
@@ -89,6 +113,7 @@ private void initTransactionBinder(WebDataBinder binder) {
 			System.out.println("Create get");
 			List<TransactionDetails> transDet=tdService.findAllTransactions();
 			mav.addObject("transDetail",transDet);
+			mav.addObject("transAndTransDetails",new TransAndTransDetails());
 			return mav;
 
 	 }
