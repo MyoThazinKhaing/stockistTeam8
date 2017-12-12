@@ -38,7 +38,7 @@ public class Transaction {
 	@Column(name = "customerid")
 	private Integer customerId;
 
-	//@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "consumedate")
 	//@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date consumeDate;
@@ -60,6 +60,8 @@ public class Transaction {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public Transaction(Integer transactionId, Integer customerId, Date consumeDate, String userName,
 			List<TransactionDetails> transactionEvent) {
 		super();
@@ -69,6 +71,8 @@ public class Transaction {
 		this.userName = userName;
 		this.transactionEvent = transactionEvent;
 	}
+
+
 
 	public Integer getTransactionId() {
 		return transactionId;
@@ -86,13 +90,19 @@ public class Transaction {
 		this.customerId = customerId;
 	}
 
+	
+
 	public Date getConsumeDate() {
 		return consumeDate;
 	}
 
+
+
 	public void setConsumeDate(Date consumeDate) {
 		this.consumeDate = consumeDate;
 	}
+
+
 
 	public String getUserName() {
 		return userName;
@@ -110,11 +120,12 @@ public class Transaction {
 		this.transactionEvent = transactionEvent;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + customerId;
+		result = prime * result + ((transactionId == null) ? 0 : transactionId.hashCode());
 		return result;
 	}
 
@@ -127,7 +138,10 @@ public class Transaction {
 		if (getClass() != obj.getClass())
 			return false;
 		Transaction other = (Transaction) obj;
-		if (customerId != other.customerId)
+		if (transactionId == null) {
+			if (other.transactionId != null)
+				return false;
+		} else if (!transactionId.equals(other.transactionId))
 			return false;
 		return true;
 	}

@@ -12,13 +12,12 @@
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script>
-	$(document).ready(function() {
-		$("#datepicker1").datepicker({
+	 $(document).ready(function() {
+		$("#fuck").datepicker({
 			dateFormat : "dd/mm/yy"
 		});
-	});
-	
-</script>
+	}); 
+	</script>
 </head>
 
 <h3>New Transaction page</h3>
@@ -43,8 +42,8 @@
       
       <tr>
 		<td>Date</td>	
-       <td><form:input size="16" path="consumeDate" id="datepicker1" type="date"/>
-       <form:errors path="consumeDate" cssStyle="color: red;" /></td></td><td></td><td></td>
+       <td><form:input type="date" size="16" path="consumeDate" id="fuck" />
+       <form:errors path="consumeDate" cssStyle="color: red;" /><td></td><td></td><td></td>
 
 	
 			<!-- non spring tag. its normal html tag -->
