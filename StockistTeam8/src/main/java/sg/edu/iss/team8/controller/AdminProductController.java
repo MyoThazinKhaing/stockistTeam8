@@ -17,8 +17,10 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import sg.edu.iss.team8.model.Product;
+import sg.edu.iss.team8.model.Supplier;
 import sg.edu.iss.team8.model.User;
 import sg.edu.iss.team8.service.ProductService;
+import sg.edu.iss.team8.service.SupplierService;
 
 @Controller
 @RequestMapping(value = "/product")
@@ -26,6 +28,9 @@ public class AdminProductController {
 	
 	@Autowired
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
+	
+	@Autowired
+	private SupplierService sService;
 	
 	@RequestMapping(value = "/**", method = RequestMethod.GET)
 	public String firstTime(HttpServletRequest request, HttpSession session) {
@@ -190,4 +195,19 @@ public class AdminProductController {
 	        return new ModelAndView("product-catalogue", "pList", pService.searchProducts(criteria, description));
 	        //return new ModelAndView("product-catalogue", "pList", pService.searchProduct("p.criteria",description));
 	    }
+	 
+	 @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+		public ModelAndView viewProductDetails(HttpSession session, @PathVariable String id) {
+			if (!new TestController().isUser(session)) {
+				return new ModelAndView("403");
+			}
+			ModelAndView mav = new ModelAndView("product-view");
+			Product p = pService.findProduct(Integer.parseInt(id));
+			Supplier s = sService.findSupplier(p.getSupplierId());
+
+			mav.addObject("product", p);
+			mav.addObject("supplier", s);
+
+			return mav;
 	 }
+}
