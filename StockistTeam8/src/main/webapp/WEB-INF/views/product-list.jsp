@@ -5,7 +5,7 @@
 
 <h3>Product List page</h3>
 
-  <a href="${pageContext.request.contextPath}/admin/product/create">Add
+  <a href="${pageContext.request.contextPath}/product/create">Add
 	Product</a>
 	<c:if test="${fn:length(plist) gt 0}">
 	<table style="cellspacing: 2; cellpadding: 2; border: 1;">
@@ -38,9 +38,9 @@
 					<td>${product.stock}</td>
 					<td>${product.status}</td>
 					<td align="center"><a
-						href="${pageContext.request.contextPath}/admin/product/edit/${product.partNumber}.html">Edit</a></td>
+						href="${pageContext.request.contextPath}/product/edit/${product.partNumber}.html">Edit</a></td>
 					<!--  <td><a
-						href="${pageContext.request.contextPath}/admin/product/delete/${product.partNumber}.html"><spring:message
+						href="${pageContext.request.contextPath}/product/delete/${product.partNumber}.html"><spring:message
 								code="caption.delete" /></a></td>-->
 				</tr>
 			</c:forEach>

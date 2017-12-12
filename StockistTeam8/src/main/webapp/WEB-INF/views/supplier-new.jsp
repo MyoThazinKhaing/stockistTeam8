@@ -17,7 +17,7 @@ padding-top:5;
 <body>
 	<h3>New Supplier page</h3>
 	<form:form method="POST" modelAttribute="supplier"
-		action="${pageContext.request.contextPath}/admin/supplier/create.html">
+		action="${pageContext.request.contextPath}/supplier/create.html">
 		<div style="margin: 20px 0 0 0">
 				<div class="row editrow">
 					<div class="col-sm-3 label-field" >Supplier Name</div>

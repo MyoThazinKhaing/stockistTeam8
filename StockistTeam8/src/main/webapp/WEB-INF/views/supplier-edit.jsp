@@ -18,7 +18,7 @@
 <body>
 	<h3>Edit Supplier page</h3>
 	<form:form method="POST" modelAttribute="supplier"
-		action="${pageContext.request.contextPath}/admin/supplier/edit.html">
+		action="${pageContext.request.contextPath}/supplier/edit.html">
 		<div style="margin: 20px 0 0 0">
 			<div class="row editrow">
 				<div class="col-sm-3 label-field">Supplier Name</div>

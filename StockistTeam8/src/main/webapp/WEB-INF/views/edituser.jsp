@@ -7,7 +7,7 @@
 <h3>Edit User page</h3>
 
 <form:form method="POST" commandName="user"
-	action="${pageContext.request.contextPath}/admin/user/edit/${user.username}.html">
+	action="${pageContext.request.contextPath}/user/edit/${user.username}.html">
 	<table>
 		<tbody>
 			<tr>

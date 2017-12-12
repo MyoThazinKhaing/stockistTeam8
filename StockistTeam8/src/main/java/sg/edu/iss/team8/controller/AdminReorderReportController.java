@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ import sg.edu.iss.team8.service.ProductService;
 import sg.edu.iss.team8.service.SupplierService;
 
 
-@RequestMapping(value="/admin/reorderreport")
+@RequestMapping(value="/reorder")
 @Controller
 public class AdminReorderReportController 
 {
@@ -32,11 +34,14 @@ public class AdminReorderReportController
 	@Autowired
 	SupplierService supplierService;
 
-	
+	@RequestMapping(value = {"/*","/**"}, method = RequestMethod.GET)
+	public String general(HttpServletRequest request, HttpSession session) {
+		return "redirect:/notfound";
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView productListPage() {
-		ModelAndView mav = new ModelAndView("ReorderReport","supplier",new Supplier());
+		ModelAndView mav = new ModelAndView("reorder-report","supplier",new Supplier());
 		List<Product> plist = productService.findAllProduct();
 		List<Supplier> slist=supplierService.findAllSuppliers();
 		HashMap<Integer,String> map=new HashMap<Integer,String>();
@@ -56,7 +61,7 @@ public class AdminReorderReportController
 			return new ModelAndView("product-edit");
 		}*/
 
-		ModelAndView mav = new ModelAndView("ReorderReport");
+		ModelAndView mav = new ModelAndView("reorder-report");
 		
 		ArrayList<Product> plist=productService.findAllProductBySupplierId(supplier.getSupplierId());
 		List<Supplier> slist=supplierService.findAllSuppliers();

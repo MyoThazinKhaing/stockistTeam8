@@ -29,10 +29,12 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.mvc.WebContentInterceptor;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import sg.edu.iss.team8.controller.MappingInterceptor;
+import sg.edu.iss.team8.validator.MappingInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -152,6 +154,18 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/css/**").addResourceLocations("/css/");
 		registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 	}
+	
+	@Bean
+	public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+	   RequestMappingHandlerMapping mapping = new RequestMappingHandlerMapping();
+	   mapping.setInterceptors(new Object[] {getMappingInterceptor()});
+	   return mapping;
+	}
+	
+	@Bean
+	public MappingInterceptor getMappingInterceptor(){
+	   return new MappingInterceptor();
+	}	
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -171,4 +185,12 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 				.parseLocaleString("en"));
 		return cookieLocaleResolver;
 	}
+	
+	//prevent caching
+	@Bean
+	public WebContentInterceptor webContentInterceptor() {
+        WebContentInterceptor interceptor = new WebContentInterceptor();
+        interceptor.setCacheSeconds(0);
+        return interceptor;
+    }
 }

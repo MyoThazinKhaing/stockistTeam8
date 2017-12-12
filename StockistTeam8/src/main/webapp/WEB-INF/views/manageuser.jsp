@@ -6,7 +6,7 @@
 <h3>User List page</h3>
 
 <form:form method="POST"
-	action="${pageContext.request.contextPath}/admin/user/list">
+	action="${pageContext.request.contextPath}/user/list">
 	<table class="framed">
 		<tr>
 
@@ -28,7 +28,7 @@
 
 	</table>
 </form:form>
-<a href="${pageContext.request.contextPath}/admin/user/create">Add
+<a href="${pageContext.request.contextPath}/user/create">Add
 	User</a>
 <c:if test="${fn:length(userList) gt 0}">
 	<table class="table table-hover">
@@ -48,10 +48,10 @@
 					<td>${user.password}</td>
 					<td>${user.role}</td>
 					<td align="center"><a
-						href="${pageContext.request.contextPath}/admin/user/edit/${user.username}.html"><spring:message
+						href="${pageContext.request.contextPath}/user/edit/${user.username}.html"><spring:message
 								code="caption.edit" /></a></td>
 					<td><a
-						href="${pageContext.request.contextPath}/admin/user/delete/${user.username}.html"><spring:message
+						href="${pageContext.request.contextPath}/user/delete/${user.username}.html"><spring:message
 								code="caption.delete" /></a></td>
 				</tr>
 			</c:forEach>
@@ -59,7 +59,7 @@
 	</table>
 	<div id="pagination">
 
-		<c:url value="/admin/user/list" var="prev">
+		<c:url value="/user/list" var="prev">
 			<c:param name="page" value="${page-1}" />
 		</c:url>
 		<c:if test="${page > 1}">
@@ -72,14 +72,14 @@
 					<span>${i.index}</span>
 				</c:when>
 				<c:otherwise>
-					<c:url value="/admin/user/list" var="url">
+					<c:url value="/user/list" var="url">
 						<c:param name="page" value="${i.index}" />
 					</c:url>
 					<a href='<c:out value="${url}" />'>${i.index}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		<c:url value="/admin/user/list" var="next">
+		<c:url value="/user/list" var="next">
 			<c:param name="page" value="${page + 1}" />
 		</c:url>
 		<c:if test="${page + 1 <= maxPages}">

@@ -8,7 +8,7 @@
 
 	<h3>Inventory Report</h3>
 <form:form method="POST" modelAttribute="supplier"
-	action="${pageContext.request.contextPath}/admin/reorderreport/search.html">
+	action="${pageContext.request.contextPath}/reorder/search.html">
 
 	<form:select path="supplierId">
     <form:options items="${slist}" />

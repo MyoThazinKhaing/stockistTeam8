@@ -7,7 +7,7 @@
 <html>
 <h3>New Product Page</h3>
 <form:form method="POST" modelAttribute="product"
-	action="${pageContext.request.contextPath}/admin/product/create.html">
+	action="${pageContext.request.contextPath}/product/create.html">
 	<table>
 		<tbody>
 			<tr>

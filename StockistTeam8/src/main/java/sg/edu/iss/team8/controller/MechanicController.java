@@ -3,6 +3,8 @@ package sg.edu.iss.team8.controller;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,7 @@ import sg.edu.iss.team8.service.CustomerServiceImpl;
 import sg.edu.iss.team8.service.TransactionDetailsService;
 import sg.edu.iss.team8.service.TransactionService;
 
-@RequestMapping(value = "/mechanic")
+@RequestMapping(value = "/transaction")
 @Controller
 public class MechanicController {
 
@@ -43,9 +45,13 @@ public class MechanicController {
 	
 	@Autowired 
 	private CustomerService cService;
-	 
+	
+	@RequestMapping(value = {"/*","/**"}, method = RequestMethod.GET)
+	public String general(HttpServletRequest request, HttpSession session) {
+		return "redirect:/notfound";
+	}	 
 
-	@RequestMapping(value = "/transactions/{pNo}", method = RequestMethod.GET)
+	@RequestMapping(value = "/list/{pNo}", method = RequestMethod.GET)
 	public ModelAndView showProductTransaction(@PathVariable int pNo) {
 		ModelAndView mav = new ModelAndView("transaction-history");
 		ArrayList<TransactionDetails> transDetailList = tdService.findTransactionDetailsByPartNumber(pNo);
@@ -59,7 +65,7 @@ public class MechanicController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/transactions/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView showAllTransaction() {
 		ModelAndView mav = new ModelAndView("transaction-all");
 		ArrayList<TransactionDetails> transDetailList = tdService.findAllTransactions();

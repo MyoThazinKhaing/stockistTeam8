@@ -4,6 +4,8 @@ package sg.edu.iss.team8.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ import sg.edu.iss.team8.model.Supplier;
 import sg.edu.iss.team8.service.SupplierService;
 import sg.edu.iss.team8.validator.SupplierValidator;
 
-@RequestMapping(value="/admin/supplier")
+@RequestMapping(value="/supplier")
 @Controller
 public class AdminSupplierController {
 
@@ -43,6 +45,11 @@ public class AdminSupplierController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));*/
 		binder.addValidators(sValidator);
 
+	}
+	
+	@RequestMapping(value = {"/*","/**"}, method = RequestMethod.GET)
+	public String general(HttpServletRequest request, HttpSession session) {
+		return "redirect:/notfound";
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -87,7 +94,7 @@ public class AdminSupplierController {
 		String message = "New supplier " + supplier.getSupplierId() + " was successfully created.";
 
 		sService.createSupplier(supplier);
-		mav.setViewName("redirect:/admin/supplier/list");
+		mav.setViewName("redirect:/supplier/list");
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
@@ -113,7 +120,7 @@ public class AdminSupplierController {
 		String message = "Supplier " + supplier.getSupplierId() + " was successfully updated.";
 
 		sService.changeSupplier(supplier);
-		mav.setViewName("redirect:/admin/supplier/list");
+		mav.setViewName("redirect:/supplier/list");
 
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
@@ -132,30 +139,5 @@ public class AdminSupplierController {
 		return mav;
 	}
 	
-	/*@RequestMapping(value = "/searchByName", method = RequestMethod.GET)
-	public @ResponseBody List<Supplier> filterByDate(Model model, @RequestParam("name") String name) {
-
-	    // Fetch data from the DAO
-	    List<Supplier> sList = sService.searchSupplierByName(name);
-
-	    // We add to the model (JSP page the list of EBLINVB2B)
-	    model.addAttribute("slist",sList);
-
-	    return sList;
-
-	}*/
 	
-	
-	/*@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView deleteSupplier(@PathVariable String id, final RedirectAttributes redirectAttributes)
-			throws EmployeeNotFound {
-
-		ModelAndView mav = new ModelAndView("redirect:/admin/employee/list");
-		Employee employee = eService.findEmployee(id);
-		eService.removeEmployee(employee);
-		String message = "The employee " + employee.getEmployeeId() + " was successfully deleted.";
-
-		redirectAttributes.addFlashAttribute("message", message);
-		return mav;
-	}*/
 }

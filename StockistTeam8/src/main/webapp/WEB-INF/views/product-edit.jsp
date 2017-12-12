@@ -5,7 +5,7 @@
 
 <h3>Edit Product page</h3>
 <form:form method="POST" modelAttribute="product"
-	action="${pageContext.request.contextPath}/admin/product/edit/${product.partNumber}.html">
+	action="${pageContext.request.contextPath}/product/edit/${product.partNumber}.html">
 	<table>
 		<tbody>
 		<form:hidden path=""/>

@@ -87,7 +87,7 @@ h4{
 							</h5>
 						</c:if>
 						<c:if test="${sessionScope.USERSESSION == null}">
-							<spring:url value="/authenticate" var="login" htmlEscape="true" />
+							<spring:url value="/login" var="login" htmlEscape="true" />
 							<form:form modelAttribute="user" method="POST" action="${login}">
 								<label class="col-form-label" for="unInput">Username</label>
 								<form:input type="text" class="form-control"
