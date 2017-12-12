@@ -26,10 +26,12 @@ public class TestController {
 	public String testURL(HttpServletRequest request, HttpSession session,
 			Map<RequestMappingInfo, HandlerMethod> mapping) {
 		String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-
-		for (Map.Entry<RequestMappingInfo, HandlerMethod> info : mapping.entrySet()) {
-			if (info.getKey().getName() == path) {
-				if (session.getAttribute("USERSESSION") != null) {
+		if(path.equals("/")||path.equals("/login")) {
+			return "redirect:/login";
+		}
+		for (Map.Entry<RequestMappingInfo, HandlerMethod> info : mapping.entrySet()) {			
+			if (info.getKey().getName().equals(path)) {
+				if (session.getAttribute("USERSESSION") != null) {					
 					return "redirect:" + path;
 				} else {
 					return "403";
