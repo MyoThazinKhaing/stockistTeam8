@@ -64,9 +64,10 @@
 					<thead>
 						<tr>
 							<th scope="col"><spring:message code="Part Number" /></th>
-							<th scope="col"><spring:message code="Unit Price" /></th>
+							<th scope="col" align="right"><spring:message code="Unit Price" /></th>
 							<th scope="col"><spring:message code="Description" /></th>
 							<th scope="col"><spring:message code="Colour" /></th>
+							<th scope="col"><spring:message code="Details" /></th>
 							<th scope="col"><spring:message code="caption.edit" /></th>
 							<th scope="col"><spring:message code="caption.delete" /></th>
 						</tr>
@@ -78,6 +79,8 @@
 								<td align="right" width = "120cm"><fmt:formatNumber value="${product.unitPrice}" pattern="$#,##0.00" /></td>
 								<td>${product.description}</td>
 								<td>${product.colour}</td>
+								<td><a
+									href="${pageContext.request.contextPath}/product/${product.partNumber}.html">Details</a></td>
 								<td><a
 									href="${pageContext.request.contextPath}/admin/product/edit/${product.partNumber}.html"><i
 										class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
