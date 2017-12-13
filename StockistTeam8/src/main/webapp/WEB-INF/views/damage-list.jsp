@@ -18,8 +18,12 @@
 			</form:select></td>
 
 		<td><input type="submit" value="Search" /></td>
+		<td><a href="${pageContext.request.contextPath}/admin/damage/list"><spring:message
+			code="Display all damages" /></a></td>
 	</tr>
+	
 </form:form>
+
 <c:if test="${fn:length(damageList) gt 0}">
 	<table style="cellspacing: 2; cellpadding: 2; border: 1;">
 		<thead>
@@ -30,8 +34,8 @@
 				<th>Send Date</th>
 				<th>Receive Date</th>
 				<th>Status</th>
-				<th>Received</th>
-				<!-- <th>Edit</th> -->
+				<!-- <th>Received</th> -->
+				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
 		</thead>
@@ -44,15 +48,15 @@
 					<td>${damage.sendDate}</td>
 					<td>${damage.receiveDate}</td>
 					<td>${damage.status}</td>
-					<c:if test="${damage.status eq 'received'}">
+					<%-- <c:if test="${damage.status eq 'received'}">
 						<td> </td>
 					</c:if>
 					<c:if test="${damage.status gt 'received'}">
 						<td align="center"><a
 							href="${pageContext.request.contextPath}/admin/damage/received/${damage.damageId}.html">Received</a></td>
-					</c:if>
-					<%-- <td align="center"><a
-						href="${pageContext.request.contextPath}/admin/damage/edit/${damage.damageId}.html">Edit</a></td> --%>
+					</c:if> --%>
+					<td align="center"><a
+						href="${pageContext.request.contextPath}/admin/damage/edit/${damage.damageId}.html">Edit</a></td>
 					<td><a
 						href="${pageContext.request.contextPath}/admin/damage/delete/${damage.damageId}.html">Delete</a></td>
 					<td></td>

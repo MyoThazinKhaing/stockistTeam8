@@ -2,6 +2,9 @@ package sg.edu.iss.team8.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -46,7 +49,11 @@ public class DamageController {
 	public ModelAndView damageListPage() {
 		ModelAndView mav = new ModelAndView("damage-list", "damage", new Damage());
 		ArrayList<Damage> damageList = (ArrayList<Damage>) dService.findAllDamage();
-		int[] plist = new int[] { 3652, 3653, 3654, 3655 };
+		ArrayList<Damage> allDamageList = dService.findAllDamage();
+		Set<Integer> plist = new HashSet();
+		for (Damage d : allDamageList) {
+			plist.add(d.getPartNumber());
+		}
 		mav.addObject("plist", plist);
 		mav.addObject("damageList", damageList);
 		return mav;
@@ -58,12 +65,12 @@ public class DamageController {
 		ModelAndView mav = new ModelAndView("damage-new", "damage", d);
 		ArrayList<Product> productList = pService.findAllProducts();
 		ArrayList<Integer> plist = new ArrayList<>();
-		for (Product p:productList) {
+		for (Product p : productList) {
 			plist.add(p.getPartNumber());
 		}
-		//int[] plist = new int[] { 3652, 3653, 3654, 3655 };
+		// int[] plist = new int[] { 3652, 3653, 3654, 3655 };
 		mav.addObject("plist", plist);
-		
+
 		return mav;
 	}
 
@@ -72,22 +79,21 @@ public class DamageController {
 			final RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors()) {
-			//System.out.println("Bind error");
+			// System.out.println("Bind error");
 			ModelAndView mav = new ModelAndView("damage-new");
-			
+
 			ArrayList<Product> productList = pService.findAllProducts();
 			ArrayList<Integer> plist = new ArrayList<>();
-			for (Product p:productList) {
+			for (Product p : productList) {
 				plist.add(p.getPartNumber());
 			}
 			mav.addObject("plist", plist);
-			
 
 			return mav;
 		}
 		ModelAndView mav = new ModelAndView();
 		String message = "New record  was successfully created.";
-		
+
 		damage.setStatus("sent");
 		dService.createDamage(damage);
 		pService.reduceStock(damage.getPartNumber(), damage.getQuantity());
@@ -105,7 +111,7 @@ public class DamageController {
 		damage.setStatus("received");
 		damage.setReceiveDate(Calendar.getInstance().getTime());
 		dService.changeDamage(damage);
-		//Product product = pService.findProduct(id);
+		// Product product = pService.findProduct(id);
 		pService.increaseStock(damage.getPartNumber(), damage.getQuantity());
 		String message = "The products have been received.";
 
@@ -126,22 +132,26 @@ public class DamageController {
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-	public ModelAndView editEmployee(@ModelAttribute @Valid Damage damage, BindingResult result, @PathVariable int id,
-			final RedirectAttributes redirectAttributes) {
+	public ModelAndView editEmployee(@ModelAttribute @Valid Damage damage, BindingResult result,
+			@PathVariable int id, final RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-
+			
 			ModelAndView mav = new ModelAndView("damage-edit");
-			ArrayList<String> slist = new ArrayList<String>();
-			slist.add("received");
-			slist.add("sent");
-
-			mav.addObject("slist", slist);
-
+					
 			return mav;
 		}
-
+		
+		
 		ModelAndView mav = new ModelAndView("redirect:/admin/damage/list");
 		String message = "Record was successfully updated.";
+		Date d=damage.getReceiveDate();
+		Calendar c=Calendar.getInstance();
+		Date current=c.getTime();
+		if(d.after(current)) {
+			damage.setStatus("sent but not received");
+		}else {
+			damage.setStatus("received");
+		}
 		dService.changeDamage(damage);
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
@@ -174,7 +184,11 @@ public class DamageController {
 
 		ModelAndView mav = new ModelAndView("damage-list");
 		ArrayList<Damage> damageList = (ArrayList<Damage>) dService.findCoursesByPNUM(damage.getPartNumber());
-		int[] plist = new int[] { 3652, 3653, 3654, 3655 };
+		ArrayList<Damage> allDamageList = dService.findAllDamage();
+		Set<Integer> plist = new HashSet();
+		for (Damage d : allDamageList) {
+			plist.add(d.getPartNumber());
+		}
 		mav.addObject("plist", plist);
 		mav.addObject("damageList", damageList);
 		return mav;

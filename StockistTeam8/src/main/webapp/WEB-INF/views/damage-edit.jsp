@@ -19,16 +19,31 @@
 <form:form method="POST" modelAttribute="damage"
 	action="${pageContext.request.contextPath}/admin/damage/edit/${damage.damageId}.html">
 	<form:hidden path="damageId" />
-	<form:hidden path="partNumber" />
-	<form:hidden path="quantity" />
+	<form:hidden path="status" />
 <table>
 		<tbody>
 		   
+			<tr>
+				<td>Part Number</td>
+				<td ><form:input path="partNumber"  readonly="true"  cssStyle="background:#DDDDDD" />
+				
+				
+				</td>
+				
+			</tr>
+			<tr>
+				<td>Quantity</td>
+				<td ><form:input path="quantity"  readonly="true"  cssStyle="background:#DDDDDD" />
+				
+				
+				</td>
+				
+			</tr>
 			
 			
 			<tr>
 				<td>Send Date</td>
-				<td><form:input path="sendDate"  readonly="true"/>
+				<td ><form:input path="sendDate"  readonly="true"  cssStyle="background:#DDDDDD" />
 				
 				
 				</td>
@@ -41,16 +56,7 @@
 				<td><form:errors path="receiveDate" cssStyle="color: red;" /></td>
 			</tr>
 			
-			<tr>
-				<td>Status</td>
-				
-				<td><form:select path="status">
-						
-						<form:options items="${slist}" />
-					</form:select></td>
-				
-				<td></td>
-			</tr>
+			
 			
 			<tr>
 				<td><input type="submit" value="Update" /></td>

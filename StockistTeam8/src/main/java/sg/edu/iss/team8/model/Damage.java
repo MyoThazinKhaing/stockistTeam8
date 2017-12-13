@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,12 +40,13 @@ public class Damage  {
 	@Min(1)
 	private int quantity;
 	
-	
+	@Past
 	@Temporal(TemporalType.DATE)
 	@Column(name="senddate")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date sendDate;
 	
+	@Past
 	@Temporal(TemporalType.DATE)
 	@Column(name="receivedate")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
