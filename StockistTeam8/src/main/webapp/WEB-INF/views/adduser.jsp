@@ -7,7 +7,7 @@
 <h3>Fill in the following to create a new user</h3>
 
 <form:form method="POST" commandName="user"
-	action="${pageContext.request.contextPath}/admin/user/create.html">
+	action="${pageContext.request.contextPath}/user/create.html">
 <%-- 	<table>
 		<tbody>
 			<!-- 			<tr> -->

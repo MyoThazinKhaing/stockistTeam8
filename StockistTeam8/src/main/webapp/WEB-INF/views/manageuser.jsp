@@ -37,6 +37,28 @@
 </form:form>
 <a href="${pageContext.request.contextPath}/user/create">Add User</a>
 <c:if test="${fn:length(userList) gt 0}">
+	<table class="table table-hover">
+		<thead>
+			<tr class="listHeading">
+				<th><spring:message code="fieldLabel.username" /></th>
+				<th><spring:message code="fieldLabel.password" /></th>
+				<th><spring:message code="fieldLabel.role" /></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="user" items="${userList}">
+				<tr class="listRecord">
+					<td>${user.username}</td>
+					<td>${user.password}</td>
+					<td>${user.role}</td>
+					<td align="center"><a
+						href="${pageContext.request.contextPath}/admin/user/edit/${user.username}.html"><i
+										class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
+					<td><a
+						href="${pageContext.request.contextPath}/admin/user/delete/${user.username}.html"><i
+										class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
 	<div style="padding: 30 30 30 0;">
 		<table class="table table-hover" style="font-size: 1em">
 			<thead>
@@ -66,7 +88,8 @@
 		</table>
 
 		<div id="pagination">
-
+		<ul class="pagination">
+		
 			<c:url value="/user/list" var="prev">
 				<c:param name="page" value="${page-1}" />
 			</c:url>

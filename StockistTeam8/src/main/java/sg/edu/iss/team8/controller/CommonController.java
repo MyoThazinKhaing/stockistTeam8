@@ -53,10 +53,18 @@ public class CommonController {
 
 	
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String firstTime(HttpServletRequest request, HttpSession session) {
-//		Map<RequestMappingInfo, HandlerMethod> mapping = requestMappingHandlerMapping.getHandlerMethods();
-//		return new TestController().testURL(request, session, mapping);
+	@RequestMapping(value = {"/*","/**"}, method = RequestMethod.GET)
+	public String general(HttpServletRequest request, HttpSession session) {
+		return "redirect:/login";
+	}
+	
+	@RequestMapping(value = "restricted", method = RequestMethod.GET)
+	public String restricted(HttpServletRequest request, HttpSession session) {
+		return "403";
+	}
+	
+	@RequestMapping(value = "notfound", method = RequestMethod.GET)
+	public String notfound(HttpServletRequest request, HttpSession session) {
 		return "404";
 	}
 
@@ -75,10 +83,10 @@ public class CommonController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView authenticate(@ModelAttribute User user, HttpSession session, BindingResult result) {
 		if (result.hasErrors()) {
-			return new ModelAndView("error");
+			return new ModelAndView("404");
 		}
 		UserSession us = new UserSession();
 		if (user.getUsername() != null && user.getPassword() != null) {
@@ -120,10 +128,6 @@ public class CommonController {
 	@RequestMapping(value = "/changepw/{id}", method = RequestMethod.POST)
 	public ModelAndView changepwUser(@ModelAttribute @Valid User user, BindingResult result, @PathVariable String id,
 			final RedirectAttributes redirectAttributes, HttpSession session) throws UserNotFound {
-/*		if (!new TestController().isUser(session) )
-			return new ModelAndView("403");
-		if (result.hasErrors())
-			return new ModelAndView("changepassword");*/
 		String message=null;
 		ModelAndView mav = new ModelAndView("redirect:/changepw/"+id);
 		
@@ -142,46 +146,6 @@ public class CommonController {
 		return mav;
 	}
 
-	/*
-	 * @RequestMapping(value = { "/", "/welcome**", "/login"}, method =
-	 * RequestMethod.GET) public ModelAndView login(@RequestParam(value = "error",
-	 * required = false) String error,
-	 * 
-	 * @RequestParam(value = "logout", required = false) String logout) {
-	 * 
-	 * ModelAndView model = new ModelAndView(); if (error != null) {
-	 * model.addObject("error", "Invalid username and password!"); }
-	 * 
-	 * if (logout != null) { model.addObject("msg",
-	 * "You've been logged out successfully."); } model.setViewName("login");
-	 * 
-	 * return model;
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping(value = { "/login"}, method = RequestMethod.POST) public
-	 * ModelAndView loginPost(@RequestParam(value = "error", required = false)
-	 * String error,
-	 * 
-	 * @RequestParam(value = "logout", required = false) String logout) { return new
-	 * ModelAndView("error"); }
-	 * 
-	 * 
-	 * //for 403 access denied page
-	 * 
-	 * @RequestMapping(value = "/403", method = RequestMethod.GET) public
-	 * ModelAndView accesssDenied() {
-	 * 
-	 * ModelAndView model = new ModelAndView();
-	 * 
-	 * //check if user is login Authentication auth =
-	 * SecurityContextHolder.getContext().getAuthentication(); if (!(auth instanceof
-	 * AnonymousAuthenticationToken)) { UserDetails userDetail = (UserDetails)
-	 * auth.getPrincipal(); model.addObject("username", userDetail.getUsername()); }
-	 * 
-	 * model.setViewName("403"); return model;
-	 * 
-	 * }
-	 */
+	
 
 }

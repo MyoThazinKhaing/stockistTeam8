@@ -32,7 +32,7 @@ import sg.edu.iss.team8.model.User;
 import sg.edu.iss.team8.service.UserService;
 import sg.edu.iss.team8.validator.UserValidator;
 
-@RequestMapping(value = "/admin/user")
+@RequestMapping(value = "/user")
 @Controller
 public class AdminUserController {
 
@@ -51,11 +51,10 @@ public class AdminUserController {
 
 	@Autowired
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
-
-	@RequestMapping(value = "/**", method = RequestMethod.GET)
-	public String firstTime(HttpServletRequest request, HttpSession session) {
-		Map<RequestMappingInfo, HandlerMethod> mapping = requestMappingHandlerMapping.getHandlerMethods();
-		return new TestController().testURL(request, session, mapping);
+	
+	@RequestMapping(value = {"/*","/**"}, method = RequestMethod.GET)
+	public String general(HttpServletRequest request, HttpSession session) {
+		return "redirect:/notfound";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -100,7 +99,7 @@ public class AdminUserController {
 		}
 
 		uService.createUser(user);
-		mav.setViewName("redirect:/admin/user/create");
+		mav.setViewName("redirect:/user/create");
 		
 
 		redirectAttributes.addFlashAttribute("message", "true");
