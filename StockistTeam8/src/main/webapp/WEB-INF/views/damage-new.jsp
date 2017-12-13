@@ -17,7 +17,7 @@
 
 <h3>New Damage page</h3>
 <form:form method="POST" modelAttribute="damage"
-	action="${pageContext.request.contextPath}/admin/damage/create.html">
+	action="${pageContext.request.contextPath}/admin/damage/create">
 	<table>
 		<tbody>
 		   
@@ -41,11 +41,11 @@
 				<td><form:input size="16" path="sendDate" id="datepicker1" /></td>
 				<td><form:errors path="sendDate" cssStyle="color: red;" /></td>
 			</tr>
-			<%-- <tr>
-				<td>Receive Date</td>
-				<td><form:input size="16" path="receiveDate" id="datepicker2" /></td>
+			<tr>
+			
+				<td><form:input size="16" path="receiveDate" id="datepicker2" style="display:none;" /></td>
 				<td><form:errors path="receiveDate" cssStyle="color: red;" /></td>
-			</tr> --%>
+			</tr> 
 			
 			<%-- <tr>
 				<td>Status</td>

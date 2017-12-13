@@ -34,11 +34,7 @@ public class DamageValidator implements Validator {
 
 		}
 		
-		if (damage.getSendDate().getTime() > Calendar.getInstance().getTime().getDate()) {
-			arg1.rejectValue("receiveDate", "error.dates", "Receive date cannot after today");
-
-		}
-
+		
 		if ((damage.getQuantity() > pService.findProduct(damage.getPartNumber()).getStock())) {
 			arg1.rejectValue("quantity","damage.quantity", "Quantity damaged cannot exceed the stock of "
 					+ pService.findProduct(damage.getPartNumber()).getStock());

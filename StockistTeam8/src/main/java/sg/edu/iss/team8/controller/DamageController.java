@@ -55,13 +55,15 @@ public class DamageController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView newDamagePage() {
 		Damage d = new Damage();
-		ArrayList<String> slist = new ArrayList<String>();
-		slist.add("received");
-		slist.add("sent");
 		ModelAndView mav = new ModelAndView("damage-new", "damage", d);
-		int[] plist = new int[] { 3652, 3653, 3654, 3655 };
+		ArrayList<Product> productList = pService.findAllProducts();
+		ArrayList<Integer> plist = new ArrayList<>();
+		for (Product p:productList) {
+			plist.add(p.getPartNumber());
+		}
+		//int[] plist = new int[] { 3652, 3653, 3654, 3655 };
 		mav.addObject("plist", plist);
-		mav.addObject("slist", slist);
+		
 		return mav;
 	}
 
@@ -70,13 +72,16 @@ public class DamageController {
 			final RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors()) {
+			//System.out.println("Bind error");
 			ModelAndView mav = new ModelAndView("damage-new");
-			ArrayList<String> slist = new ArrayList<String>();
-			slist.add("received");
-			slist.add("sent");
-			int[] plist = new int[] { 3652, 3653, 3654, 3655 };
+			
+			ArrayList<Product> productList = pService.findAllProducts();
+			ArrayList<Integer> plist = new ArrayList<>();
+			for (Product p:productList) {
+				plist.add(p.getPartNumber());
+			}
 			mav.addObject("plist", plist);
-			mav.addObject("slist", slist);
+			
 
 			return mav;
 		}
@@ -98,10 +103,10 @@ public class DamageController {
 		ModelAndView mav = new ModelAndView("redirect:/admin/damage/list");
 		Damage damage = dService.findDamage(id);
 		damage.setStatus("received");
-		damage.setSendDate(Calendar.getInstance().getTime());
+		damage.setReceiveDate(Calendar.getInstance().getTime());
 		dService.changeDamage(damage);
 		//Product product = pService.findProduct(id);
-		pService.increaseStock(id, damage.getQuantity());
+		pService.increaseStock(damage.getPartNumber(), damage.getQuantity());
 		String message = "The products have been received.";
 
 		redirectAttributes.addFlashAttribute("message", message);
