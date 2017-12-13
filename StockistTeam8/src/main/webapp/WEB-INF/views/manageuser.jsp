@@ -40,7 +40,7 @@
 	<div style="padding: 30 30 30 0;">
 		<table class="table table-hover" style="font-size: 1em">
 			<thead>
-				<tr class="listHeading">
+				<tr>
 					<th scope="col"><spring:message code="fieldLabel.username" /></th>
 					<th scope="col"><spring:message code="fieldLabel.password" /></th>
 					<th scope="col"><spring:message code="fieldLabel.role" /></th>
@@ -50,7 +50,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="user" items="${userList}">
-					<tr class="listRecord">
+					<tr>
 						<td>${user.username}</td>
 						<td>${user.password}</td>
 						<td>${user.role}</td>
