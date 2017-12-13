@@ -28,6 +28,7 @@ public interface ProductService {
 	Product changeUser(Product product);
 
 	void removeUser(Product product);
-	public ArrayList<Product> getProductByPage(int pageid,int total);
 
+	ArrayList<Product> findAllProduct();
+	ArrayList<Product> findAllProductBySupplierId(int sid);
 }
