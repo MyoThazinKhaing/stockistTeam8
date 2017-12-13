@@ -26,9 +26,14 @@ public interface ProductService {
 	Product createUser(Product product);
 
 	Product changeUser(Product product);
+	
+	Product reduceStock(Integer partNumber, Integer sentNumber);
+	Product increaseStock(Integer partNumber, Integer receivedNumber);
 
 	void removeUser(Product product);
 
 	ArrayList<Product> findAllProduct();
 	ArrayList<Product> findAllProductBySupplierId(int sid);
+
+	
 }

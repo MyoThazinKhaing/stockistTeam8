@@ -17,6 +17,8 @@ public interface DamageService {
 	Damage createDamage(Damage d);
 
 	void removeDamage(Damage d);
+	
+	
 
 	ArrayList<Damage> findCoursesByPNUM(int pnum);
 

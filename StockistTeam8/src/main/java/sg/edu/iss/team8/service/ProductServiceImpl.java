@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional
 	public Product findProduct(Integer partNumber) {
-		return pRepository.findOne(partNumber);
+		return pRepository.findProductByNo(partNumber);
 	}
 
 	/*
@@ -129,5 +129,28 @@ public class ProductServiceImpl implements ProductService {
 		ArrayList<Product> l = (ArrayList<Product>) pRepository.findProductBySupplierId(sid);
 		return l;
 	}
+
+	@Override
+	public Product reduceStock(Integer partNumber, Integer sentNumber) {
+		Product p = pRepository.findOne(partNumber);
+		Integer newStock = p.getStock() - sentNumber;
+		p.setStock(newStock);
+		pRepository.saveAndFlush(p);
+		return p;
+	}
+
+	@Override
+	public Product increaseStock(Integer partNumber, Integer receivedNumber) {
+		Product p = pRepository.findOne(partNumber);
+		Integer newStock = p.getStock() + receivedNumber;
+		p.setStock(newStock);
+		pRepository.saveAndFlush(p);
+		return p;
+	}
+
+
+
+	
+	
 
 }

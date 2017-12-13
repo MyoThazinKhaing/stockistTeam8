@@ -41,13 +41,13 @@
 				<td><form:input size="16" path="sendDate" id="datepicker1" /></td>
 				<td><form:errors path="sendDate" cssStyle="color: red;" /></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<td>Receive Date</td>
 				<td><form:input size="16" path="receiveDate" id="datepicker2" /></td>
 				<td><form:errors path="receiveDate" cssStyle="color: red;" /></td>
-			</tr>
+			</tr> --%>
 			
-			<tr>
+			<%-- <tr>
 				<td>Status</td>
 				<td><form:select path="status">
 						
@@ -55,7 +55,7 @@
 					</form:select></td>
 
 				<td></td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<td><input type="submit" value="Create" /></td>
 				<td> <a href="${pageContext.request.contextPath}/admin/damage/list.html"> cancel
