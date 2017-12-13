@@ -1,18 +1,21 @@
 package sg.edu.iss.team8.validator;
 
+import java.util.ArrayList;
 
-
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import sg.edu.iss.team8.model.Product;
+import sg.edu.iss.team8.service.ProductService;
 
 @Component
 public class ProductValidator implements Validator{
 	
+	@Autowired
+	ProductService productService;
 	
 	@Override
 	public boolean supports(Class<?> arg0) {
@@ -24,6 +27,17 @@ public class ProductValidator implements Validator{
 	public void validate(Object arg0, Errors errors) {
 		
 		Product product = (Product)arg0;
+		ArrayList<Integer> listOfProductId = productService.findAllProductIDs();
+		
+		if(listOfProductId.contains(product.getPartNumber()))
+		{
+			//errors.rejectValue("partNumber", "An account already exists");
+			errors.rejectValue("partNumber", "errror.product.partNumber.exist");
+		}
+		
+		
+		
+		
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "partNumber","error.product.partNumber.empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "unitPrice", "error.product.unitPrice.empty");

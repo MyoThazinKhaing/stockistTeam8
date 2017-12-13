@@ -56,8 +56,9 @@
 						<td>${user.password}</td>
 						<td>${user.role}</td>
 						<td>
-						<c:if test="${user.status=='inactive'}"><span style="color:red;">${user.status }</span></c:if>
-						<c:if test="${user.status=='active'}"><span style="color:green;">${user.status }</span></c:if>
+						<c:set var = "status" value = "${user.status }"/>
+						<c:if test="${user.status=='inactive'}"><span style="color:red;">${fn:toUpperCase(status)}</span></c:if>
+						<c:if test="${user.status=='active'}"><span style="color:green;">${fn:toUpperCase(status)}</span></c:if>
 			
 						</td>
 						<td align="center"><a

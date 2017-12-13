@@ -2,13 +2,26 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<head>
 
-<h3>Fill in the following to create a new user</h3>
+<style>
+.editrow {
+	margin: 20px 0px;
+}
 
-<form:form method="POST" commandName="user"
-	action="${pageContext.request.contextPath}/user/create.html">
-<%-- 	<table>
+.label-field {
+	text-align: right;
+	padding-top: 5;
+}
+</style>
+</head>
+<body>
+	<h3>Fill in the following to create a new user</h3>
+
+	<form:form method="POST" commandName="user"
+		action="${pageContext.request.contextPath}/user/create.html">
+		<%-- 	<table>
 		<tbody>
 			<!-- 			<tr> -->
 							<td><spring:message code="fieldLabel.userId" /></td>
@@ -53,54 +66,69 @@
 	</c:if>
 </form:form> --%>
 		<div style="margin: 20px 0 0 0">
-				<div class="row editrow">
-					<div class="col-sm-3 label-field" >Username</div>
-					<div class="col-sm-5"><form:input path="username" class="form-control" /></div>
-					<div><form:errors path="username" cssStyle="color: red;" /></div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field">Username</div>
+				<div class="col-sm-5">
+					<form:input path="username" class="form-control" />
 				</div>
 				<div>
+					<form:errors path="username" cssStyle="color: red;" />
 				</div>
-				<div class="row editrow">
+			</div>
+			<div></div>
+			<div class="row editrow">
 				<div class="col-sm-3  label-field">Password</div>
-				<div class="col-sm-5"><form:input path="password" type="password" class="form-control" /></div>
-					<div><form:errors path="password" cssStyle="color: red;" /></div>
+				<div class="col-sm-5">
+					<form:input path="password" type="password" class="form-control" />
 				</div>
-					<div>
+				<div>
+					<form:errors path="password" cssStyle="color: red;" />
 				</div>
-				<div class="row editrow">
-					<div class="col-sm-3 label-field">Role</div>
-					<div class="col-sm-5"><form:select path="role" items="${eidlist}" class="form-control" /></div>
-					<div><form:errors path="role" cssStyle="color: red;" /></div>
+			</div>
+			<div></div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field">Role</div>
+				<div class="col-sm-5">
+					<form:select path="role" items="${eidlist}" class="form-control" />
 				</div>
-					<div>
+				<div>
+					<form:errors path="role" cssStyle="color: red;" />
 				</div>
-				<div class="row editrow">
-					<div class="col-sm-3 label-field">Status</div>
-					<div class="col-sm-5"><form:select path="status" items="${statuslist}" class="form-control"/></div>
-					<div><form:errors path="status" cssStyle="color: red;" /></div>
+			</div>
+			<div></div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field">Status</div>
+				<div class="col-sm-5">
+					<form:select path="status" items="${statuslist}"
+						class="form-control" />
 				</div>
-					<div>
+				<div>
+					<form:errors path="status" cssStyle="color: red;" />
 				</div>
-				<div class="row editrow">
-					<div class="col-sm-3 label-field"></div>
-					<div class="col-sm-5"><input type="submit" value="Create" 
-						class="btn btn-primary" /></div>
+			</div>
+			<div></div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field"></div>
+				<div class="col-sm-5">
+					<input type="submit" value="Create" class="btn btn-primary" />
 				</div>
+			</div>
 
 		</div>
 		<c:choose>
-		<c:when test="${message == null}"><div></div></c:when>
-		<c:when test="${message == true}"><spring:message code="message.successUserCreate" /></c:when>
-		<c:when test="${message == false}"><spring:message code="error.username.repeat" /></c:when>
-		<c:otherwise><div> </div></c:otherwise>	
+			<c:when test="${message == null}">
+				<div></div>
+			</c:when>
+			<c:when test="${message == true}">
+				<spring:message code="message.successUserCreate" />
+			</c:when>
+			<c:when test="${message == false}">
+				<spring:message code="error.username.repeat" />
+			</c:when>
+			<c:otherwise>
+				<div></div>
+			</c:otherwise>
 		</c:choose>
-<%-- 
-			<c:if test="${message != error}">
-		<div>
-		<spring:message code="message.successUserCreate" />
-		</div>
 
-	</c:if> --%>
-
-	
 	</form:form>
+</body>
