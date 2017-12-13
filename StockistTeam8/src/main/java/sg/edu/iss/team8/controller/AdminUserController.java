@@ -48,11 +48,6 @@ public class AdminUserController {
 		binder.addValidators(uValidator);
 	}
 
-	/**
-	 * USER CRUD OPERATIONS
-	 * 
-	 * @return
-	 */
 
 	@Autowired
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
@@ -79,6 +74,8 @@ public class AdminUserController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@ModelAttribute @Valid User user, BindingResult result,
 			final RedirectAttributes redirectAttributes, HttpSession session) {
+		
+		String message = null;
 
 		if (!new TestController().isAdmin(session))
 			return new ModelAndView("403");
@@ -87,6 +84,8 @@ public class AdminUserController {
 		boolean isRepeat = false;
 		if (uService.findUser(user.getUsername()) != null) {
 			isRepeat = true;
+			message=null;
+			redirectAttributes.addAttribute("message", message);
 			mav.addObject("repeatUser", isRepeat);
 		}
 		if (result.hasErrors() || isRepeat) {
@@ -94,15 +93,16 @@ public class AdminUserController {
 			mav.addObject("eidlist", eidList);
 			String[] statusList = uService.ListStatus();
 			mav.addObject("statuslist", statusList);
+			message = "false";
+			mav.addObject("message","false");			
 			return mav;
 		}
 
-		String message = "The user " + user.getUsername() + " was successfully created.";
-
 		uService.createUser(user);
 		mav.setViewName("redirect:/user/create");
+		
 
-		redirectAttributes.addFlashAttribute("message", message);
+		redirectAttributes.addFlashAttribute("message", "true");
 		return mav;
 	}
 
@@ -157,22 +157,24 @@ public class AdminUserController {
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
 	public ModelAndView editUser(@ModelAttribute @Valid User user, BindingResult result, @PathVariable String id,
 			final RedirectAttributes redirectAttributes, HttpSession session) throws UserNotFound {
+		
+		String message=null;
 
-		ModelAndView mav = new ModelAndView("redirect:/admin/user/edit/" + id);
+		ModelAndView mav = new ModelAndView("redirect:/user/edit/" + id);
 
 		if (result.hasErrors()) {
 			ArrayList<String> eidList = uService.ListRoles();
 			mav.addObject("eidlist", eidList);
 			String[] statusList = uService.ListStatus();
 			mav.addObject("statuslist", statusList);
+			redirectAttributes.addFlashAttribute("message", "false");
 			return mav;
 		}
 
-		String message = "The user " + user.getUsername() + " was successfully created.";
 
 		uService.changeUser(user);
 
-		redirectAttributes.addFlashAttribute("message", message);
+		redirectAttributes.addFlashAttribute("message", "true");
 		return mav;
 
 	}

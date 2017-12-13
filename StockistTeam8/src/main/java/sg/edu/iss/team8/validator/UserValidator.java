@@ -27,4 +27,5 @@ public class UserValidator implements Validator {
 		System.out.println(u.toString());
 	}
 
+
 }

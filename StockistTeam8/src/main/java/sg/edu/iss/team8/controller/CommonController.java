@@ -1,4 +1,5 @@
 package sg.edu.iss.team8.controller;
+import sg.edu.iss.team8.validator.UserValidator;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -15,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +42,16 @@ public class CommonController {
 
 	@Autowired
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
+	
+	@Autowired
+	private UserValidator uValidator;
+
+	@InitBinder("user")
+	private void initUserBinder(WebDataBinder binder) {
+		binder.addValidators(uValidator);
+	}
+
+	
 
 	@RequestMapping(value = {"/*","/**"}, method = RequestMethod.GET)
 	public String general(HttpServletRequest request, HttpSession session) {
@@ -115,7 +128,7 @@ public class CommonController {
 	@RequestMapping(value = "/changepw/{id}", method = RequestMethod.POST)
 	public ModelAndView changepwUser(@ModelAttribute @Valid User user, BindingResult result, @PathVariable String id,
 			final RedirectAttributes redirectAttributes, HttpSession session) throws UserNotFound {
-
+		String message=null;
 		ModelAndView mav = new ModelAndView("redirect:/changepw/"+id);
 		
 		if (result.hasErrors()) {
@@ -123,15 +136,13 @@ public class CommonController {
 			mav.addObject("eidlist", eidList);
 			String[] statusList = uService.ListStatus();
 			mav.addObject("statuslist", statusList);
+			redirectAttributes.addFlashAttribute("message", "false");
 			return mav;
-		}
-		
-		String message = "The user " + user.getUsername() + " was successfully created.";
+		}		
 
 		uService.changeUser(user);
 
-
-		redirectAttributes.addFlashAttribute("message", message);
+		redirectAttributes.addFlashAttribute("message", "true");
 		return mav;
 	}
 
