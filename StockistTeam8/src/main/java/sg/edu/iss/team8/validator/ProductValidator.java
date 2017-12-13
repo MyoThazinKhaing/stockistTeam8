@@ -28,17 +28,13 @@ public class ProductValidator implements Validator{
 		
 		Product product = (Product)arg0;
 		ArrayList<Integer> listOfProductId = productService.findAllProductIDs();
-		
+		/*
 		if(listOfProductId.contains(product.getPartNumber()))
 		{
 			//errors.rejectValue("partNumber", "An account already exists");
 			errors.rejectValue("partNumber", "errror.product.partNumber.exist");
 		}
-		
-		
-		
-		
-		
+		*/		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "partNumber","error.product.partNumber.empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "unitPrice", "error.product.unitPrice.empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description","error.product.description.empty");

@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		<div class="row editrow">
-			<div class="col-sm-3  label-field">Unit Price</div>
+			<div class="col-sm-3  label-field">Quantity</div>
 			<div class="col-sm-5">
 				<form:input path="quantity" class="form-control" />
 			</div>

@@ -51,8 +51,8 @@ public class AdminProductController {
 
 	@Autowired
 	private RequestMappingHandlerMapping requestMappingHandlerMapping;
-	
-	@RequestMapping(value = {"/*","/**"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/*", "/**" }, method = RequestMethod.GET)
 	public String general(HttpServletRequest request, HttpSession session) {
 		return "redirect:/notfound";
 	}
@@ -113,9 +113,16 @@ public class AdminProductController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView createNewProduct(@ModelAttribute @Valid Product product, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
-
-		if (result.hasErrors()) {
-			ModelAndView mav = new ModelAndView("product-new");
+		
+		ModelAndView mav = new ModelAndView("product-new");
+		
+		boolean productExists = false;
+		if(productService.findProduct(product.getPartNumber())!=null) {
+			mav.addObject("errProductExists", true);	
+			productExists = true;
+		}
+		
+		if (result.hasErrors() || productExists) {			
 
 			HashMap<Integer, String> map = new HashMap<Integer, String>();
 			List<Supplier> slist = supplierService.findAllSupplierByStatus();
@@ -123,10 +130,8 @@ public class AdminProductController {
 				map.put(s.getSupplierId(), s.getSupplierName());
 			}
 			mav.addObject("supplierList", map);
-
 			return mav;
 		}
-		ModelAndView mav = new ModelAndView();
 		String message = "New Product " + product.getPartNumber() + " is successfully created";
 
 		productService.createProduct(product);
@@ -181,7 +186,7 @@ public class AdminProductController {
 			return mav;
 		}
 
-		ModelAndView mav = new ModelAndView("redirect:/product/list");
+		ModelAndView mav = new ModelAndView("redirect:/product/catalogue");
 		String message = "Product was successfully updated.";
 		productService.changeProduct(product);
 
@@ -189,10 +194,10 @@ public class AdminProductController {
 		return mav;
 
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView viewProductDetails(HttpSession session, @PathVariable String id) {
-		
+
 		ModelAndView mav = new ModelAndView("product-view");
 		Product p = productService.findProduct(Integer.parseInt(id));
 		Supplier s = supplierService.findSupplier(p.getSupplierId());

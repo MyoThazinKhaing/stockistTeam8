@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -31,6 +32,10 @@
 				</div>
 				<div>
 					<form:errors path="partNumber" cssStyle="color: red;" />
+					<c:if test="${errProductExists}">
+						<p style="color: red"><spring:message code="errror.product.partNumber.exist" /></p>
+					</c:if>
+
 				</div>
 			</div>
 			<div class="row editrow">
@@ -131,7 +136,7 @@
 				<div class="col-sm-5">
 					<form:select class="form-control" path="status">
 						<form:option value="Active" />
-						<form:option value="InActive" />
+						<form:option value="Inactive" />
 					</form:select>
 				</div>
 				<div>
@@ -141,7 +146,7 @@
 			<div class="row editrow">
 				<div class="col-sm-3 label-field"></div>
 				<div class="col-sm-5">
-					<input type="submit" value="Update" class="btn btn-primary" />
+					<input type="submit" value="Create" class="btn btn-primary" />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="${pageContext.request.contextPath}/product/list.html"
 						class="btn btn-danger"> Cancel </a>
