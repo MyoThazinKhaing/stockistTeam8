@@ -6,10 +6,11 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,9 +47,25 @@ public class DamageController {
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView damageListPage() {
+	public ModelAndView damageListPage(HttpSession session, @RequestParam(required = false) Integer page) {
 		ModelAndView mav = new ModelAndView("damage-list", "damage", new Damage());
 		ArrayList<Damage> damageList = (ArrayList<Damage>) dService.findAllDamage();
+		PagedListHolder<Damage> pagedListHolder = new PagedListHolder<>(damageList);
+		pagedListHolder.setPageSize(8);
+		mav.addObject("maxPages", pagedListHolder.getPageCount());
+
+		
+
+		mav.addObject("page", page);
+		if (page == null || page < 1 || page > pagedListHolder.getPageCount()) {
+			pagedListHolder.setPage(0);
+			mav.addObject("damageList", pagedListHolder.getPageList());
+		} else if (page <= pagedListHolder.getPageCount()) {
+			pagedListHolder.setPage(page - 1);
+			mav.addObject("damageList", pagedListHolder.getPageList());
+		}
+		
+		
 		ArrayList<Damage> allDamageList = dService.findAllDamage();
 		Set<Integer> plist = new HashSet();
 		for (Damage d : allDamageList) {
@@ -153,6 +170,10 @@ public class DamageController {
 			damage.setStatus("received");
 		}
 		dService.changeDamage(damage);
+		
+		pService.increaseStock(damage.getPartNumber(), damage.getQuantity());
+		
+		
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
