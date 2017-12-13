@@ -58,20 +58,28 @@
 					<div class="col-sm-5"><form:input path="username" class="form-control" /></div>
 					<div><form:errors path="username" cssStyle="color: red;" /></div>
 				</div>
+				<div>
+				</div>
 				<div class="row editrow">
 				<div class="col-sm-3  label-field">Password</div>
 				<div class="col-sm-5"><form:input path="password" type="password" class="form-control" /></div>
 					<div><form:errors path="password" cssStyle="color: red;" /></div>
+				</div>
+					<div>
 				</div>
 				<div class="row editrow">
 					<div class="col-sm-3 label-field">Role</div>
 					<div class="col-sm-5"><form:select path="role" items="${eidlist}" class="form-control" /></div>
 					<div><form:errors path="role" cssStyle="color: red;" /></div>
 				</div>
+					<div>
+				</div>
 				<div class="row editrow">
 					<div class="col-sm-3 label-field">Status</div>
 					<div class="col-sm-5"><form:select path="status" items="${statuslist}" class="form-control"/></div>
 					<div><form:errors path="status" cssStyle="color: red;" /></div>
+				</div>
+					<div>
 				</div>
 				<div class="row editrow">
 					<div class="col-sm-3 label-field"></div>
