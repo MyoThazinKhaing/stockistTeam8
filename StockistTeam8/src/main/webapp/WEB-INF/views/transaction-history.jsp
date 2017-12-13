@@ -9,16 +9,16 @@
 
 	<h3>Transaction History</h3>
 	<c:if test="${fn:length(transDetailList) gt 0}">
-
-		<table style="cellspacing: 2; cellpadding: 2; border: 1;">
+<div style="padding: 30 30 30 0;">
+		<table class="table table-hover" style="font-size: 1em">
 
 			<tr class="listHeading">
-				<th><spring:message code="TransactionId" /></th>
-				<th><spring:message code="PartNumber" /></th>
-				<th><spring:message code="Quantity" /></th>
-				<th><spring:message code="Customer Name" /></th>
-				<th><spring:message code="Transaction Date" /></th>
-				<th><spring:message code="User" /></th>
+				<th scope="col"><spring:message code="TransactionId" /></th>
+				<th scope="col"><spring:message code="PartNumber" /></th>
+				<th scope="col"><spring:message code="Quantity" /></th>
+				<th scope="col"><spring:message code="Customer Name" /></th>
+				<th scope="col"><spring:message code="Transaction Date" /></th>
+				<th scope="col"><spring:message code="User" /></th>
 
 				<c:forEach var="transDetailList" items="${transDetailList}">
 					<tr class="listRecord">
@@ -42,14 +42,15 @@
 					</tr>
 				</c:forEach>
 		</table>
+		</div>
 	</c:if>
 	<c:if test="${fn:length(transDetailList) eq 0}">
 		<p>No records found.</p>
 	</c:if>
-	<input type="button"
+	<input type="button" class="btn btn-primary"
 		onclick="location.href='${pageContext.request.contextPath}/product/catalogue';"
 		style="width: 20%; text-align: center; text-decoration: none;"
-		value="<Back to product catalogue" />
+		value="< Back to product catalogue" />
 </body>
 </html>
 

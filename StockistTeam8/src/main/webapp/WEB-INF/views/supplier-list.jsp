@@ -16,14 +16,14 @@
 <body>
 	<h3>Supplier List</h3>
 	<form:form method="POST" modelAttribute="supplier"
-		action="${pageContext.request.contextPath}/admin/supplier/searchByName/${supplierName}.html">
+		action="${pageContext.request.contextPath}/supplier/searchByName/${supplierName}.html">
 		<div class="row" style="margin: 20px 0 0 0">
 
 			<div class="col-sm-1">
 				<span><i class="fa fa-search fa-2x" aria-hidden="true"></i></span>
 			</div>
-			<div class="col-sm-2" style="display: flex; justify-content: flex-end;  ">
-				<label style="margin-bottom:0 !important; padding:5 0 !important;"> Search by Name</label>
+			<div class="col-sm-2" style="display: flex; justify-content: flex-end;">
+				<label style="margin-bottom: 0px !important; padding:5 0 !important;"> Search by Name</label>
 			</div>
 			<div class="col-sm-7" style="padding-left: 0;">
 
@@ -40,7 +40,7 @@
 		</div>
 	</form:form>
 	<div style="margin: 20px 0 0 0">
-		<a href="${pageContext.request.contextPath}/admin/supplier/create">Add
+		<a href="${pageContext.request.contextPath}/supplier/create">Add
 			Supplier</a>
 	</div>
 	
@@ -76,7 +76,7 @@
 							<td>${supplier.status}</td>
 
 							<td><a
-								href="${pageContext.request.contextPath}/admin/supplier/edit/${supplier.supplierId}.html"><i
+								href="${pageContext.request.contextPath}/supplier/edit/${supplier.supplierId}.html"><i
 									class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
 							<%-- <td><a
 						href="${pageContext.request.contextPath}/admin/supplier/delete/${supplier.supplierId}.html"><spring:message
@@ -87,7 +87,7 @@
 			</table>
 			<div id="pagination">
 
-		<c:url value="/admin/supplier/list" var="prev">
+		<c:url value="/supplier/list" var="prev">
 			<c:param name="page" value="${page-1}" />
 		</c:url>
 		<c:if test="${page > 1}">
@@ -100,14 +100,14 @@
 					<span>${i.index}</span>
 				</c:when>
 				<c:otherwise>
-					<c:url value="/admin/supplier/list" var="url">
+					<c:url value="/supplier/list" var="url">
 						<c:param name="page" value="${i.index}" />
 					</c:url>
 					<a href='<c:out value="${url}" />'>${i.index}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		<c:url value="/admin/supplier/list" var="next">
+		<c:url value="/supplier/list" var="next">
 			<c:param name="page" value="${page + 1}" />
 		</c:url>
 		<c:if test="${page + 1 <= maxPages}">

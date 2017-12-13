@@ -48,21 +48,21 @@ a{
 						<a href="${ulist}"
 							class="list-group-item list-group-item-action"><spring:message code="menu.browseCatalog" />
 						</a>
-						<spring:url value="/mechanic/transactions/list" var="rlist" htmlEscape="true" />
+						<spring:url value="/transaction/list" var="rlist" htmlEscape="true" />
 						<a href="${rlist}" class="list-group-item list-group-item-action">
 							<spring:message code="menu.browseTransaction" />
 						</a>
-						<spring:url value="/admin/user/list" var="elist"
+						<spring:url value="/user/list" var="elist"
 							htmlEscape="true" />
 						<a href="${elist}" class="list-group-item list-group-item-action">
 							<spring:message code="menu.manageUser" />
 						</a>
-						<spring:url value="/admin/supplier/list" var="dlist"
+						<spring:url value="/supplier/list" var="dlist"
 							htmlEscape="true" />
 						<a href="${dlist}" class="list-group-item list-group-item-action">
 							<spring:message code="menu.browseSupplier" />
 						</a>
-						<spring:url value="/admin/reorderreport/list" var="dlist"
+						<spring:url value="/reorder/list" var="dlist"
 							htmlEscape="true" />
 						<a href="${dlist}" class="list-group-item list-group-item-action">
 							<spring:message code="menu.ReorderReport" />
@@ -73,7 +73,7 @@ a{
 						<a href="${ulist}"
 							class="list-group-item list-group-item-action"><spring:message code="menu.browseCatalog" />
 						</a>
-						<spring:url value="/mechanic/transactions/list" var="rlist" htmlEscape="true" />
+						<spring:url value="/transaction/list" var="rlist" htmlEscape="true" />
 						<a href="${rlist}" class="list-group-item list-group-item-action">
 							<spring:message code="menu.browseTransaction" />
 						</a>

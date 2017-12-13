@@ -2,91 +2,152 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<head>
 
-<h3>Edit Product page</h3>
-<form:form method="POST" modelAttribute="product"
-	action="${pageContext.request.contextPath}/admin/product/edit/${product.partNumber}.html">
-	<table>
-		<tbody>
-		<form:hidden path=""/>
-			<tr>
-				<td>PartNumber</td>
-				<td><form:input path="partNumber"  readonly="true"/></td>
-				<td><form:errors path="partNumber" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td>UnitPrice</td>
-				<td><form:input path="unitPrice" /></td>
-				<td><form:errors path="unitPrice" cssStyle="color: red;" /></td>
-			</tr>
-			
-			<tr>
-				<td>Description</td>
-				<td><form:input path="description" /></td>
-				<td><form:errors path="description" cssStyle="color: red;" /></td>
-			</tr>
-			
-			<tr>
-				<td>Colour</td>
-				<td><form:input path="colour" /></td>
-				<td><form:errors path="colour" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td>Dimension</td>
-				<td><form:input path="dimension" /></td>
-				<td><form:errors path="dimension" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td>Manufacturer</td>
-				<td><form:input path="manufacturer" /></td>
-				<td><form:errors path="manufacturer" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td>SupplierId</td>
-				<!-- <td><form:input path="supplierId" readonly="true" /></td>-->
-				<td><form:select path="supplierId">						
+<style>
+.editrow {
+	margin: 20px 0px;
+}
+
+.label-field {
+	text-align: right;
+	padding-top: 5;
+}
+</style>
+</head>
+
+
+<body>
+	<h3>Edit Product page</h3>
+	<form:form method="POST" modelAttribute="product"
+		action="${pageContext.request.contextPath}/product/edit/${product.partNumber}.html">
+		<div style="margin: 20px 0 0 0">
+			<div class="row editrow">
+				<div class="col-sm-3 label-field">Part Name</div>
+				<div class="col-sm-5">
+					<form:input path="partNumber" readonly="true" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="partNumber" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow">
+				<div class="col-sm-3  label-field">Unit Price</div>
+				<div class="col-sm-5">
+					<form:input path="unitPrice" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="unitPrice" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field">Description</div>
+				<div class="col-sm-5">
+					<form:input path="description" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="description" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field">Colour</div>
+				<div class="col-sm-5">
+					<form:input path="colour" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="colour" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field">Dimension</div>
+				<div class="col-sm-5">
+					<form:input path="dimension" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="dimension" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow label-field">
+				<div class="col-sm-3">Manufacturer</div>
+				<div class="col-sm-5">
+					<form:input path="manufacturer" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="manufacturer" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field">Supplier Id</div>
+				<div class="col-sm-5">
+					<form:select class="form-control" path="supplierId">
 						<form:option value="" label="...." />
 						<form:options items="${supplierList}" />
-					</form:select></td>
-			<td><form:errors path="supplierId" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td>ReorderLevel</td>
-				<td><form:input path="reorderLevel" /></td>
-				<td><form:errors path="reorderLevel" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td>MinimumReorderQuantity</td>
-				<td><form:input path="minimumReorderQuantity" /></td>
-				<td><form:errors path="minimumReorderQuantity" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td>ShelfLocation</td>
-				<td><form:input path="shelfLocation" /></td>
-				<td><form:errors path="shelfLocation" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td>Stock</td>
-				<td><form:input path="stock" /></td>
-				<td><form:errors path="stock" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-			<td>Status</td>
-				<td><form:select path="status">						
-						<%-- <form:option value="" label="...." /> --%>
-						<form:option value="Active"/>
-						<form:option value="InActive"/>
-						
-					</form:select></td>
-						
-				<td><form:errors path="status" cssStyle="color: red;" /></td>
-				</tr>
-			<tr>
-				<td><input type="submit" value="Update" /></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-</form:form>
+					</form:select>
+				</div>
+				<div>
+					<form:errors path="supplierId" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow label-field">
+				<div class="col-sm-3">Reorder Level</div>
+				<div class="col-sm-5">
+					<form:input path="reorderLevel" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="reorderLevel" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow label-field">
+				<div class="col-sm-3">Minimum Reorder Quantity</div>
+				<div class="col-sm-5">
+					<form:input path="minimumReorderQuantity" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="minimumReorderQuantity" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow label-field">
+				<div class="col-sm-3">Shelf Location</div>
+				<div class="col-sm-5">
+					<form:input path="shelfLocation" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="shelfLocation" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow label-field">
+				<div class="col-sm-3 label-field">Stock</div>
+				<div class="col-sm-5">
+					<form:input path="stock" class="form-control" />
+				</div>
+				<div>
+					<form:errors path="stock" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field">Status</div>
+				<div class="col-sm-5">
+					<form:select class="form-control" path="status">
+						<form:option value="Active" />
+						<form:option value="InActive" />
+					</form:select>
+				</div>
+				<div>
+					<form:errors path="status" cssStyle="color: red;" />
+				</div>
+			</div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field"></div>
+				<div class="col-sm-5">
+					<input type="submit" value="Update" class="btn btn-primary" />
+				</div>
 
+			</div>
+		</div>
+		
+
+
+
+
+	</form:form>
+</body>

@@ -55,7 +55,7 @@
 		style="width: 20%; text-align: center; text-decoration: none;"
 		value="<Back to product catalogue" />
 	<input type="button"
-		onclick="location.href='${pageContext.request.contextPath}/mechanic/transactions/${product.partNumber}.html';"
+		onclick="location.href='${pageContext.request.contextPath}/transactions/${product.partNumber}.html';"
 		style="width: 20%; text-align: center; text-decoration: none;"
 		value="View transaction history>" />
 
