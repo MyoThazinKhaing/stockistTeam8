@@ -28,5 +28,7 @@ public interface ProductService {
 	Product changeUser(Product product);
 
 	void removeUser(Product product);
+	
+	int UpdateStock(int partNumber,int stock);
 
 }

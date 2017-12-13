@@ -118,4 +118,10 @@ public class ProductServiceImpl implements ProductService {
 		return searchResult;
 	}
 
+	@Override
+	public int UpdateStock(int partNumber, int stock) {
+		
+		return pRepository.UpdateStock(partNumber, stock);
+	}
+
 }

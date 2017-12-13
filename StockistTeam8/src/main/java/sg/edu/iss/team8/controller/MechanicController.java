@@ -1,5 +1,6 @@
 package sg.edu.iss.team8.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,7 +30,8 @@ import sg.edu.iss.team8.service.CustomerService;
 import sg.edu.iss.team8.service.ProductService;
 import sg.edu.iss.team8.service.TransactionDetailsService;
 import sg.edu.iss.team8.service.TransactionService;
-import sg.edu.iss.team8.validator.TransationValidator;
+import sg.edu.iss.team8.validator.TransactionValidator;
+
 
 @RequestMapping(value = "/mechanic")
 @Controller
@@ -46,7 +48,7 @@ public class MechanicController {
 	 @Autowired
 	  UserSession uService;
 	 @Autowired
-	 TransationValidator transactionValidator;
+	 TransactionValidator transactionValidator;
 	
 
 /*@InitBinder("transaction")
@@ -58,9 +60,10 @@ private void initTransactionBinder(WebDataBinder binder) {
 //	private void initCustomerBinder(WebDataBinder binder) {
 //		// binder.addValidators(eValidator);
 //	}
-	 @InitBinder("course")
+	 @InitBinder("transaction")
 		private void initCourseBinder(WebDataBinder binder) {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
 			dateFormat.setLenient(false);
 			binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 			binder.addValidators(transactionValidator);
@@ -138,6 +141,7 @@ private void initTransactionBinder(WebDataBinder binder) {
 		
 		if (result.hasErrors()) {
 			 mav.setViewName("transaction-new");
+			 System.out.println("Bind Error");
 			 return mav;
 		}
 		
@@ -159,26 +163,45 @@ private void initTransactionBinder(WebDataBinder binder) {
 		
 		//&&t.getConsumeDate().compareTo(transaction.getConsumeDate())==0
 		
-		if(t.getCustomerId()==transaction.getCustomerId()) {
+		if(t.getCustomerId()==transaction.getCustomerId()&&t.getConsumeDate().compareTo(transaction.getConsumeDate())==0) {
 			String partNumber = request.getParameter("product");
 			String quantity = request.getParameter("quantity");
+			Product p=pService.findProduct(Integer.parseInt(partNumber));
+			if(Integer.parseInt(quantity)>p.getStock()) {
+				
+			}
 			//and set to transationdetails object:
 			TransactionDetails tdetails = new TransactionDetails();
 			tdetails.setTransactionId(t.getTransactionId());
 			tdetails.setPartNumber(Integer.parseInt(partNumber));
+			try {
 			tdetails.setQuantity(Integer.parseInt(quantity));
-			t.setTransactionId(t.getTransactionId()+1);
+			}catch(NumberFormatException e) {
+				
+			}
+			//t.setTransactionId(t.getTransactionId()+1);
 			tdService.createTransaction(tdetails);
 			System.out.println("if block-----");
+			
+			pService.UpdateStock(Integer.parseInt(partNumber), p.getStock()-Integer.parseInt(quantity));
 			
 		}
 		else {
 		Transaction lastRow=	tService.findLastRow();
 		transaction.setTransactionId(lastRow.getTransactionId()+1);
+		/*String condate=request.getParameter("consumedate");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			transaction.setConsumeDate(dateFormat.parse(condate));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		*/
 			 t=	tService.createTransaction(transaction);
 			 System.out.println("else block-----");
 			 String partNumber = request.getParameter("product");
 				String quantity = request.getParameter("quantity");
+				
 				//and set to transationdetails object:
 				TransactionDetails tdetails = new TransactionDetails();
 				tdetails.setTransactionId(t.getTransactionId());
@@ -188,7 +211,8 @@ private void initTransactionBinder(WebDataBinder binder) {
 				tdService.createTransaction(tdetails);
 				
 		}
-		
+		 transDet=tdService.findAllTransactions();
+		mav.addObject("transDetail",transDet);
 		//transationdetails attirbute received from httprequest  
 		
 		

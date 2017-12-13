@@ -1,6 +1,5 @@
 package sg.edu.iss.team8.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,14 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,8 +37,10 @@ public class Transaction {
 	private Integer customerId;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "consumedate")
-	//@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name="consumedate")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull
+	@Past
 	private Date consumeDate;
 
 	@Column(name = "username")
