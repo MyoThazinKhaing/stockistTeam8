@@ -62,6 +62,11 @@ a{
 						<a href="${dlist}" class="list-group-item list-group-item-action">
 							<spring:message code="menu.browseSupplier" />
 						</a>
+						<spring:url value="/damage/list" var="dlist"
+							htmlEscape="true" />
+						<a href="${dlist}" class="list-group-item list-group-item-action">
+							<spring:message code="menu.Damage" />
+						</a>
 						<spring:url value="/reorder/list" var="dlist"
 							htmlEscape="true" />
 						<a href="${dlist}" class="list-group-item list-group-item-action">

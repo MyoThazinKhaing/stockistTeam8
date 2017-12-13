@@ -27,7 +27,7 @@
 			<div class="row editrow">
 				<div class="col-sm-3 label-field">Part Name</div>
 				<div class="col-sm-5">
-					<form:input path="partNumber" readonly="true" class="form-control" />
+					<form:input path="partNumber" class="form-control" />
 				</div>
 				<div>
 					<form:errors path="partNumber" cssStyle="color: red;" />
@@ -142,9 +142,13 @@
 				<div class="col-sm-3 label-field"></div>
 				<div class="col-sm-5">
 					<input type="submit" value="Update" class="btn btn-primary" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+						href="${pageContext.request.contextPath}/product/list.html"
+						class="btn btn-danger"> Cancel </a>
 				</div>
-
 			</div>
+
+		</div>
 		</div>
 	</form:form>
 </body>

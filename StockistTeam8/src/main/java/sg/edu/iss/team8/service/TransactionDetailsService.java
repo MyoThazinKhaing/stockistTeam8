@@ -16,7 +16,7 @@ public interface TransactionDetailsService {
 	/* (non-Javadoc)
 	 * @see edu.iss.cats.service.TransactionService#findTransaction(java.lang.String)
 	 */
-	TransactionDetails findTransaction(Integer ceid);
+//	TransactionDetails findTransaction(Integer ceid);
 
 	/* (non-Javadoc)
 	 * @see edu.iss.cats.service.TransactionService#createTransaction(edu.iss.cats.model.TransactionDetails)

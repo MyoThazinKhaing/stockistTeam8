@@ -8,7 +8,14 @@ public class MappingValidator {
 					"create",
 					"delete",
 					"supplier",
-					"reorder"};
+					"reorder",
+					"damage"};
+	
+	public static final String[] ALL_USER = new String[] 
+			{"transaction"};
+	
+	public static final String[] LIST_PAGE = new String[]
+			{"catalogue", "list"};
 	
 	public static final String[] PUBLIC = new String[] {"/login"};
 	

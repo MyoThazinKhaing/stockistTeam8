@@ -164,11 +164,13 @@ public class UserServiceImpl implements UserService {
 	public ArrayList<User> searchUsers(String criteria, String description) {
 		ArrayList<User> userList = new ArrayList<>();
 		switch (criteria) {
-		case "userName": userList = userRepository.searchUserByUserName(description);
+		case "username": userList = userRepository.searchUserByUserName(description);
 		break;
 		case "role": userList = userRepository.searchUserByRole(description);
 		break;
-		default: userList = userRepository.searchUserByRole(description);
+		case "status": userList = userRepository.searchUserByStatus(description);
+		break;
+		default: userList = null;
 		break;
 		}
 		return userList;

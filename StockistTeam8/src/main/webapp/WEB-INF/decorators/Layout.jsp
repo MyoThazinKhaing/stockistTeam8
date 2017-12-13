@@ -4,6 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
+<title>Team 8 Stock List</title>
+
 <!-- Bootstrap Litera CSS -->
 <link href="https://bootswatch.com/4/litera/bootstrap.css"
 	rel="stylesheet">

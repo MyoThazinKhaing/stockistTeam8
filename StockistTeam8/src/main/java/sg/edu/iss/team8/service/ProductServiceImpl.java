@@ -68,6 +68,36 @@ public class ProductServiceImpl implements ProductService {
 	public void removeUser(Product product) {
 		pRepository.delete(product);
 	}
+	@Override
+	public Product reduceStock(Integer partNumber, Integer sentNumber) {
+		Product p = pRepository.findOne(partNumber);
+		Integer newStock = p.getStock() - sentNumber;
+		p.setStock(newStock);
+		pRepository.saveAndFlush(p);
+		return p;
+	}
+
+	@Override
+	public Product increaseStock(Integer partNumber, Integer receivedNumber) {
+		Product p = pRepository.findOne(partNumber);
+		Integer newStock = p.getStock() + receivedNumber;
+		p.setStock(newStock);
+		pRepository.saveAndFlush(p);
+		return p;
+	}
+
+	@Override
+	@Transactional
+	public Product findProduct(Integer partNumber) {
+		return pRepository.findOne(partNumber);
+	}
+	@Override
+	@Transactional
+	public int UpdateStock(int partNumber, int stock) {
+		
+		return pRepository.UpdateStock(partNumber, stock);
+	}
+
 
 	@Override
 	public ArrayList<Product> searchProductByDescription(String pDescription) {
@@ -173,6 +203,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	
 	public ArrayList<Integer> findAllSupplierIDs() {
 		// TODO Auto-generated method stub
 		return pRepository.findAllSupplierIDs();

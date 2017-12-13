@@ -4,6 +4,7 @@ package sg.edu.iss.team8.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,7 +28,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sg.edu.iss.team8.exception.UserNotFound;
+import sg.edu.iss.team8.model.Product;
 import sg.edu.iss.team8.model.User;
+import sg.edu.iss.team8.service.ProductService;
 //import sg.edu.iss.team8.service.EmployeeService;
 import sg.edu.iss.team8.service.UserService;
 import sg.edu.iss.team8.validator.UserValidator;
@@ -38,6 +41,7 @@ public class AdminUserController {
 
 	@Autowired
 	private UserService uService;
+
 	// @Autowired
 	// private EmployeeService eService;
 	@Autowired
@@ -59,8 +63,9 @@ public class AdminUserController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView newUserPage(HttpSession session, RedirectAttributes redirect) {
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
+		if(redirect.containsAttribute("message")) {
+			
+		}
 		ModelAndView mav = new ModelAndView("adduser", "user", new User());
 		ArrayList<User> userList = uService.findAllUsers();
 		mav.addObject("userList", userList);
@@ -76,10 +81,7 @@ public class AdminUserController {
 			final RedirectAttributes redirectAttributes, HttpSession session) {
 		
 		String message = null;
-
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
-
+		
 		ModelAndView mav = new ModelAndView("adduser");
 		boolean isRepeat = false;
 		if (uService.findUser(user.getUsername()) != null) {
@@ -106,12 +108,9 @@ public class AdminUserController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public ModelAndView searchUser(HttpSession session, @RequestParam String criteria,
 			@RequestParam String description) {
-		if (!new TestController().isUser(session)) {
-			return new ModelAndView("403");
-		}
 		return new ModelAndView("manageuser", "userList", uService.searchUsers(criteria, description));
 		// return new ModelAndView("product-catalogue", "pList",
 		// pService.searchProduct("p.criteria",description));
@@ -119,13 +118,10 @@ public class AdminUserController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView userListPage(HttpSession session, @RequestParam(required = false) Integer page) {
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
-
 		ModelAndView mav = new ModelAndView("manageuser");
 		List<User> userList = uService.findAllUsers();
 		PagedListHolder<User> pagedListHolder = new PagedListHolder<>(userList);
-		pagedListHolder.setPageSize(8);
+		pagedListHolder.setPageSize(6);
 		mav.addObject("maxPages", pagedListHolder.getPageCount());
 
 		// if(page==null || page < 1 || page > pagedListHolder.getPageCount())page=1;
@@ -182,9 +178,7 @@ public class AdminUserController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView deleteUser(@PathVariable String id, final RedirectAttributes redirectAttributes,
 			HttpSession session) throws UserNotFound {
-		if (!new TestController().isAdmin(session))
-			return new ModelAndView("403");
-		ModelAndView mav = new ModelAndView("redirect:/admin/user/list");
+		ModelAndView mav = new ModelAndView("redirect:/user/list");
 		User user = uService.findUser(id);
 		uService.removeUser(user);
 		String message = "The user " + user.getUsername() + " was successfully deleted.";
@@ -192,4 +186,6 @@ public class AdminUserController {
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
+
+	
 }

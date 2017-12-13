@@ -1,6 +1,5 @@
 package sg.edu.iss.team8.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,15 +10,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+
 
 @Entity
 @Table(name = "transaction")
@@ -30,19 +31,22 @@ public class Transaction {
 	@Id
 	@Column(name = "transactionid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int transactionId;
+	private Integer transactionId;
 
 	@Column(name = "customerid")
-	private int customerId;
+	private Integer customerId;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "consumedate")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name="consumedate")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull
+	@Past
 	private Date consumeDate;
 
 	@Column(name = "username")
 	private String userName;
 
+	@Transient
 	@OneToMany(mappedBy = "transactionDetailsMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)//EAGER)
 //	@JoinColumn(name="transactionid")
 	public List<TransactionDetails> transactionEvent;// = new ArrayList<TransactionDetails>();
@@ -56,7 +60,9 @@ public class Transaction {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Transaction(int transactionId, int customerId, Date consumeDate, String userName,
+	
+
+	public Transaction(Integer transactionId, Integer customerId, Date consumeDate, String userName,
 			List<TransactionDetails> transactionEvent) {
 		super();
 		this.transactionId = transactionId;
@@ -66,29 +72,37 @@ public class Transaction {
 		this.transactionEvent = transactionEvent;
 	}
 
-	public int getTransactionId() {
+
+
+	public Integer getTransactionId() {
 		return transactionId;
 	}
 
-	public void setTransactionId(int transactionId) {
+	public void setTransactionId(Integer transactionId) {
 		this.transactionId = transactionId;
 	}
 
-	public int getCustomerId() {
+	public Integer getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(int customerId) {
+	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
+
+	
 
 	public Date getConsumeDate() {
 		return consumeDate;
 	}
 
+
+
 	public void setConsumeDate(Date consumeDate) {
 		this.consumeDate = consumeDate;
 	}
+
+
 
 	public String getUserName() {
 		return userName;
@@ -106,11 +120,12 @@ public class Transaction {
 		this.transactionEvent = transactionEvent;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + customerId;
+		result = prime * result + ((transactionId == null) ? 0 : transactionId.hashCode());
 		return result;
 	}
 
@@ -123,7 +138,10 @@ public class Transaction {
 		if (getClass() != obj.getClass())
 			return false;
 		Transaction other = (Transaction) obj;
-		if (customerId != other.customerId)
+		if (transactionId == null) {
+			if (other.transactionId != null)
+				return false;
+		} else if (!transactionId.equals(other.transactionId))
 			return false;
 		return true;
 	}

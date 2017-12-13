@@ -3,12 +3,16 @@ package sg.edu.iss.team8.repository;
 import java.util.ArrayList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import sg.edu.iss.team8.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+	@Modifying(clearAutomatically=true)
+	@Query(value = "update product p set p.stock=:stock  where p.partnumber=:partnumber", nativeQuery = true)
+	int UpdateStock(@Param("partnumber") int partnumber,@Param("stock") int stock);
 
 	@Query("SELECT p from Product p where p.partNumber = :pNo")
 	Product findProductByNo(@Param("pNo") int pNo);

@@ -7,58 +7,81 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View product details</title>
+<style>
+.editrow {
+	margin: 20px 0px;
+}
+
+.label-field {
+	text-align: right;
+	padding-top: 5;
+}
+
+.title{
+	border-right:solid 1px;
+	border-color: rgba(204, 198, 198, 0.4);
+	max-width:70px
+}
+
+</style>
+
+
+
 </head>
 <body>
 	<h3>Product Details</h3>
-	<table width='500' ; style="cellspacing: 2; cellpadding: 2; border: 1;">
+	<div style="width: 80%; padding: 30 30 30 0;">
+	<table class="table table-hover" style="font-size: 1em;">
 		<tbody>
 			<tr>
-				<th><b>Part Number</th>
-				<td align="right">${product.partNumber}</td>
+				<th scope="col" class="title">Part Number</th>
+				<td class="field">${product.partNumber}</td>
 
 			</tr>
 			<tr>
-				<th>Unit Price</th>
-				<td align="right"><fmt:formatNumber value="${product.unitPrice}" pattern="$#,##0.00" /></td>
+				<th scope="col" class="title">Unit Price</th>
+				<td>${product.unitPrice}</td>
 			</tr>
 			<tr>
-				<th>Description</th>
-				<td align="right">${product.description}</td>
+				<th scope="col" class="title">Description</th>
+				<td>${product.description}</td>
 			</tr>
 			<tr>
-				<th>Manufacturer</th>
-				<td align="right">${product.manufacturer}</td>
+				<th scope="col" class="title">Manufacturer</th>
+				<td>${product.manufacturer}</td>
 			</tr>
 			<tr>
-				<th>Supplier</th>
-				<td align="right">${supplier.supplierName}</td>
+				<th scope="col" class="title">Supplier</th>
+				<td>${supplier.supplierName}</td>
 			</tr>
 			<tr>
-				<th>Stock Level</th>
-				<td align="right">${product.stock}</td>
+				<th scope="col" class="title">Stock Level</th>
+				<td>${product.stock}</td>
 			</tr>
 			<tr>
-				<th>Reorder Level</th>
-				<td align="right">${product.reorderLevel}</td>
+				<th scope="col" class="title">Reorder Level</th>
+				<td>${product.reorderLevel}</td>
 			</tr>
 			<tr>
-				<th>Minimum Reorder Quantity</th>
-				<td align="right">${product.minimumReorderQuantity}</td>
+				<th scope="col" class="title">Minimum Reorder Quantity</th>
+				<td>${product.minimumReorderQuantity}</td>
 			</tr>
 		</tbody>
 	</table>
-
-	&nbsp;
-	
-	<input type="button"
-		onclick="location.href='${pageContext.request.contextPath}/product/catalogue';"
-		style="width: 20%; text-align: center; text-decoration: none;"
-		value="<Back to product catalogue" />
-	<input type="button"
-		onclick="location.href='${pageContext.request.contextPath}/transactions/${product.partNumber}.html';"
-		style="width: 20%; text-align: center; text-decoration: none;"
-		value="View transaction history>" />
-
-
+	<div class="row">
+		<div class="col-sm-6" >
+			<input type="button" class="btn btn-primary"
+				onclick="location.href='${pageContext.request.contextPath}/product/catalogue';"
+				style="text-align: center; text-decoration: none;"
+				value="< Back to product catalogue" />
+		</div>
+		<div align="right" class="col-sm-6" >
+			<input type="button" class="btn btn-primary"
+				onclick="location.href='${pageContext.request.contextPath}/transaction/list/${product.partNumber}.html';"
+				style="text-align: center; text-decoration: none;"
+				value="View transaction history >" />
+		</div>
+	</div>
+</div>
 </body>
 </html>

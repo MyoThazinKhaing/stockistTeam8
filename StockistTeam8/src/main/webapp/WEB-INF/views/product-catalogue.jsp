@@ -46,15 +46,14 @@
 
 		</div>
 	</form:form>
-	<div class="row" style="margin: 20px 0 0 0">
-		<div class="col-sm-6" style="padding: 0;">
-			<a href="${pageContext.request.contextPath}/product/catalogue"><spring:message
-					code="Display all products" /></a>
-		</div>
-		<div class="col-sm-6" style="text-align: right; padding: 0 30 0 0;">
-			<a href="${pageContext.request.contextPath}/product/create">Add
-				Product</a>
-		</div>
+
+	<div>
+		<a href="${pageContext.request.contextPath}/product/catalogue"><spring:message
+				code="Display all products" /></a>
+	</div>
+	<div>
+		<a href="${pageContext.request.contextPath}/product/create">Add
+			Product</a>
 	</div>
 	<form:form method="GET"
 		action="${pageContext.request.contextPath}/product/catalogue">
@@ -63,30 +62,36 @@
 				<table class="table table-hover" style="font-size: 1em">
 					<thead>
 						<tr>
-							<th scope="col"><spring:message code="Part Number" /></th>							
+							<th scope="col"><spring:message code="Part Number" /></th>
 							<th scope="col"><spring:message code="Description" /></th>
-							<th style="min-width:300px"></th>
+							<th style="min-width: 300px"></th>
 							<th scope="col"><spring:message code="Colour" /></th>
-							<td align="right" ><strong><spring:message
-									code="Unit Price" /></strong></td>
-							<th scope="col"><spring:message code="caption.edit" /></th>
-							<th scope="col"><spring:message code="caption.delete" /></th>
+							<td align="right"><strong><spring:message
+										code="Unit Price" /></strong></td>
+							<th scope="col"><spring:message code="caption.detail" /></th>
+							<c:if test="${sessionScope.USERSESSION.user.role eq 'admin'}">
+								<th scope="col"><spring:message code="caption.edit" /></th>
+							</c:if>
+
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="product" items="${pList}">
-							<tr class="table-light">
-								<td>${product.partNumber}</td>								
+							<tr>
+								<td>${product.partNumber}</td>
 								<td colspan=2>${product.description}</td>
 								<td>${product.colour}</td>
 								<td align="right">$<fmt:formatNumber
 										value="${product.unitPrice}" type="number" pattern="#,##0.00" /></td>
+
 								<td><a
-									href="${pageContext.request.contextPath}/product/edit/${product.partNumber}.html"><i
-										class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
-								<td><a
-									href="${pageContext.request.contextPath}/product/delete/${product.partNumber}.html"><i
-										class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+									href="${pageContext.request.contextPath}/product/${product.partNumber}.html"><i
+										class="fa fa-list-alt fa-2x" aria-hidden="true"></i></a></td>
+								<c:if test="${sessionScope.USERSESSION.user.role eq 'admin'}">
+									<td><a
+										href="${pageContext.request.contextPath}/product/edit/${product.partNumber}.html"><i
+											class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>

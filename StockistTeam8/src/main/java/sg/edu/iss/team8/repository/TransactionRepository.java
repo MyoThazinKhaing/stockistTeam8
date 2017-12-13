@@ -10,6 +10,9 @@ import sg.edu.iss.team8.model.Transaction;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Integer>{
 
+	@Query(value = "SELECT * FROM transaction ORDER BY transactionid DESC LIMIT 1", nativeQuery = true)
+	Transaction findLastRow();
+
 	@Query("SELECT t from Transaction t WHERE t.transactionId = :eid")
 	ArrayList<Transaction> findTransactionsByEID(@Param("eid") String eid);
 	
@@ -18,6 +21,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	
 	@Query("SELECT DISTINCT t.transactionId FROM Transaction t")
 	ArrayList<String> findAllTransactionIDs();
+	
 //	@Query("SELECT t.transactionid FROM transaction t")
 //	ArrayList<String> findTransactionByDateRange();
 //	

@@ -19,11 +19,12 @@
 
 <body>
 	<h3>Edit Product page</h3>
+	
 	<form:form method="POST" modelAttribute="product"
 		action="${pageContext.request.contextPath}/product/edit/${product.partNumber}.html">
 		<div style="margin: 20px 0 0 0">
 			<div class="row editrow">
-				<div class="col-sm-3 label-field">Part Name</div>
+				<div class="col-sm-3 label-field" >Part Name</div>
 				<div class="col-sm-5">
 					<form:input path="partNumber" readonly="true" class="form-control" />
 				</div>
@@ -129,7 +130,7 @@
 				<div class="col-sm-5">
 					<form:select class="form-control" path="status">
 						<form:option value="Active" />
-						<form:option value="InActive" />
+						<form:option value="Inactive" />
 					</form:select>
 				</div>
 				<div>

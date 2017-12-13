@@ -19,52 +19,8 @@
 <body>
 	<h3>Fill in the following to create a new user</h3>
 
-	<form:form method="POST" commandName="user"
+	<form:form method="POST" modelAttribute="user"
 		action="${pageContext.request.contextPath}/user/create.html">
-		<%-- 	<table>
-		<tbody>
-			<!-- 			<tr> -->
-							<td><spring:message code="fieldLabel.userId" /></td>
-							<td><form:input path="userId" /></td>
-							<td><form:errors path="userId" cssStyle="color: red;" /></td>
-			<!-- 			</tr> -->
-			<tr>
-				<td><spring:message code="fieldLabel.username" /></td>
-				<td><form:input path="username" /></td>
-				<td><form:errors path="username" required="required"
-						cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td><spring:message code="fieldLabel.password" /></td>
-				<td><form:input path="password" type="password"/></td>
-				<td><form:errors path="password" required="required"
-						cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td><spring:message code="fieldLabel.role" /></td>
-				<td><form:select path="role" items="${eidlist}" /></td>
-				<td><form:errors path="role" cssStyle="color: red;" /></td>
-			</tr>
-			<tr>
-				<td><spring:message code="fieldLabel.status" /></td>
-				<td><form:select path="status" items="${statuslist}" /></td>
-				<td><form:errors path="status" cssStyle="color: red;" /></td>
-			</tr>
-
-			<tr>
-				<td><input type="submit" value="Create" /></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table> 
-	<c:if test="${message != error}">
-		<div>
-		<spring:message code="message.successUserCreate" />
-		</div>
-
-	</c:if>
-</form:form> --%>
 		<div style="margin: 20px 0 0 0">
 			<div class="row editrow">
 				<div class="col-sm-3 label-field">Username</div>
@@ -111,24 +67,35 @@
 				<div class="col-sm-3 label-field"></div>
 				<div class="col-sm-5">
 					<input type="submit" value="Create" class="btn btn-primary" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+						href="${pageContext.request.contextPath}/user/list.html"
+						class="btn btn-danger"> Cancel </a>
+				</div>
+			</div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field"></div>
+				<div class="col-sm-5">
+					<c:choose>
+						<c:when test="${message == null}">
+							<div></div>
+						</c:when>
+						<c:when test="${message == true}">
+							<span style="color: green"><spring:message
+									code="message.successUserCreate" /></span>
+						</c:when>
+						<c:when test="${message == false}">
+							<span style="color: red"><spring:message
+									code="error.username.repeat" /></span>
+						</c:when>
+						<c:otherwise>
+							<div></div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 
 		</div>
-		<c:choose>
-			<c:when test="${message == null}">
-				<div></div>
-			</c:when>
-			<c:when test="${message == true}">
-				<spring:message code="message.successUserCreate" />
-			</c:when>
-			<c:when test="${message == false}">
-				<spring:message code="error.username.repeat" />
-			</c:when>
-			<c:otherwise>
-				<div></div>
-			</c:otherwise>
-		</c:choose>
+
 
 	</form:form>
 </body>

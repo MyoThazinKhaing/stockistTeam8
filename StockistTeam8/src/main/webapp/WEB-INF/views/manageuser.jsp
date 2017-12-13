@@ -2,11 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<head>
 
-<h3>User List page</h3>
+</head>
+<h3>User List</h3>
 
 <form:form method="POST"
-	action="${pageContext.request.contextPath}/user/list">
+	action="${pageContext.request.contextPath}/user/search">
 	<div class="row" style="margin: 20px 0 0 0">
 		<div class="col-sm-4">
 			<div class="row">
@@ -14,9 +16,10 @@
 					<i class="fa fa-search fa-2x" aria-hidden="true"></i>
 				</div>
 				<div class="col-sm-10">
-					<select class="form-control" name="criteria">
-						<option value="partNumber">Role</option>
-						<option value="description">Username</option>
+					<select class="form-control" name="criteria" id="select">
+						<option value="role">Role</option>
+						<option value="username">Username</option>
+						<option value="status">Status</option>
 					</select>
 				</div>
 			</div>
@@ -30,12 +33,13 @@
 			<input type="submit" class="btn btn-primary" value="Search"
 				style="font-size: 1em" />
 		</div>
-
-
 	</div>
 
 </form:form>
 <a href="${pageContext.request.contextPath}/user/create">Add User</a>
+<div>
+	<a href="${pageContext.request.contextPath}/user/list">Display all users</a>
+</div>
 <c:if test="${fn:length(userList) gt 0}">
 	<div style="padding: 30 30 30 0;">
 		<table class="table table-hover" style="font-size: 1em">
@@ -55,18 +59,18 @@
 						<td>${user.username}</td>
 						<td>${user.password}</td>
 						<td>${user.role}</td>
-						<td>
-						<c:set var = "status" value = "${user.status }"/>
-						<c:if test="${user.status=='inactive'}"><span style="color:red;">${fn:toUpperCase(status)}</span></c:if>
-						<c:if test="${user.status=='active'}"><span style="color:green;">${fn:toUpperCase(status)}</span></c:if>
-			
-						</td>
+						<td><c:set var="status" value="${user.status }" /> <c:if
+								test="${user.status=='inactive'}">
+								<span style="color: red;">${fn:toUpperCase(status)}</span>
+							</c:if> <c:if test="${user.status=='active'}">
+								<span style="color: green;">${fn:toUpperCase(status)}</span>
+							</c:if></td>
 						<td align="center"><a
 							href="${pageContext.request.contextPath}/user/edit/${user.username}.html"><i
-										class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
+								class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
 						<td><a
 							href="${pageContext.request.contextPath}/user/delete/${user.username}.html"><i
-										class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+								class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

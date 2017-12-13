@@ -39,35 +39,40 @@
 					<spring:message code="fieldLabel.password" />
 				</div>
 				<div class="col-sm-5">
-					<form:input path="password" class="form-control" type="password"  />
+					<form:input path="password" class="form-control" type="password" />
 				</div>
 				<div>
 					<form:errors path="password" cssStyle="color: red;" />
 				</div>
 			</div>
-
+			<form:hidden path="role" />
+			<form:hidden path="status" />
 			<div class="row editrow">
 				<div class="col-sm-3 label-field"></div>
 				<div class="col-sm-5">
 					<input type="submit" value="Update" class="btn btn-primary" />
 				</div>
-
+			</div>
+			<div class="row editrow">
+				<div class="col-sm-3 label-field"></div>
+				<div class="col-sm-5">
+					<c:choose>
+						<c:when test="${message==null}">
+						</c:when>
+						<c:when test="${message==true}">
+							<span style="color:green;" ><spring:message code="message.successUserPwChange"></spring:message></span>
+						</c:when>
+						<c:when test="${message==false}">
+							<span style="color:red;" ><spring:message code="error.user.password.empty"></spring:message></span>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
-		<c:choose>
-			<c:when test="${message==null}">
-				<div></div>
-			</c:when>
-			<c:when test="${message==true}">
-				<spring:message code="message.successUserPwChange"></spring:message>
-			</c:when>
-			<c:when test="${message==false}">
-				<spring:message code="error.user.password.empty"></spring:message>
-			</c:when>
-			<c:otherwise>
-				<div></div>
-			</c:otherwise>
-		</c:choose>
 
 	</form:form>
+
+
 </body>

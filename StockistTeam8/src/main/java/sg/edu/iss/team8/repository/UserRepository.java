@@ -31,5 +31,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 	
 	@Query("SELECT DISTINCT u.status FROM User u")
 	ArrayList<String> ListStatus();
+	
+	@Query("SELECT u FROM User u WHERE u.status=:status")
+	ArrayList<User> searchUserByStatus(@Param("status") String status);
 
 }

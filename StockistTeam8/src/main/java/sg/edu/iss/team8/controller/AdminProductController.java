@@ -82,9 +82,6 @@ public class AdminProductController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public ModelAndView searchByDescription(HttpSession session, @RequestParam String criteria,
 			@RequestParam String description) {
-		if (!new TestController().isUser(session)) {
-			return new ModelAndView("403");
-		}
 		return new ModelAndView("product-catalogue", "pList", productService.searchProducts(criteria, description));
 		// return new ModelAndView("product-catalogue", "pList",
 		// pService.searchProduct("p.criteria",description));
@@ -133,7 +130,7 @@ public class AdminProductController {
 		String message = "New Product " + product.getPartNumber() + " is successfully created";
 
 		productService.createProduct(product);
-		mav.setViewName("redirect:/product/list");
+		mav.setViewName("redirect:/product/catalogue");
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
@@ -192,5 +189,17 @@ public class AdminProductController {
 		return mav;
 
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ModelAndView viewProductDetails(HttpSession session, @PathVariable String id) {
+		
+		ModelAndView mav = new ModelAndView("product-view");
+		Product p = productService.findProduct(Integer.parseInt(id));
+		Supplier s = supplierService.findSupplier(p.getSupplierId());
 
+		mav.addObject("product", p);
+		mav.addObject("supplier", s);
+
+		return mav;
+	}
 }

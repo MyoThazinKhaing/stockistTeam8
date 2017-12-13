@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<title>RESTRICTED!</title>
 <meta name="decorator" content="nodeco" />
 <!-- Bootstrap Litera CSS -->
 <link href="https://bootswatch.com/4/litera/bootstrap.css"

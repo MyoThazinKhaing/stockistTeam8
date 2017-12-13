@@ -20,8 +20,10 @@ public interface ProductService {
 
 	// SEARCH PRODUCT ALL IN ONE
 	//ArrayList<Product> searchProduct(String searchCriteria, String searchValue);
-
-
+	Product reduceStock(Integer partNumber, Integer sentNumber);
+	Product increaseStock(Integer partNumber, Integer receivedNumber);
+	Product findProduct(Integer partNumber);
+	int UpdateStock(int partNumber,int stock);
 	Product createUser(Product product);
 
 	Product changeUser(Product product);

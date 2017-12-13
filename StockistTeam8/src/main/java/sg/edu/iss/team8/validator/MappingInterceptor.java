@@ -62,9 +62,21 @@ public class MappingInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		} 
 		
+		
 		// if user is logged in, get user session to get user
 		UserSession us = (UserSession) request.getSession().getAttribute("USERSESSION");
+		
+		// check if uri is a list page
+		if (isListPage(requestUri) && request.getQueryString()==null) {
+			response.sendRedirect(request.getRequestURI() + "?page=1");
+			return false;
+		}
+		
 		// check if uri is only accessible by admin
+		if (isUser(requestUri)) {
+			return true;
+		}
+		
 		if (isAdminOnly(requestUri)) {
 			// if only accessible by admin, check user role is admin
 			if (us.getUser().getRole().equals("admin")) {
@@ -89,7 +101,17 @@ public class MappingInterceptor extends HandlerInterceptorAdapter {
 
 	private boolean isAdminOnly(String uri) {
 		Stream<String> ss = Arrays.stream(MappingValidator.ADMIN_ONLY);
-		return ss.anyMatch(uri::contains);
+		return ss.parallel().anyMatch(uri::contains);
+	}
+	
+	private boolean isUser(String uri) {
+		Stream<String> ss = Arrays.stream(MappingValidator.ALL_USER);
+		return ss.parallel().anyMatch(uri::contains);
+	}
+	
+	private boolean isListPage(String uri) {
+		Stream<String> ss = Arrays.stream(MappingValidator.LIST_PAGE);
+		return ss.parallel().anyMatch(uri::contains);
 	}
 
 }

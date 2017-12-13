@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
+<title>Team 8 Stock List</title>
 <meta name="decorator" content="nodeco" />
 <head>
 <!-- Bootstrap Litera CSS -->

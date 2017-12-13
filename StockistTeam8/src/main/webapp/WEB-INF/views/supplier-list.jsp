@@ -43,6 +43,10 @@
 		<a href="${pageContext.request.contextPath}/supplier/create">Add
 			Supplier</a>
 	</div>
+	<div style="margin: 20px 0 0 0">
+		<a href="${pageContext.request.contextPath}/supplier/list">Display all
+			Suppliers</a>
+	</div>
 	
 	<!-- Table starts here -->
 	<div style="padding: 30 30 30 0; font-size:0.9em" >
