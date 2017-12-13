@@ -27,8 +27,8 @@ div{
 }
 
 img{
-	width:40%;
-	height:auto;
+	width:auto;
+	height:40%;
 	
 }
 
