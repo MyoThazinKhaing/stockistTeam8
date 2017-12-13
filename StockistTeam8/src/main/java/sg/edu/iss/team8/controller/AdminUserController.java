@@ -160,7 +160,7 @@ public class AdminUserController {
 		
 		String message=null;
 
-		ModelAndView mav = new ModelAndView("redirect:/admin/user/edit/" + id);
+		ModelAndView mav = new ModelAndView("redirect:/user/edit/" + id);
 
 		if (result.hasErrors()) {
 			ArrayList<String> eidList = uService.ListRoles();

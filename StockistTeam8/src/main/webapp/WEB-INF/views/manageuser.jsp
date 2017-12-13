@@ -44,6 +44,7 @@
 					<th scope="col"><spring:message code="fieldLabel.username" /></th>
 					<th scope="col"><spring:message code="fieldLabel.password" /></th>
 					<th scope="col"><spring:message code="fieldLabel.role" /></th>
+					<th scope="col"><spring:message code="fieldLabel.status" /></th>
 					<th scope="col"></th>
 					<th scope="col"></th>
 				</tr>
@@ -54,6 +55,11 @@
 						<td>${user.username}</td>
 						<td>${user.password}</td>
 						<td>${user.role}</td>
+						<td>
+						<c:if test="${user.status=='inactive'}"><span style="color:red;">${user.status }</span></c:if>
+						<c:if test="${user.status=='active'}"><span style="color:green;">${user.status }</span></c:if>
+			
+						</td>
 						<td align="center"><a
 							href="${pageContext.request.contextPath}/user/edit/${user.username}.html"><i
 										class="fa fa-pencil fa-2x" aria-hidden="true"></i></a></td>
